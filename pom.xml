@@ -528,6 +528,7 @@
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
     </dependency>
+	<!--
 	<dependency>
 	  <groupId>com.gdn.x.beirut</groupId>
 	  <artifactId>beirut-rest-web-model</artifactId>
@@ -538,6 +539,7 @@
 	  <artifactId>beirut-client-java-sdk</artifactId>
 	  <version>${gdn-x-beirut.version}</version>
     </dependency>
+	-->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
