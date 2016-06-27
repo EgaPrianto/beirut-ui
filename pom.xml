@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.gdn.x.beirut</groupId>
   <artifactId>beirut-ui</artifactId>
-  <packaging>pom</packaging>
+  <packaging>war</packaging>
   <version>1.0.0-SNAPSHOT</version>
   <name>${project.groupId}-${project.artifactId}</name>
   <prerequisites>
@@ -12,8 +12,23 @@
   <scm>
     <connection>scm:git:ssh://git@github.com:EgaPrianto/beirut-ui.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:EgaPrianto/beirut-ui.git</developerConnection>
-  </scm>
+  </scm> 
   <build>
+    <finalName>${project.name}</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/webapp</directory>
+        <targetPath>${project.build.directory}/${project.name}</targetPath>
+        <includes>
+          <include>version</include>
+        </includes>
+      </resource>
+    </resources>
+
     <pluginManagement>
       <plugins>
         <plugin>
@@ -318,51 +333,6 @@
         <version>${javax.inject-version}</version>
       </dependency>
       <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-model</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-candidateDAO-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-candidateDAO-jpa</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-service-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-service-impl</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-outbound-api</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-outbound-impl</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-rest-web-model</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.gdn.x.beirut</groupId>
-        <artifactId>beirut-rest-web</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-framework-bom</artifactId>
         <version>${spring-framework-version}</version>
@@ -558,6 +528,16 @@
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
     </dependency>
+	<dependency>
+	  <groupId>com.gdn.x.beirut</groupId>
+	  <artifactId>beirut-rest-web-model</artifactId>
+	  <version>${gdn-x-beirut.version}</version>
+    </dependency>
+	<dependency>
+	  <groupId>com.gdn.x.beirut</groupId>
+	  <artifactId>beirut-client-java-sdk</artifactId>
+	  <version>${gdn-x-beirut.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
@@ -616,14 +596,4 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <modules>
-    <module>model</module>
-    <module>dao-api</module>
-    <module>dao-jpa</module>
-    <module>service-api</module>
-    <module>service-impl</module>
-    <module>rest-web-model</module>
-    <module>rest-web</module>
-    <module>client-java-sdk</module>
-  </modules>
 </project>
