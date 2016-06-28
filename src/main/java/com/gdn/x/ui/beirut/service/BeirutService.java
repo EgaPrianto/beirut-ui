@@ -1,6 +1,6 @@
 package com.gdn.x.ui.beirut.service;
 
-import org.springframework.web.multipart.MultipartFile;
+// import org.springframework.web.multipart.MultipartFile;
 
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
@@ -29,8 +29,8 @@ public interface BeirutService {
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception;
 
-  public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
-      String idCandidate, MultipartFile file) throws Exception;
+  // public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
+  // String idCandidate, MultipartFile file) throws Exception;
 
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       StatusDTORequest statusDTORequest, String idPosition, ListStringRequest idCandidates)
