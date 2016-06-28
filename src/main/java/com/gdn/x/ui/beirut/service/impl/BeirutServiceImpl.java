@@ -26,6 +26,20 @@ public class BeirutServiceImpl implements BeirutService {
   private BeirutApiClient beirutApiClient;
 
   @Override
+  public GdnBaseRestResponse applyNewPosition(String requestId, String username, String idCandidate,
+      ListStringRequest listPositionIdStrings) throws Exception {
+    // TODO Auto-generated method stub
+    GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition = this.beirutApiClient
+        .applyNewPosition(requestId, username, idCandidate, listPositionIdStrings);
+    if (!gdnBaseRestResponseApplyNewPosition.isSuccess()) {
+      LOG.warn("failed to applyNewPosition with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnBaseRestResponseApplyNewPosition.getErrorCode(),
+          gdnBaseRestResponseApplyNewPosition.getErrorMessage());
+    }
+    return gdnBaseRestResponseApplyNewPosition;
+  }
+
+  @Override
   public GdnRestListResponse<CandidateDTOResponse> findCandidateByCreatedDateBetweenAndStoreId(
       String requestId, String username, Long start, Long end, int page, int size)
           throws Exception {

@@ -70,6 +70,24 @@ public class BeirutServiceTest {
   }
 
   @Test
+  public void testApplyNewPosition() throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition = new GdnBaseRestResponse(REQUEST_ID);
+    ListStringRequest listStringRequest = new ListStringRequest();
+    List<String> idPositions = new ArrayList<String>();
+    idPositions.add(ID + "1");
+    idPositions.add(ID + "2");
+    idPositions.add(ID + "3");
+    listStringRequest.setValues(idPositions);
+    when(this.beirutApiClient.applyNewPosition(REQUEST_ID, USERNAME, ID, listStringRequest))
+        .thenReturn(gdnBaseRestResponseApplyNewPosition);
+    assertTrue(this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, ID,
+        listStringRequest) == gdnBaseRestResponseApplyNewPosition);
+    this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, ID, listStringRequest);
+    verify(this.beirutApiClient, times(2)).applyNewPosition(REQUEST_ID, USERNAME, ID,
+        listStringRequest);
+  }
+
+  @Test
   public void testGetCandidatePositionBySolrQuery() throws Exception {
     // GdnRestListResponse<CandidatePositionSolrDTOResponse> gdnCandidatePositionSolrDTOResponses =
     // this.beirutApiClient.getCandidatePositionBySolrQuery(requestId, username, query, page,

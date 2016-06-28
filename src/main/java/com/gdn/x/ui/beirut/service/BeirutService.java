@@ -14,6 +14,9 @@ import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 
 public interface BeirutService {
 
+  public GdnBaseRestResponse applyNewPosition(String requestId, String username, String idCandidate,
+      ListStringRequest listPositionIdStrings) throws Exception;
+
   public GdnRestListResponse<CandidateDTOResponse> findCandidateByCreatedDateBetweenAndStoreId(
       String requestId, String username, Long start, Long end, int page, int size) throws Exception;
 
