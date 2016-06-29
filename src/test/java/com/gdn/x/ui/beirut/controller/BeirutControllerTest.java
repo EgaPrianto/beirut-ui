@@ -7,10 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,7 +80,7 @@ public class BeirutControllerTest {
 
   private ListStringRequest listStringRequest;
 
-  private List<String> ids; 
+  private List<String> ids;
 
   private MockMvc mockMVC;
 
@@ -97,7 +93,8 @@ public class BeirutControllerTest {
   @Before
   public void intialize() {
     initMocks(this);
-//    this.mockMVC = standaloneSetup(this.beirutController).build(); 
+    // TANYA MOCKMVC GAGAL
+    // this.mockMVC = standaloneSetup(this.beirutController).build();
     PowerMockito.mockStatic(GdnUUIDHelper.class);
     PowerMockito.mockStatic(SecurityContextHolder.class);
     PowerMockito.when(GdnUUIDHelper.generateUUID()).thenReturn(REQUEST_ID);
