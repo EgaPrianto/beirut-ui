@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
@@ -97,18 +96,18 @@ public class BeirutServiceImpl implements BeirutService {
     return gdnCandidatePositionSolrDTOResponses;
   }
 
-  @Override
-  public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
-      String idCandidate, MultipartFile file) throws Exception {
-    GdnBaseRestResponse gdnBaseRestResponseUpdateCandidateDetail =
-        this.beirutApiClient.updateCandidateDetail(requestId, username, idCandidate, file);
-    if (!gdnBaseRestResponseUpdateCandidateDetail.isSuccess()) {
-      LOG.warn("failed to updateCandidateDetail with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnBaseRestResponseUpdateCandidateDetail.getErrorCode(),
-          gdnBaseRestResponseUpdateCandidateDetail.getErrorMessage());
-    }
-    return gdnBaseRestResponseUpdateCandidateDetail;
-  }
+  // @Override
+  // public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
+  // String idCandidate, MultipartFile file) throws Exception {
+  // GdnBaseRestResponse gdnBaseRestResponseUpdateCandidateDetail =
+  // this.beirutApiClient.updateCandidateDetail(requestId, username, idCandidate, file);
+  // if (!gdnBaseRestResponseUpdateCandidateDetail.isSuccess()) {
+  // LOG.warn("failed to updateCandidateDetail with requestId:{} errorCode:{} errorMessage:{}",
+  // requestId, gdnBaseRestResponseUpdateCandidateDetail.getErrorCode(),
+  // gdnBaseRestResponseUpdateCandidateDetail.getErrorMessage());
+  // }
+  // return gdnBaseRestResponseUpdateCandidateDetail;
+  // }
 
   @Override
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
