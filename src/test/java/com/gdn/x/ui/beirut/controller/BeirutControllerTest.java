@@ -7,6 +7,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+//import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +84,7 @@ public class BeirutControllerTest {
 
   private ListStringRequest listStringRequest;
 
-  private List<String> ids;
+  private List<String> ids; 
 
   private MockMvc mockMVC;
 
@@ -88,12 +92,12 @@ public class BeirutControllerTest {
   private BeirutService beirutService;
 
   @InjectMocks
-  private BeirutController BeirutController;
+  private BeirutController beirutController;
 
   @Before
   public void intialize() {
     initMocks(this);
-    // this.mockMVC = standaloneSetup(this.BeirutController).build();
+//    this.mockMVC = standaloneSetup(this.beirutController).build(); 
     PowerMockito.mockStatic(GdnUUIDHelper.class);
     PowerMockito.mockStatic(SecurityContextHolder.class);
     PowerMockito.when(GdnUUIDHelper.generateUUID()).thenReturn(REQUEST_ID);
@@ -172,8 +176,8 @@ public class BeirutControllerTest {
     listStringRequest.setValues(idPositions);
     when(this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, ID_1, listStringRequest))
         .thenReturn(expectedResult);
-    assertTrue(this.BeirutController.applyNewPosition(ID_1, listStringRequest) == expectedResult);
-    this.BeirutController.applyNewPosition(ID_1, listStringRequest);
+    assertTrue(this.beirutController.applyNewPosition(ID_1, listStringRequest) == expectedResult);
+    this.beirutController.applyNewPosition(ID_1, listStringRequest);
     verify(this.beirutService, times(2)).applyNewPosition(REQUEST_ID, USERNAME, ID_1,
         listStringRequest);
   }
@@ -188,7 +192,7 @@ public class BeirutControllerTest {
             REQUEST_ID);
     when(this.beirutService.getAllPositionWithPageable(REQUEST_ID, USERNAME, PAGE, SIZE))
         .thenReturn(expectedResult);
-    assertTrue(this.BeirutController.getAllPositionWithPageable(PAGE, SIZE) == expectedResult);
+    assertTrue(this.beirutController.getAllPositionWithPageable(PAGE, SIZE) == expectedResult);
     verify(this.beirutService, times(1)).getAllPositionWithPageable(REQUEST_ID, USERNAME, PAGE,
         SIZE);
   }
@@ -205,8 +209,8 @@ public class BeirutControllerTest {
         this.beirutService.getCandidatePositionBySolrQuery(REQUEST_ID, USERNAME, QUERY, PAGE, SIZE))
             .thenReturn(expectedResult);
     assertTrue(
-        this.BeirutController.getCandidatePositionBySolrQuery(QUERY, PAGE, SIZE) == expectedResult);
-    this.BeirutController.getCandidatePositionBySolrQuery(QUERY, PAGE, SIZE);
+        this.beirutController.getCandidatePositionBySolrQuery(QUERY, PAGE, SIZE) == expectedResult);
+    this.beirutController.getCandidatePositionBySolrQuery(QUERY, PAGE, SIZE);
     verify(this.beirutService, times(2)).getCandidatePositionBySolrQuery(REQUEST_ID, USERNAME,
         QUERY, PAGE, SIZE);
   }
@@ -222,9 +226,9 @@ public class BeirutControllerTest {
     GdnBaseRestResponse expectedResult = new GdnBaseRestResponse(REQUEST_ID);
     when(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME, statusDTORequest, ID_1,
         listStringRequest)).thenReturn(expectedResult);
-    assertTrue(this.BeirutController.updateCandidatesStatus(statusDTORequest, ID_1,
+    assertTrue(this.beirutController.updateCandidatesStatus(statusDTORequest, ID_1,
         listStringRequest) == expectedResult);
-    this.BeirutController.updateCandidatesStatus(statusDTORequest, ID_1, listStringRequest);
+    this.beirutController.updateCandidatesStatus(statusDTORequest, ID_1, listStringRequest);
     verify(this.beirutService, times(2)).updateCandidatesStatus(REQUEST_ID, USERNAME,
         statusDTORequest, ID_1, listStringRequest);
   }
@@ -238,8 +242,8 @@ public class BeirutControllerTest {
     idCandidates.add(ID_2);
     when(this.beirutService.updatePosition(REQUEST_ID, USERNAME, ID_1, positionDTORequest))
         .thenReturn(expectedResult);
-    assertTrue(this.BeirutController.updatePosition(ID_1, positionDTORequest) == expectedResult);
-    this.BeirutController.updatePosition(ID_1, positionDTORequest);
+    assertTrue(this.beirutController.updatePosition(ID_1, positionDTORequest) == expectedResult);
+    this.beirutController.updatePosition(ID_1, positionDTORequest);
     verify(this.beirutService, times(2)).updatePosition(REQUEST_ID, USERNAME, ID_1,
         positionDTORequest);
   }
