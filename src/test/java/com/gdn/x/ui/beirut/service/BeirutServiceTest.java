@@ -20,9 +20,10 @@ import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.PageMetaData;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
-import com.gdn.x.beirut.dto.request.ListStringRequest;
-import com.gdn.x.beirut.dto.request.PositionDTORequest;
+import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
+import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.ui.beirut.service.impl.BeirutServiceImpl;
 
@@ -69,19 +70,24 @@ public class BeirutServiceTest {
   @Test
   public void testApplyNewPosition() throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition = new GdnBaseRestResponse(REQUEST_ID);
-    ListStringRequest listStringRequest = new ListStringRequest();
+    // ListStringRequest listStringRequest = new ListStringRequest();
     List<String> idPositions = new ArrayList<String>();
     idPositions.add(ID + "1");
     idPositions.add(ID + "2");
     idPositions.add(ID + "3");
-    listStringRequest.setValues(idPositions);
-    when(this.beirutApiClient.applyNewPosition(REQUEST_ID, USERNAME, ID, listStringRequest))
-        .thenReturn(gdnBaseRestResponseApplyNewPosition);
-    assertTrue(this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, ID,
-        listStringRequest) == gdnBaseRestResponseApplyNewPosition);
-    this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, ID, listStringRequest);
-    verify(this.beirutApiClient, times(2)).applyNewPosition(REQUEST_ID, USERNAME, ID,
-        listStringRequest);
+    // listStringRequest.setValues(idPositions);
+    ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest =
+        new ApplyNewPositionModelDTORequest();
+    applyNewPositionModelDTORequest.setIdCandidate(ID);
+    applyNewPositionModelDTORequest.setListPositionIds(idPositions);
+
+    when(this.beirutApiClient.applyNewPosition(REQUEST_ID, USERNAME,
+        applyNewPositionModelDTORequest)).thenReturn(gdnBaseRestResponseApplyNewPosition);
+    assertTrue(this.beirutService.applyNewPosition(REQUEST_ID, USERNAME,
+        applyNewPositionModelDTORequest) == gdnBaseRestResponseApplyNewPosition);
+    this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, applyNewPositionModelDTORequest);
+    verify(this.beirutApiClient, times(2)).applyNewPosition(REQUEST_ID, USERNAME,
+        applyNewPositionModelDTORequest);
   }
 
   @Test
@@ -135,30 +141,44 @@ public class BeirutServiceTest {
     List<String> idCandidates = new ArrayList<String>();
     idCandidates.add(ID);
     idCandidates.add(ID + "1");
-    ListStringRequest listStringRequest = new ListStringRequest();
-    listStringRequest.setValues(idCandidates);
-    when(this.beirutApiClient.updateCandidatesStatus(REQUEST_ID, USERNAME, STATUS_DTO_REQUEST, ID,
-        listStringRequest)).thenReturn(gdnBaseRestResponseTestUpdateCandidateStatus);
-    assertTrue(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME, STATUS_DTO_REQUEST,
-        ID, listStringRequest) == gdnBaseRestResponseTestUpdateCandidateStatus);
-    this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME, STATUS_DTO_REQUEST, ID,
-        listStringRequest);
+    // ListStringRequest listStringRequest = new ListStringRequest();
+    // listStringRequest.setValues(idCandidates);
+
+    UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest =
+        new UpdateCandidateStatusModelDTORequest();
+    updateCandidateStatusModelDTORequest.setIdPosition(ID);
+    updateCandidateStatusModelDTORequest.setStatusDTORequest(STATUS_DTO_REQUEST.name());
+    updateCandidateStatusModelDTORequest.setIdCandidates(idCandidates);
+
+    when(this.beirutApiClient.updateCandidatesStatus(REQUEST_ID, USERNAME,
+        updateCandidateStatusModelDTORequest))
+            .thenReturn(gdnBaseRestResponseTestUpdateCandidateStatus);
+    assertTrue(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME,
+        updateCandidateStatusModelDTORequest) == gdnBaseRestResponseTestUpdateCandidateStatus);
+    this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME,
+        updateCandidateStatusModelDTORequest);
     verify(this.beirutApiClient, times(2)).updateCandidatesStatus(REQUEST_ID, USERNAME,
-        STATUS_DTO_REQUEST, ID, listStringRequest);
+        updateCandidateStatusModelDTORequest);
   }
 
   @Test
   public void testUpdatePosition() throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseTestUpdatePosition = new GdnBaseRestResponse(REQUEST_ID);
-    PositionDTORequest positionDTORequest = new PositionDTORequest();
-    positionDTORequest.setTitle(TITLE);
-    when(this.beirutApiClient.updatePosition(REQUEST_ID, USERNAME, ID, positionDTORequest))
+    // PositionDTORequest positionDTORequest = new PositionDTORequest();
+    // positionDTORequest.setTitle(TITLE);
+
+    UpdatePositionModelDTORequest updatePositionModelDTORequest =
+        new UpdatePositionModelDTORequest();
+    updatePositionModelDTORequest.setIdPositionTarget(ID);
+    updatePositionModelDTORequest.setTitle(TITLE);
+
+    when(this.beirutApiClient.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest))
         .thenReturn(gdnBaseRestResponseTestUpdatePosition);
-    assertTrue(this.beirutService.updatePosition(REQUEST_ID, USERNAME, ID,
-        positionDTORequest) == gdnBaseRestResponseTestUpdatePosition);
-    this.beirutService.updatePosition(REQUEST_ID, USERNAME, ID, positionDTORequest);
-    verify(this.beirutApiClient, times(2)).updatePosition(REQUEST_ID, USERNAME, ID,
-        positionDTORequest);
+    assertTrue(this.beirutService.updatePosition(REQUEST_ID, USERNAME,
+        updatePositionModelDTORequest) == gdnBaseRestResponseTestUpdatePosition);
+    this.beirutService.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest);
+    verify(this.beirutApiClient, times(2)).updatePosition(REQUEST_ID, USERNAME,
+        updatePositionModelDTORequest);
   }
 
 

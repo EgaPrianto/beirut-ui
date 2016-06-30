@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gdn.common.util.GdnUUIDHelper;
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
-import com.gdn.x.beirut.dto.request.ListStringRequest;
-import com.gdn.x.beirut.dto.request.PositionDTORequest;
-import com.gdn.x.beirut.dto.request.StatusDTORequest;
+import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.ui.beirut.service.BeirutService;
@@ -38,10 +38,11 @@ public class BeirutController {
 
   @RequestMapping(value = BeirutController.APPLY_NEW_POSITION)
   @ResponseBody
-  public GdnBaseRestResponse applyNewPosition(@RequestParam String idCandidate,
-      @RequestBody ListStringRequest listPositionIdStrings) throws Exception {
+  public GdnBaseRestResponse applyNewPosition(
+      @RequestBody ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest)
+          throws Exception {
     GdnBaseRestResponse result = this.beirutService.applyNewPosition(generateRequestId(),
-        getUsername(), idCandidate, listPositionIdStrings);
+        getUsername(), applyNewPositionModelDTORequest);
     return result;
   }
 
@@ -74,24 +75,22 @@ public class BeirutController {
     return auth.getName();
   }
 
-  // GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
-  // StatusDTORequest statusDTORequest, String idPosition, ListStringRequest idCandidates)
   @RequestMapping(value = BeirutController.UPDATE_CANDIDATE_STATUS)
   @ResponseBody
-  public GdnBaseRestResponse updateCandidatesStatus(@RequestParam StatusDTORequest status,
-      @RequestParam String idPosition, @RequestBody ListStringRequest idCandidates)
+  public GdnBaseRestResponse updateCandidatesStatus(
+      @RequestBody UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest)
           throws Exception {
     GdnBaseRestResponse result = this.beirutService.updateCandidatesStatus(generateRequestId(),
-        getUsername(), status, idPosition, idCandidates);
+        getUsername(), updateCandidateStatusModelDTORequest);
     return result;
   }
 
   @RequestMapping(value = BeirutController.UPDATE_POSITION)
   @ResponseBody
-  public GdnBaseRestResponse updatePosition(@RequestParam String id,
-      @RequestBody PositionDTORequest positionDTORequest) throws Exception {
+  public GdnBaseRestResponse updatePosition(
+      @RequestBody UpdatePositionModelDTORequest updatePositionModelDTORequest) throws Exception {
     GdnBaseRestResponse result = this.beirutService.updatePosition(generateRequestId(),
-        getUsername(), id, positionDTORequest);
+        getUsername(), updatePositionModelDTORequest);
     return result;
   }
 

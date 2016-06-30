@@ -32,9 +32,12 @@ import com.gdn.common.util.GdnUUIDHelper;
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.PageMetaData;
+import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
+import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.ui.beirut.service.BeirutService;
@@ -160,8 +163,6 @@ public class BeirutControllerTest {
     verifyNoMoreInteractions(this.beirutService);
   }
 
-  // GdnBaseRestResponse applyNewPosition(@RequestParam String idCandidate,
-  // @RequestBody ListStringRequest listPositionIdStrings)
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
   public void testApplyNewPosition() throws Exception {
@@ -169,14 +170,19 @@ public class BeirutControllerTest {
     List<String> idPositions = new ArrayList<>();
     idPositions.add(ID_1);
     idPositions.add(ID_2);
-    ListStringRequest listStringRequest = new ListStringRequest();
-    listStringRequest.setValues(idPositions);
-    when(this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, ID_1, listStringRequest))
+
+    ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest =
+        new ApplyNewPositionModelDTORequest();
+    applyNewPositionModelDTORequest.setIdCandidate(ID_1);
+    applyNewPositionModelDTORequest.setListPositionIds(idPositions);
+
+    when(this.beirutService.applyNewPosition(REQUEST_ID, USERNAME, applyNewPositionModelDTORequest))
         .thenReturn(expectedResult);
-    assertTrue(this.beirutController.applyNewPosition(ID_1, listStringRequest) == expectedResult);
-    this.beirutController.applyNewPosition(ID_1, listStringRequest);
-    verify(this.beirutService, times(2)).applyNewPosition(REQUEST_ID, USERNAME, ID_1,
-        listStringRequest);
+    assertTrue(
+        this.beirutController.applyNewPosition(applyNewPositionModelDTORequest) == expectedResult);
+    this.beirutController.applyNewPosition(applyNewPositionModelDTORequest);
+    verify(this.beirutService, times(2)).applyNewPosition(REQUEST_ID, USERNAME,
+        applyNewPositionModelDTORequest);
   }
 
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
@@ -212,22 +218,26 @@ public class BeirutControllerTest {
         QUERY, PAGE, SIZE);
   }
 
-  // GdnBaseRestResponse updateCandidatesStatus(@RequestParam StatusDTORequest status,
-  // @RequestParam String idPosition, @RequestBody ListStringRequest idCandidates)
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
   public void testUpdateCandidateStatus() throws Exception {
     ids.add(ID_1);
     ids.add(ID_2);
-    listStringRequest.setValues(ids);
+
+    UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest =
+        new UpdateCandidateStatusModelDTORequest();
+    updateCandidateStatusModelDTORequest.setIdCandidates(ids);
+    updateCandidateStatusModelDTORequest.setIdPosition(ID_1);
+    updateCandidateStatusModelDTORequest.setStatusDTORequest(statusDTORequest.name());
+
     GdnBaseRestResponse expectedResult = new GdnBaseRestResponse(REQUEST_ID);
-    when(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME, statusDTORequest, ID_1,
-        listStringRequest)).thenReturn(expectedResult);
-    assertTrue(this.beirutController.updateCandidatesStatus(statusDTORequest, ID_1,
-        listStringRequest) == expectedResult);
-    this.beirutController.updateCandidatesStatus(statusDTORequest, ID_1, listStringRequest);
+    when(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME,
+        updateCandidateStatusModelDTORequest)).thenReturn(expectedResult);
+    assertTrue(this.beirutController
+        .updateCandidatesStatus(updateCandidateStatusModelDTORequest) == expectedResult);
+    this.beirutController.updateCandidatesStatus(updateCandidateStatusModelDTORequest);
     verify(this.beirutService, times(2)).updateCandidatesStatus(REQUEST_ID, USERNAME,
-        statusDTORequest, ID_1, listStringRequest);
+        updateCandidateStatusModelDTORequest);
   }
 
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
@@ -237,12 +247,19 @@ public class BeirutControllerTest {
     List<String> idCandidates = new ArrayList<>();
     idCandidates.add(ID_1);
     idCandidates.add(ID_2);
-    when(this.beirutService.updatePosition(REQUEST_ID, USERNAME, ID_1, positionDTORequest))
+
+    UpdatePositionModelDTORequest updatePositionModelDTORequest =
+        new UpdatePositionModelDTORequest();
+    updatePositionModelDTORequest.setIdPositionTarget(ID_1);
+    updatePositionModelDTORequest.setTitle(TITLE_1);
+
+    when(this.beirutService.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest))
         .thenReturn(expectedResult);
-    assertTrue(this.beirutController.updatePosition(ID_1, positionDTORequest) == expectedResult);
-    this.beirutController.updatePosition(ID_1, positionDTORequest);
-    verify(this.beirutService, times(2)).updatePosition(REQUEST_ID, USERNAME, ID_1,
-        positionDTORequest);
+    assertTrue(
+        this.beirutController.updatePosition(updatePositionModelDTORequest) == expectedResult);
+    this.beirutController.updatePosition(updatePositionModelDTORequest);
+    verify(this.beirutService, times(2)).updatePosition(REQUEST_ID, USERNAME,
+        updatePositionModelDTORequest);
   }
 
 

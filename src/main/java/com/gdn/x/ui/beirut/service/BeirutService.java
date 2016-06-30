@@ -4,17 +4,17 @@ package com.gdn.x.ui.beirut.service;
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
-import com.gdn.x.beirut.dto.request.ListStringRequest;
-import com.gdn.x.beirut.dto.request.PositionDTORequest;
-import com.gdn.x.beirut.dto.request.StatusDTORequest;
+import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidateDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 
 public interface BeirutService {
 
-  public GdnBaseRestResponse applyNewPosition(String requestId, String username, String idCandidate,
-      ListStringRequest listPositionIdStrings) throws Exception;
+  public GdnBaseRestResponse applyNewPosition(String requestId, String username,
+      ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception;
 
   public GdnRestListResponse<CandidateDTOResponse> findCandidateByCreatedDateBetweenAndStoreId(
       String requestId, String username, Long start, Long end, int page, int size) throws Exception;
@@ -32,10 +32,9 @@ public interface BeirutService {
   // String idCandidate, MultipartFile file) throws Exception;
 
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
-      StatusDTORequest statusDTORequest, String idPosition, ListStringRequest idCandidates)
-          throws Exception;
+      UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
 
-  public GdnBaseRestResponse updatePosition(String requestId, String username, String id,
-      PositionDTORequest positionDTORequest) throws Exception;
+  public GdnBaseRestResponse updatePosition(String requestId, String username,
+      UpdatePositionModelDTORequest updatePositionModelDTORequest) throws Exception;
 
 }
