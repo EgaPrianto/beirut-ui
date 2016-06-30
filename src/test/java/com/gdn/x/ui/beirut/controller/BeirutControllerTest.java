@@ -160,8 +160,6 @@ public class BeirutControllerTest {
     verifyNoMoreInteractions(this.beirutService);
   }
 
-  // GdnBaseRestResponse applyNewPosition(@RequestParam String idCandidate,
-  // @RequestBody ListStringRequest listPositionIdStrings)
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
   public void testApplyNewPosition() throws Exception {
@@ -212,8 +210,6 @@ public class BeirutControllerTest {
         QUERY, PAGE, SIZE);
   }
 
-  // GdnBaseRestResponse updateCandidatesStatus(@RequestParam StatusDTORequest status,
-  // @RequestParam String idPosition, @RequestBody ListStringRequest idCandidates)
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
   public void testUpdateCandidateStatus() throws Exception {

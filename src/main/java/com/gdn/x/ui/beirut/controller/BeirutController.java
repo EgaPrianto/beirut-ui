@@ -74,8 +74,6 @@ public class BeirutController {
     return auth.getName();
   }
 
-  // GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
-  // StatusDTORequest statusDTORequest, String idPosition, ListStringRequest idCandidates)
   @RequestMapping(value = BeirutController.UPDATE_CANDIDATE_STATUS)
   @ResponseBody
   public GdnBaseRestResponse updateCandidatesStatus(@RequestParam StatusDTORequest status,
