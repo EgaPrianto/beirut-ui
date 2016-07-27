@@ -4,15 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
-import com.gdn.x.beirut.dto.request.ListStringRequest;
-import com.gdn.x.beirut.dto.request.PositionDTORequest;
+import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidateDTOResponse;
+import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.ui.beirut.service.BeirutService;
 
@@ -24,29 +25,17 @@ public class BeirutServiceImpl implements BeirutService {
   private BeirutApiClient beirutApiClient;
 
   @Override
-  public GdnBaseRestResponse deleteCandidate(String requestId, String username,
-      ListStringRequest idsRequest) throws Exception {
-    GdnBaseRestResponse gdnResponse =
-        this.beirutApiClient.deleteCandidate(requestId, username, idsRequest);
-    if (!gdnResponse.isSuccess()) {
-      LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
+  public GdnBaseRestResponse applyNewPosition(String requestId, String username,
+      ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception {
+    // TODO Auto-generated method stub
+    GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition =
+        this.beirutApiClient.applyNewPosition(requestId, username, applyNewPositionModelDTORequest);
+    if (!gdnBaseRestResponseApplyNewPosition.isSuccess()) {
+      LOG.warn("failed to applyNewPosition with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnBaseRestResponseApplyNewPosition.getErrorCode(),
+          gdnBaseRestResponseApplyNewPosition.getErrorMessage());
     }
-    return gdnResponse;
-  }
-
-  @Override
-  public GdnBaseRestResponse deletePosition(String requestId, String username,
-      ListStringRequest idsToDelete) throws Exception {
-    GdnBaseRestResponse gdnResponse =
-        this.beirutApiClient.deletePosition(requestId, username, idsToDelete);
-    if (!gdnResponse.isSuccess()) {
-      LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
-    }
-    return gdnResponse;
+    return gdnBaseRestResponseApplyNewPosition;
   }
 
   @Override
@@ -62,13 +51,6 @@ public class BeirutServiceImpl implements BeirutService {
           gdnCandidateDTOResponses.getErrorMessage());
     }
     return gdnCandidateDTOResponses;
-  }
-
-  @Override
-  public GdnRestSingleResponse<CandidateDTOResponse> findCandidateByEmailAddressAndStoreId(
-      String requestId, String username, int page, int size) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
   }
 
   @Override
@@ -92,7 +74,7 @@ public class BeirutServiceImpl implements BeirutService {
         this.beirutApiClient.getAllPositionWithPageable(requestId, username, page, size);
     if (!gdnPositionDTOResponses.isSuccess()) {
       LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
+          "failed to getAllPositionWithPageable with requestId:{} errorCode:{} errorMessage:{}",
           requestId, gdnPositionDTOResponses.getErrorCode(),
           gdnPositionDTOResponses.getErrorMessage());
     }
@@ -100,30 +82,57 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
-  public GdnBaseRestResponse insertNewCandidate(String requestId, String username,
-      String candidateDTORequestString, MultipartFile file) throws Exception {
-    GdnBaseRestResponse gdnResponse = this.beirutApiClient.insertNewCandidate(requestId, username,
-        candidateDTORequestString, file);
-    if (!gdnResponse.isSuccess()) {
+  public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
+      String requestId, String username, String query, int page, int size) throws Exception {
+    GdnRestListResponse<CandidatePositionSolrDTOResponse> gdnCandidatePositionSolrDTOResponses =
+        this.beirutApiClient.getCandidatePositionBySolrQuery(requestId, username, query, page,
+            size);
+    if (!gdnCandidatePositionSolrDTOResponses.isSuccess()) {
       LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
+          "failed to getCandidatePositionBySolrQuery with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnCandidatePositionSolrDTOResponses.getErrorCode(),
+          gdnCandidatePositionSolrDTOResponses.getErrorMessage());
     }
-    return gdnResponse;
+    return gdnCandidatePositionSolrDTOResponses;
+  }
+
+  // @Override
+  // public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
+  // String idCandidate, MultipartFile file) throws Exception {
+  // GdnBaseRestResponse gdnBaseRestResponseUpdateCandidateDetail =
+  // this.beirutApiClient.updateCandidateDetail(requestId, username, idCandidate, file);
+  // if (!gdnBaseRestResponseUpdateCandidateDetail.isSuccess()) {
+  // LOG.warn("failed to updateCandidateDetail with requestId:{} errorCode:{} errorMessage:{}",
+  // requestId, gdnBaseRestResponseUpdateCandidateDetail.getErrorCode(),
+  // gdnBaseRestResponseUpdateCandidateDetail.getErrorMessage());
+  // }
+  // return gdnBaseRestResponseUpdateCandidateDetail;
+  // }
+
+  @Override
+  public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
+      UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseUpdateCandidateStatus = this.beirutApiClient
+        .updateCandidatesStatus(requestId, username, updateCandidateStatusModelDTORequest);
+    if (!gdnBaseRestResponseUpdateCandidateStatus.isSuccess()) {
+      LOG.warn("failed to updateCandidateDetail with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnBaseRestResponseUpdateCandidateStatus.getErrorCode(),
+          gdnBaseRestResponseUpdateCandidateStatus.getErrorMessage());
+    }
+    return gdnBaseRestResponseUpdateCandidateStatus;
   }
 
   @Override
-  public GdnRestSingleResponse<PositionDTOResponse> insertNewPosition(String requestId,
-      String username, PositionDTORequest positionDTORequest) throws Exception {
-    GdnRestSingleResponse<PositionDTOResponse> gdnPositionDTOResponse =
-        this.beirutApiClient.insertNewPosition(requestId, username, positionDTORequest);
-    if (!gdnPositionDTOResponse.isSuccess()) {
-      LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnPositionDTOResponse.getErrorCode(),
-          gdnPositionDTOResponse.getErrorMessage());
+  public GdnBaseRestResponse updatePosition(String requestId, String username,
+      UpdatePositionModelDTORequest updatePositionModelDTORequest) throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseUpdatePosition =
+        this.beirutApiClient.updatePosition(requestId, username, updatePositionModelDTORequest);
+    if (!gdnBaseRestResponseUpdatePosition.isSuccess()) {
+      LOG.warn("failed to updatePosition with requestId:{} errorCode:{} errorMessage:{}", requestId,
+          gdnBaseRestResponseUpdatePosition.getErrorCode(),
+          gdnBaseRestResponseUpdatePosition.getErrorMessage());
     }
-    return gdnPositionDTOResponse;
+    return gdnBaseRestResponseUpdatePosition;
   }
 
 }
