@@ -101,9 +101,9 @@ public class BeirutServiceImpl implements BeirutService {
 
   @Override
   public GdnBaseRestResponse insertNewCandidate(String requestId, String username,
-      String candidateDTORequestString, MultipartFile file) throws Exception {
+      String candidateDTORequestString,byte[] data, String filename) throws Exception {
     GdnBaseRestResponse gdnResponse = this.beirutApiClient.insertNewCandidate(requestId, username,
-        candidateDTORequestString, file);
+        candidateDTORequestString, filename, data);
     if (!gdnResponse.isSuccess()) {
       LOG.warn(
           "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
@@ -113,9 +113,9 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
-  public GdnRestSingleResponse<PositionDTOResponse> insertNewPosition(String requestId,
+  public GdnBaseRestResponse insertNewPosition(String requestId,
       String username, PositionDTORequest positionDTORequest) throws Exception {
-    GdnRestSingleResponse<PositionDTOResponse> gdnPositionDTOResponse =
+    GdnBaseRestResponse gdnPositionDTOResponse =
         this.beirutApiClient.insertNewPosition(requestId, username, positionDTORequest);
     if (!gdnPositionDTOResponse.isSuccess()) {
       LOG.warn(
