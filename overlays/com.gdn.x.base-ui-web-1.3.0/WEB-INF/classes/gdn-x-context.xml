@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:util="http://www.springframework.org/schema/util" 
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:cache="http://www.springframework.org/schema/cache"
+  xmlns:metrics="http://www.ryantenney.com/schema/metrics"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.ryantenney.com/schema/metrics http://www.ryantenney.com/schema/metrics/metrics-3.0.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <context:annotation-config />
+
+  <import resource="classpath*:gdn-project-context.xml" />
+  
+  <bean id="systemPrereqs" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="targetObject" value="#{@systemProperties}" />
+    <property name="targetMethod" value="putAll" />
+    <property name="arguments">
+      <!-- The new Properties -->
+      <util:properties>
+        <prop key="http.connection-manager.class">org.apache.commons.httpclient.MultiThreadedHttpConnectionManager.class</prop>
+        <prop key="version">1.0-RC39</prop>
+      </util:properties>
+    </property>
+  </bean>
+
+  <bean id="webApplicationPropertyHolder" class="com.gdn.x.base.WebApplicationPropertyHolder">
+    <property name="basePathLocation" value="${application.base.path.location}" />
+  </bean>
+  
+  <bean id="staticApplicationBlistrapPropertyHolder" class="com.gdn.x.base.WebApplicationPropertyHolder">
+    <property name="basePathLocation" value="${application.static.blistrap.path.location}" />
+  </bean>
+  
+  <bean id="staticApplicationXUiTemplatePropertyHolder" class="com.gdn.x.base.WebApplicationPropertyHolder">
+    <property name="basePathLocation" value="${application.static.x.ui.template.path.location}" />
+  </bean>
+  
+  <!-- scheduler -->
+  <bean id="applicationEventMulticaster" class="org.springframework.context.event.SimpleApplicationEventMulticaster">
+    <property name="taskExecutor">
+      <ref bean="delegateSecurityAsyncThreadPool" />
+    </property>
+  </bean>
+  <bean id="threadsPool" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" />
+  <bean id="delegateSecurityAsyncThreadPool" class="org.springframework.security.task.DelegatingSecurityContextTaskExecutor">
+    <constructor-arg ref="threadsPool" />
+  </bean>
+
+  <metrics:metric-registry id="metric-registry" />
+
+  <metrics:health-check-registry id="health-check-registry" />
+
+  <metrics:annotation-driven health-check-registry="health-check-registry" metric-registry="metric-registry" />
+
+</beans>
