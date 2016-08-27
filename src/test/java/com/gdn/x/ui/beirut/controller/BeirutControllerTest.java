@@ -14,6 +14,10 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+<<<<<<< HEAD
+=======
+import org.junit.Ignore;
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,7 +30,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+<<<<<<< HEAD
 import org.springframework.test.web.servlet.MockMvc;
+=======
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
 
 import com.gdn.common.util.GdnUUIDHelper;
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
@@ -81,19 +88,27 @@ public class BeirutControllerTest {
 
   private StatusDTORequest statusDTORequest;
 
+<<<<<<< HEAD
   private ListStringRequest listStringRequest;
 
   private List<String> ids;
 
   private MockMvc mockMVC;
 
+=======
+  private List<String> ids;
+
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   @Mock
   private BeirutService beirutService;
 
   @InjectMocks
   private BeirutController beirutController;
 
+<<<<<<< HEAD
   @Ignore
+=======
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   @Before
   public void intialize() {
     initMocks(this);
@@ -154,11 +169,19 @@ public class BeirutControllerTest {
     this.candidatePositionSolrDTOResponses = new ArrayList<CandidatePositionSolrDTOResponse>();
     this.positionDTORequest = new PositionDTORequest();
     this.positionDTORequest.setTitle(TITLE_1);
+<<<<<<< HEAD
     this.listStringRequest = new ListStringRequest();
     ids = new ArrayList<>();
     this.statusDTORequest = StatusDTORequest.HEAD;
   }
   @Ignore
+=======
+    new ListStringRequest();
+    ids = new ArrayList<>();
+    this.statusDTORequest = StatusDTORequest.HEAD;
+  }
+
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   @After
   public void noMoreTransaction() {
     verifyNoMoreInteractions(this.beirutService);
@@ -166,6 +189,10 @@ public class BeirutControllerTest {
 
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
+<<<<<<< HEAD
+=======
+  @Ignore
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   public void testApplyNewPosition() throws Exception {
     GdnBaseRestResponse expectedResult = new GdnBaseRestResponse(REQUEST_ID);
     List<String> idPositions = new ArrayList<>();
@@ -186,9 +213,15 @@ public class BeirutControllerTest {
         applyNewPositionModelDTORequest);
   }
 
+<<<<<<< HEAD
   @Ignore
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
+=======
+  @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
+  @Test
+  @Ignore
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   public void testGetAllPositionWithPageable() throws Exception {
     this.positionDTOResponses.add(this.positionDTOResponse1);
     this.positionDTOResponses.add(this.positionDTOResponse2);
@@ -202,9 +235,15 @@ public class BeirutControllerTest {
         SIZE);
   }
 
+<<<<<<< HEAD
   @Ignore
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
+=======
+  @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
+  @Test
+  @Ignore
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   public void testGetCandidatePositionBySolrQuery() throws Exception {
     this.candidatePositionSolrDTOResponses.add(candidatePositionSolrDTOResponse1);
     this.candidatePositionSolrDTOResponses.add(candidatePositionSolrDTOResponse2);
@@ -221,9 +260,15 @@ public class BeirutControllerTest {
         QUERY, PAGE, SIZE);
   }
 
+<<<<<<< HEAD
   @Ignore
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
+=======
+  @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
+  @Test
+  @Ignore
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   public void testUpdateCandidateStatus() throws Exception {
     ids.add(ID_1);
     ids.add(ID_2);
@@ -244,9 +289,15 @@ public class BeirutControllerTest {
         updateCandidateStatusModelDTORequest);
   }
 
+<<<<<<< HEAD
   @Ignore
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
   @Test
+=======
+  @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})
+  @Test
+  @Ignore
+>>>>>>> 49d929bd4cdab84111caccce4542954b8ee3cc81
   public void testUpdatePosition() throws Exception {
     GdnBaseRestResponse expectedResult = new GdnBaseRestResponse(REQUEST_ID);
     List<String> idCandidates = new ArrayList<>();
