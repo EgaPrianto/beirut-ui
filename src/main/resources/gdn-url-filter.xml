@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+  xmlns:cache="http://www.springframework.org/schema/cache" xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+  <util:list id="filterUrls" list-class="java.util.ArrayList" value-type="com.gdn.iam.spring.security.IamPermissionModel">
+    <!-- api section -->
+    <!--<ref bean="activateLogisticOptionApi" />-->
+    <!--<ref bean="activateLogisticProductApi" />-->
+    <!--<ref bean="deactivateLogisticOptionApi" />-->
+    <!--<ref bean="deactivateLogisticProductApi" />-->
+    <!--<ref bean="deleteLogisticOptionApi" />-->
+    <!--<ref bean="deleteLogisticProductApi" />-->
+    <!--<ref bean="findLogisticProviderCountersApi" />-->
+    <!--<ref bean="findLogisticProviderReportLogApi" />-->
+    <!--<ref bean="getAllLogisticOptionsApi" />-->
+    <!--<ref bean="getAllLogisticProductsApi" />-->
+    <!--<ref bean="getAllLogisticUploadDataStatusApi" />-->
+    <!--<ref bean="getLogisticOptionApi" />-->
+    <!--<ref bean="getLogisticProductApi" />-->
+    <!--<ref bean="getCategorySettingsApi" />-->
+    <!--<ref bean="saveLogisticOptionApi" />-->
+    <!--<ref bean="saveLogisticProductApi" />-->
+    <!--<ref bean="saveCategorySettingsApi" />-->
+
+    <!--&lt;!&ndash; view section &ndash;&gt;-->
+    <!--<ref bean="logisticOptionSummaryView" />-->
+    <!--<ref bean="logisticProductSummaryView" />-->
+    <!--<ref bean="detailView" />-->
+    <!--<ref bean="createLogisticOptionView" />-->
+    <!--<ref bean="createLogisticProductView" />-->
+    <!--<ref bean="updateLogisticOptionView" />-->
+    <!--<ref bean="logisticOptionDetailView" />-->
+    <!--<ref bean="logisticProductDetailView" />-->
+    <!--<ref bean="updateLogisticProductView" />-->
+    <!--<ref bean="uploadShippingView" />-->
+    <!--<ref bean="logisticProviderCounterView" />-->
+    <!--<ref bean="logisticProviderReportLogView" />-->
+    <!--<ref bean="logisticUploadDataStatusView" />-->
+    <!--<ref bean="categorySettingsView" />-->
+  </util:list>
+
+  <util:list id="applicationRoles" list-class="java.util.ArrayList" value-type="com.gdn.iam.spring.security.IamRoleModel">
+    <!--<ref bean="LogOptRead" />-->
+    <!--<ref bean="LogOptWrite" />-->
+    <!--<ref bean="LogPrdRead" />-->
+    <!--<ref bean="LogPrdWrite" />-->
+    <!--<ref bean="LogPvdRead" />-->
+    <!--<ref bean="CatStgRead" />-->
+    <!--<ref bean="CatStgWrite" />-->
+  </util:list>
+
+  <util:list id="applicationRolePermissions" list-class="java.util.ArrayList" value-type="com.gdn.iam.spring.security.IamRolePermissionModel">
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptWrite" />-->
+      <!--<property name="permission" ref="activateLogisticOptionApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="activateLogisticProductApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptWrite" />-->
+      <!--<property name="permission" ref="deactivateLogisticOptionApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="deactivateLogisticProductApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptWrite" />-->
+      <!--<property name="permission" ref="deleteLogisticOptionApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="deleteLogisticProductApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPvdRead" />-->
+      <!--<property name="permission" ref="findLogisticProviderCountersApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPvdRead" />-->
+      <!--<property name="permission" ref="findLogisticProviderReportLogApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptRead" />-->
+      <!--<property name="permission" ref="getAllLogisticOptionsApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdRead" />-->
+      <!--<property name="permission" ref="getAllLogisticProductsApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdRead" />-->
+      <!--<property name="permission" ref="getAllLogisticUploadDataStatusApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptRead" />-->
+      <!--<property name="permission" ref="getLogisticOptionApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdRead" />-->
+      <!--<property name="permission" ref="getLogisticProductApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptWrite" />-->
+      <!--<property name="permission" ref="saveLogisticOptionApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="saveLogisticProductApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="CatStgRead" />-->
+      <!--<property name="permission" ref="getCategorySettingsApi" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="CatStgWrite" />-->
+      <!--<property name="permission" ref="saveCategorySettingsApi" />-->
+      <!--<property name="method" value="post" />-->
+    <!--</bean>-->
+
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptRead" />-->
+      <!--<property name="permission" ref="logisticOptionSummaryView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdRead" />-->
+      <!--<property name="permission" ref="logisticProductSummaryView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptWrite" />-->
+      <!--<property name="permission" ref="createLogisticOptionView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="createLogisticProductView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptRead" />-->
+      <!--<property name="permission" ref="logisticOptionDetailView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdRead" />-->
+      <!--<property name="permission" ref="logisticProductDetailView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogOptWrite" />-->
+      <!--<property name="permission" ref="updateLogisticOptionView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="updateLogisticProductView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdWrite" />-->
+      <!--<property name="permission" ref="uploadShippingView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPvdRead" />-->
+      <!--<property name="permission" ref="logisticProviderCounterView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPvdRead" />-->
+      <!--<property name="permission" ref="logisticProviderReportLogView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="LogPrdRead" />-->
+      <!--<property name="permission" ref="logisticUploadDataStatusView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+    <!--<bean class="com.gdn.iam.spring.security.IamRolePermissionModel">-->
+      <!--<property name="role" ref="CatStgRead" />-->
+      <!--<property name="permission" ref="categorySettingsView" />-->
+      <!--<property name="method" value="get" />-->
+    <!--</bean>-->
+  <!--</util:list>-->
+
+
+  <!--&lt;!&ndash; ==================== &ndash;&gt;-->
+  <!--&lt;!&ndash; Model Permission Start &ndash;&gt;-->
+  <!--&lt;!&ndash; ==================== &ndash;&gt;-->
+  <!--<bean id="activateLogisticOptionApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/activate-logistic-option" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="activateLogisticProductApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/activate-logistic-product" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="deactivateLogisticOptionApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/deactivate-logistic-option" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="deactivateLogisticProductApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/deactivate-logistic-product" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="deleteLogisticOptionApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/delete-logistic-option" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="deleteLogisticProductApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/delete-logistic-product" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="findLogisticProviderCountersApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/find-logistic-provider-counter" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="findLogisticProviderReportLogApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/find-logistic-provider-report-log" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="getAllLogisticOptionsApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/get-all-logistic-options" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="getAllLogisticProductsApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/get-all-logistic-products" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="getAllLogisticUploadDataStatusApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/get-all-logistic-upload-data-status" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="getLogisticOptionApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/get-logistic-option" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="getLogisticProductApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/get-logistic-product" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="saveLogisticOptionApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/save-logistic-option" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="saveLogisticProductApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/save-logistic-product" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="getCategorySettingsApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/get-category-settings" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="saveCategorySettingsApi" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/api/save-category-settings" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+
+  <!--<bean id="logisticOptionSummaryView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-option-summary" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="logisticProductSummaryView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-product-summary" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="detailView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/detail/" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="createLogisticOptionView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/create-logistic-option" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="createLogisticProductView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/create-logistic-product" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="logisticOptionDetailView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-option-detail/" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="logisticProductDetailView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-product-detail/" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="logisticProviderCounterView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-provider-counter" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="logisticProviderReportLogView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-provider-report-log" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="logisticUploadDataStatusView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/logistic-upload-data-status" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="updateLogisticOptionView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/update-logistic-option/" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="updateLogisticProductView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/update-logistic-product/" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="uploadShippingView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/upload-shipping" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+  <!--<bean id="categorySettingsView" class="com.gdn.iam.spring.security.IamPermissionModel">-->
+    <!--<property name="url" value="/view/category-settings" />-->
+    <!--<property name="description" value="" />-->
+  <!--</bean>-->
+
+  <!--&lt;!&ndash; ==================== &ndash;&gt;-->
+  <!--&lt;!&ndash; Model Permission End &ndash;&gt;-->
+  <!--&lt;!&ndash; ==================== &ndash;&gt;-->
+  <!--&lt;!&ndash; ==================== &ndash;&gt;-->
+  <!--&lt;!&ndash; Application Roles Start &ndash;&gt;-->
+  <!--&lt;!&ndash; ==================== &ndash;&gt;-->
+  <!--<bean id="SHPRead" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_SHP_READ" />-->
+    <!--<property name="description" value="read function on Shipping service at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="SHPWrite" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_SHP_WRITE" />-->
+    <!--<property name="description" value="write function on Shipping service at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="LogOptRead" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_OPT_READ" />-->
+    <!--<property name="description" value="read function on Logistic Option module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="LogOptWrite" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_OPT_WRITE" />-->
+    <!--<property name="description" value="write function on Logistic Option module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="LogPrdRead" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_PRD_READ" />-->
+    <!--<property name="description" value="read function on Logistic Product module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="LogPrdWrite" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_PRD_WRITE" />-->
+    <!--<property name="description" value="write function on Logistic Product module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="LogPvdRead" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_PVD_READ" />-->
+    <!--<property name="description" value="read function on Logistic Provider Counter module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="CatStgRead" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_CAT_READ" />-->
+    <!--<property name="description" value="read function on Category Settings module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!--<bean id="CatStgWrite" class="com.gdn.iam.spring.security.IamRoleModel">-->
+    <!--<property name="name" value="FUNCTION_X-SHP_CAT_WRITE" />-->
+    <!--<property name="description" value="write function on Category Settings module at Shipping-ui" />-->
+  <!--</bean>-->
+  <!-- ==================== -->
+  <!-- Application Roles End -->
+  <!-- ==================== -->
+</beans>

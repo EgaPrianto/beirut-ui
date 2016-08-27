@@ -27,9 +27,6 @@ public interface BeirutService {
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception;
 
-  // public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
-  // String idCandidate, MultipartFile file) throws Exception;
-
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
 

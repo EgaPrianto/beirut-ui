@@ -27,7 +27,6 @@ public class BeirutServiceImpl implements BeirutService {
   @Override
   public GdnBaseRestResponse applyNewPosition(String requestId, String username,
       ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception {
-    // TODO Auto-generated method stub
     GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition =
         this.beirutApiClient.applyNewPosition(requestId, username, applyNewPositionModelDTORequest);
     if (!gdnBaseRestResponseApplyNewPosition.isSuccess()) {
@@ -95,19 +94,6 @@ public class BeirutServiceImpl implements BeirutService {
     }
     return gdnCandidatePositionSolrDTOResponses;
   }
-
-  // @Override
-  // public GdnBaseRestResponse updateCandidateDetail(String requestId, String username,
-  // String idCandidate, MultipartFile file) throws Exception {
-  // GdnBaseRestResponse gdnBaseRestResponseUpdateCandidateDetail =
-  // this.beirutApiClient.updateCandidateDetail(requestId, username, idCandidate, file);
-  // if (!gdnBaseRestResponseUpdateCandidateDetail.isSuccess()) {
-  // LOG.warn("failed to updateCandidateDetail with requestId:{} errorCode:{} errorMessage:{}",
-  // requestId, gdnBaseRestResponseUpdateCandidateDetail.getErrorCode(),
-  // gdnBaseRestResponseUpdateCandidateDetail.getErrorMessage());
-  // }
-  // return gdnBaseRestResponseUpdateCandidateDetail;
-  // }
 
   @Override
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
