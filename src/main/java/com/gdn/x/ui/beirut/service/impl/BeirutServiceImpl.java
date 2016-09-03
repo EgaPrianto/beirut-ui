@@ -4,15 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
+import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
-import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidateDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
@@ -25,6 +24,19 @@ public class BeirutServiceImpl implements BeirutService {
 
   @Autowired
   private BeirutApiClient beirutApiClient;
+
+  @Override
+  public GdnBaseRestResponse applyNewPosition(String requestId, String username,
+      ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition =
+        this.beirutApiClient.applyNewPosition(requestId, username, applyNewPositionModelDTORequest);
+    if (!gdnBaseRestResponseApplyNewPosition.isSuccess()) {
+      LOG.warn("failed to applyNewPosition with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnBaseRestResponseApplyNewPosition.getErrorCode(),
+          gdnBaseRestResponseApplyNewPosition.getErrorMessage());
+    }
+    return gdnBaseRestResponseApplyNewPosition;
+  }
 
   @Override
   public GdnBaseRestResponse deleteCandidate(String requestId, String username,
@@ -51,22 +63,11 @@ public class BeirutServiceImpl implements BeirutService {
     }
     return gdnResponse;
   }
-  public GdnBaseRestResponse applyNewPosition(String requestId, String username,
-      ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception {
-    GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition =
-        this.beirutApiClient.applyNewPosition(requestId, username, applyNewPositionModelDTORequest);
-    if (!gdnBaseRestResponseApplyNewPosition.isSuccess()) {
-      LOG.warn("failed to applyNewPosition with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnBaseRestResponseApplyNewPosition.getErrorCode(),
-          gdnBaseRestResponseApplyNewPosition.getErrorMessage());
-    }
-    return gdnBaseRestResponseApplyNewPosition;
-  }
 
   @Override
   public GdnRestListResponse<CandidateDTOResponse> findCandidateByCreatedDateBetweenAndStoreId(
       String requestId, String username, Long start, Long end, int page, int size)
-      throws Exception {
+          throws Exception {
     GdnRestListResponse<CandidateDTOResponse> gdnCandidateDTOResponses = this.beirutApiClient
         .findCandidateByCreatedDateBetweenAndStoreId(requestId, username, start, end, page, size);
     if (!gdnCandidateDTOResponses.isSuccess()) {
@@ -107,31 +108,6 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
-  public GdnBaseRestResponse insertNewCandidate(String requestId, String username,
-      String candidateDTORequestString,byte[] data, String filename) throws Exception {
-    GdnBaseRestResponse gdnResponse = this.beirutApiClient.insertNewCandidate(requestId, username,
-        candidateDTORequestString, filename, data);
-    if (!gdnResponse.isSuccess()) {
-      LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
-    }
-    return gdnResponse;
-  }
-
-  @Override
-  public GdnBaseRestResponse insertNewPosition(String requestId,
-      String username, PositionDTORequest positionDTORequest) throws Exception {
-    GdnBaseRestResponse gdnPositionDTOResponse =
-        this.beirutApiClient.insertNewPosition(requestId, username, positionDTORequest);
-    if (!gdnPositionDTOResponse.isSuccess()) {
-      LOG.warn(
-          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
-          requestId, gdnPositionDTOResponse.getErrorCode(),
-          gdnPositionDTOResponse.getErrorMessage());
-    }
-    return gdnPositionDTOResponse;
-  }
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception {
     GdnRestListResponse<CandidatePositionSolrDTOResponse> gdnCandidatePositionSolrDTOResponses =
@@ -144,6 +120,33 @@ public class BeirutServiceImpl implements BeirutService {
           gdnCandidatePositionSolrDTOResponses.getErrorMessage());
     }
     return gdnCandidatePositionSolrDTOResponses;
+  }
+
+  @Override
+  public GdnBaseRestResponse insertNewCandidate(String requestId, String username,
+      String candidateDTORequestString, byte[] data, String filename) throws Exception {
+    GdnBaseRestResponse gdnResponse = this.beirutApiClient.insertNewCandidate(requestId, username,
+        candidateDTORequestString, filename, data);
+    if (!gdnResponse.isSuccess()) {
+      LOG.warn(
+          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
+    }
+    return gdnResponse;
+  }
+
+  @Override
+  public GdnBaseRestResponse insertNewPosition(String requestId, String username,
+      PositionDTORequest positionDTORequest) throws Exception {
+    GdnBaseRestResponse gdnPositionDTOResponse =
+        this.beirutApiClient.insertNewPosition(requestId, username, positionDTORequest);
+    if (!gdnPositionDTOResponse.isSuccess()) {
+      LOG.warn(
+          "failed to findCandidateByCreatedDateBetweenAndStoreId with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnPositionDTOResponse.getErrorCode(),
+          gdnPositionDTOResponse.getErrorMessage());
+    }
+    return gdnPositionDTOResponse;
   }
 
   @Override
@@ -161,9 +164,9 @@ public class BeirutServiceImpl implements BeirutService {
 
   @Override
   public GdnBaseRestResponse updatePosition(String requestId, String username,
-      PositionDTORequest updatePositionDTORequest) throws Exception {
+      PositionDTORequest positionDTORequest) throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseUpdatePosition =
-        this.beirutApiClient.updatePosition(requestId, username, updatePositionDTORequest);
+        this.beirutApiClient.updatePosition(requestId, username, positionDTORequest);
     if (!gdnBaseRestResponseUpdatePosition.isSuccess()) {
       LOG.warn("failed to updatePosition with requestId:{} errorCode:{} errorMessage:{}", requestId,
           gdnBaseRestResponseUpdatePosition.getErrorCode(),

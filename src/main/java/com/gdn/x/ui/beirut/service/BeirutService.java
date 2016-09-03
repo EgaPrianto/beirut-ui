@@ -15,7 +15,7 @@ import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 public interface BeirutService {
 
   public GdnBaseRestResponse applyNewPosition(String requestId, String username,
-      ApplyNewPositionModelDTORequest positionDTORequest) throws Exception;
+      ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception;
 
   public GdnBaseRestResponse deleteCandidate(String requestId, String username,
       ListStringRequest idsRequest) throws Exception;
@@ -46,6 +46,6 @@ public interface BeirutService {
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
 
   public GdnBaseRestResponse updatePosition(String requestId, String username,
-      PositionDTORequest updatePositionDTORequest) throws Exception;
+      PositionDTORequest positionDTORequest) throws Exception;
 
 }

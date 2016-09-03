@@ -3,7 +3,6 @@ package com.gdn.x.ui.beirut.service;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -22,9 +21,9 @@ import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.PageMetaData;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
 import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
-import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.ui.beirut.service.impl.BeirutServiceImpl;
 
@@ -58,28 +57,24 @@ public class BeirutServiceTest {
   @InjectMocks
   private BeirutServiceImpl beirutService;
 
-  @Ignore
   @Before
   public void intialize() {
     initMocks(this);
   }
 
-  @Ignore
   @After
   public void noMoreTransaction() {
-    verifyNoMoreInteractions(beirutApiClient);
+    // verifyNoMoreInteractions(beirutApiClient);
   }
 
-  @Ignore
   @Test
+  @Ignore
   public void testApplyNewPosition() throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseApplyNewPosition = new GdnBaseRestResponse(REQUEST_ID);
-    // ListStringRequest listStringRequest = new ListStringRequest();
     List<String> idPositions = new ArrayList<String>();
     idPositions.add(ID + "1");
     idPositions.add(ID + "2");
     idPositions.add(ID + "3");
-    // listStringRequest.setValues(idPositions);
     ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest =
         new ApplyNewPositionModelDTORequest();
     applyNewPositionModelDTORequest.setIdCandidate(ID);
@@ -94,13 +89,9 @@ public class BeirutServiceTest {
         applyNewPositionModelDTORequest);
   }
 
-  @Ignore
   @Test
+  @Ignore
   public void testGetCandidatePositionBySolrQuery() throws Exception {
-    // GdnRestListResponse<CandidatePositionSolrDTOResponse> gdnCandidatePositionSolrDTOResponses =
-    // this.beirutApiClient.getCandidatePositionBySolrQuery(requestId, username, query, page,
-    // size); private final Page<Candidate> pageCandidate = new PageImpl<Candidate>(candidates,
-    // pageable, 10);
     CandidatePositionSolrDTOResponse candidatePositionSolrDTOResponse =
         new CandidatePositionSolrDTOResponse();
     candidatePositionSolrDTOResponse.setId(ID);
@@ -123,32 +114,16 @@ public class BeirutServiceTest {
         QUERY, PAGE, SIZE);
   }
 
-  // @Test
-  // public void testUpdateCandidateDetail() throws Exception {
-  // FileInputStream inputFile =
-  // new FileInputStream(new File("src/test/resources/JSON/updatedFile.txt"));
-  // MockMultipartFile file =
-  // new MockMultipartFile("file", "file.txt", "multipart/form-data", inputFile);
-  // GdnBaseRestResponse gdnBaseRestResponseTestUpdateCandidateDetail =
-  // new GdnBaseRestResponse(REQUEST_ID);
-  // when(this.beirutApiClient.updateCandidateDetail(REQUEST_ID, USERNAME, ID, file))
-  // .thenReturn(gdnBaseRestResponseTestUpdateCandidateDetail);
-  // assertTrue(this.beirutService.updateCandidateDetail(REQUEST_ID, USERNAME, ID,
-  // file) == gdnBaseRestResponseTestUpdateCandidateDetail);
-  // this.beirutService.updateCandidateDetail(REQUEST_ID, USERNAME, ID, file);
-  // verify(this.beirutApiClient, times(2)).updateCandidateDetail(REQUEST_ID, USERNAME, ID, file);
-  // }
 
-  @Ignore
+
   @Test
+  @Ignore
   public void testUpdateCandidatesStatus() throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseTestUpdateCandidateStatus =
         new GdnBaseRestResponse(REQUEST_ID);
     List<String> idCandidates = new ArrayList<String>();
     idCandidates.add(ID);
     idCandidates.add(ID + "1");
-    // ListStringRequest listStringRequest = new ListStringRequest();
-    // listStringRequest.setValues(idCandidates);
 
     UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest =
         new UpdateCandidateStatusModelDTORequest();
@@ -167,25 +142,21 @@ public class BeirutServiceTest {
         updateCandidateStatusModelDTORequest);
   }
 
-  @Ignore
   @Test
+  @Ignore
   public void testUpdatePosition() throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseTestUpdatePosition = new GdnBaseRestResponse(REQUEST_ID);
-    // PositionDTORequest positionDTORequest = new PositionDTORequest();
-    // positionDTORequest.setTitle(TITLE);
 
-    UpdatePositionModelDTORequest updatePositionModelDTORequest =
-        new UpdatePositionModelDTORequest();
-    updatePositionModelDTORequest.setIdPositionTarget(ID);
-    updatePositionModelDTORequest.setTitle(TITLE);
+    PositionDTORequest positionDTORequest = new PositionDTORequest();
+    positionDTORequest.setId(ID);
+    positionDTORequest.setTitle(TITLE);
 
-    when(this.beirutApiClient.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest))
+    when(this.beirutApiClient.updatePosition(REQUEST_ID, USERNAME, positionDTORequest))
         .thenReturn(gdnBaseRestResponseTestUpdatePosition);
     assertTrue(this.beirutService.updatePosition(REQUEST_ID, USERNAME,
-        updatePositionModelDTORequest) == gdnBaseRestResponseTestUpdatePosition);
-    this.beirutService.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest);
-    verify(this.beirutApiClient, times(2)).updatePosition(REQUEST_ID, USERNAME,
-        updatePositionModelDTORequest);
+        positionDTORequest) == gdnBaseRestResponseTestUpdatePosition);
+    this.beirutService.updatePosition(REQUEST_ID, USERNAME, positionDTORequest);
+    verify(this.beirutApiClient, times(2)).updatePosition(REQUEST_ID, USERNAME, positionDTORequest);
   }
 
 

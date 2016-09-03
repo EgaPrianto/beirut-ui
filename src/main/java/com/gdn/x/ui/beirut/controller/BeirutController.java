@@ -88,9 +88,9 @@ public class BeirutController {
   @RequestMapping(value = BeirutController.UPDATE_POSITION)
   @ResponseBody
   public GdnBaseRestResponse updatePosition(
-      @RequestBody PositionDTORequest updatePositionDTORequest) throws Exception {
+      @RequestBody PositionDTORequest positionDTORequest) throws Exception {
     GdnBaseRestResponse result = this.beirutService.updatePosition(generateRequestId(),
-        getUsername(), updatePositionDTORequest);
+        getUsername(), positionDTORequest);
     return result;
   }
 
