@@ -40,7 +40,7 @@ public interface BeirutService {
       String candidateDTORequestString, byte[] data, String filename) throws Exception;
 
   public GdnBaseRestResponse insertNewPosition(String requestId, String username,
-      PositionDTORequest positionDTORequest) throws Exception;
+      String positionDTORequestString, byte[] data, String filename) throws Exception;
 
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
