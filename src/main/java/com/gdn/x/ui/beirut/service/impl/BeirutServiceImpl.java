@@ -189,7 +189,21 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
-  public GdnBaseRestResponse updatePosition(String requestId, String username,
+  public GdnBaseRestResponse updatePositionDescription(String requestId, String username, String id,
+      byte[] data, String filename) throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseUpdatePositionInformation =
+        this.beirutApiClient.updatePositionDescription(requestId, username, id, filename, data);
+    if (!gdnBaseRestResponseUpdatePositionInformation.isSuccess()) {
+      LOG.warn(
+          "failed to updateCandidateInformation with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnBaseRestResponseUpdatePositionInformation.getErrorCode(),
+          gdnBaseRestResponseUpdatePositionInformation.getErrorMessage());
+    }
+    return gdnBaseRestResponseUpdatePositionInformation;
+  }
+
+  @Override
+  public GdnBaseRestResponse updatePositionInformation(String requestId, String username,
       PositionDTORequest positionDTORequest) throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseUpdatePosition =
         this.beirutApiClient.updatePositionInformation(requestId, username, positionDTORequest);
@@ -199,13 +213,6 @@ public class BeirutServiceImpl implements BeirutService {
           gdnBaseRestResponseUpdatePosition.getErrorMessage());
     }
     return gdnBaseRestResponseUpdatePosition;
-  }
-
-  @Override
-  public GdnBaseRestResponse updatePositionDescription(String requestId, String username, String id,
-      byte[] data, String filename) throws Exception {
-    GdnBaseRestResponse gdnBaseRestResponseUpdatePosition =
-        this.beirutApiClient.updatePositionDescription
   }
 
 }
