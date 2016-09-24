@@ -5,6 +5,7 @@ import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
 import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.CandidateDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
@@ -26,7 +27,6 @@ public interface BeirutService {
   public GdnRestListResponse<CandidateDTOResponse> findCandidateByCreatedDateBetweenAndStoreId(
       String requestId, String username, Long start, Long end, int page, int size) throws Exception;
 
-
   public GdnRestSingleResponse<CandidateDTOResponse> findCandidateByEmailAddressAndStoreId(
       String requestId, String username, String emailAddress) throws Exception;
 
@@ -42,10 +42,19 @@ public interface BeirutService {
   public GdnBaseRestResponse insertNewPosition(String requestId, String username,
       String positionDTORequestString, byte[] data, String filename) throws Exception;
 
+  public GdnBaseRestResponse updateCandidateDetail(String requestId, String username, String id,
+      byte[] data, String filename) throws Exception;
+
+  public GdnBaseRestResponse updateCandidateInformation(String requestId, String username,
+      CandidateDTORequest candidateDTORequest) throws Exception;
+
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
 
   public GdnBaseRestResponse updatePosition(String requestId, String username,
       PositionDTORequest positionDTORequest) throws Exception;
+
+  public GdnBaseRestResponse updatePositionDescription(String requestId, String username, String id,
+      byte[] data, String filename) throws Exception;
 
 }

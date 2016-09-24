@@ -10,6 +10,7 @@ import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
 import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.CandidateDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
@@ -150,6 +151,31 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
+  public GdnBaseRestResponse updateCandidateDetail(String requestId, String username, String id,
+      byte[] data, String filename) throws Exception {
+    GdnBaseRestResponse gdnResponse =
+        this.beirutApiClient.updateCandidateDetail(requestId, username, id, filename, data);
+    if (!gdnResponse.isSuccess()) {
+      LOG.warn("failed to updateCandidateDetail with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
+    }
+    return gdnResponse;
+  }
+
+  @Override
+  public GdnBaseRestResponse updateCandidateInformation(String requestId, String username,
+      CandidateDTORequest candidateDTORequest) throws Exception {
+    GdnBaseRestResponse gdnResponse =
+        this.beirutApiClient.updateCandidateInformation(requestId, username, candidateDTORequest);
+    if (!gdnResponse.isSuccess()) {
+      LOG.warn(
+          "failed to updateCandidateInformation with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnResponse.getErrorCode(), gdnResponse.getErrorMessage());
+    }
+    return gdnResponse;
+  }
+
+  @Override
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseUpdateCandidateStatus = this.beirutApiClient
@@ -166,13 +192,20 @@ public class BeirutServiceImpl implements BeirutService {
   public GdnBaseRestResponse updatePosition(String requestId, String username,
       PositionDTORequest positionDTORequest) throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseUpdatePosition =
-        this.beirutApiClient.updatePosition(requestId, username, positionDTORequest);
+        this.beirutApiClient.updatePositionInformation(requestId, username, positionDTORequest);
     if (!gdnBaseRestResponseUpdatePosition.isSuccess()) {
       LOG.warn("failed to updatePosition with requestId:{} errorCode:{} errorMessage:{}", requestId,
           gdnBaseRestResponseUpdatePosition.getErrorCode(),
           gdnBaseRestResponseUpdatePosition.getErrorMessage());
     }
     return gdnBaseRestResponseUpdatePosition;
+  }
+
+  @Override
+  public GdnBaseRestResponse updatePositionDescription(String requestId, String username, String id,
+      byte[] data, String filename) throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseUpdatePosition =
+        this.beirutApiClient.updatePositionDescription
   }
 
 }
