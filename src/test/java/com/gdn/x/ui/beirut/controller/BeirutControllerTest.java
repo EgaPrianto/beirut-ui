@@ -254,9 +254,11 @@ public class BeirutControllerTest {
 
     when(this.beirutService.updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest))
         .thenReturn(expectedResult);
-    assertTrue(this.beirutController.updatePosition(positionDTORequest) == expectedResult);
-    this.beirutController.updatePosition(positionDTORequest);
-    verify(this.beirutService, times(2)).updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest);
+    assertTrue(
+        this.beirutController.updatePositionInformation(positionDTORequest) == expectedResult);
+    this.beirutController.updatePositionInformation(positionDTORequest);
+    verify(this.beirutService, times(2)).updatePositionInformation(REQUEST_ID, USERNAME,
+        positionDTORequest);
   }
 
 
