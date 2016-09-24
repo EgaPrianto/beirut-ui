@@ -51,7 +51,7 @@ public interface BeirutService {
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
 
-  public GdnBaseRestResponse updatePosition(String requestId, String username,
+  public GdnBaseRestResponse updatePositionInformation(String requestId, String username,
       PositionDTORequest positionDTORequest) throws Exception;
 
   public GdnBaseRestResponse updatePositionDescription(String requestId, String username, String id,

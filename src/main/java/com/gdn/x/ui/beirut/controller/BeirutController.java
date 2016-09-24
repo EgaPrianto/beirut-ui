@@ -128,10 +128,10 @@ public class BeirutController {
 
   @RequestMapping(value = BeirutController.UPDATE_POSITION)
   @ResponseBody
-  public GdnBaseRestResponse updatePosition(@RequestBody PositionDTORequest positionDTORequest)
-      throws Exception {
-    GdnBaseRestResponse result =
-        this.beirutService.updatePosition(generateRequestId(), getUsername(), positionDTORequest);
+  public GdnBaseRestResponse updatePositionInformation(
+      @RequestBody PositionDTORequest positionDTORequest) throws Exception {
+    GdnBaseRestResponse result = this.beirutService.updatePositionInformation(generateRequestId(),
+        getUsername(), positionDTORequest);
     return result;
   }
 

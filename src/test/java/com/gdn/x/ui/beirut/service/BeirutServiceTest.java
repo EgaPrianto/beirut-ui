@@ -151,12 +151,13 @@ public class BeirutServiceTest {
     positionDTORequest.setId(ID);
     positionDTORequest.setTitle(TITLE);
 
-    when(this.beirutApiClient.updatePosition(REQUEST_ID, USERNAME, positionDTORequest))
+    when(this.beirutApiClient.updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest))
         .thenReturn(gdnBaseRestResponseTestUpdatePosition);
-    assertTrue(this.beirutService.updatePosition(REQUEST_ID, USERNAME,
+    assertTrue(this.beirutService.updatePositionInformation(REQUEST_ID, USERNAME,
         positionDTORequest) == gdnBaseRestResponseTestUpdatePosition);
-    this.beirutService.updatePosition(REQUEST_ID, USERNAME, positionDTORequest);
-    verify(this.beirutApiClient, times(2)).updatePosition(REQUEST_ID, USERNAME, positionDTORequest);
+    this.beirutService.updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest);
+    verify(this.beirutApiClient, times(2)).updatePositionInformation(REQUEST_ID, USERNAME,
+        positionDTORequest);
   }
 
 
