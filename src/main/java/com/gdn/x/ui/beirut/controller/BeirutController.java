@@ -23,7 +23,7 @@ import com.gdn.x.ui.beirut.service.BeirutService;
 @Controller
 @RequestMapping(value = BeirutController.BASE_PATH)
 public class BeirutController {
-  @SuppressWarnings("unused")
+//  @SuppressWarnings("unused")
   private static final Logger LOG = LoggerFactory.getLogger(BeirutController.class);
 
   public static final String BASE_PATH = "/api";
@@ -36,15 +36,15 @@ public class BeirutController {
   @Autowired
   private BeirutService beirutService;
 
-  @RequestMapping(value = BeirutController.APPLY_NEW_POSITION)
-  @ResponseBody
-  public GdnBaseRestResponse applyNewPosition(
-      @RequestBody ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest)
-          throws Exception {
-    GdnBaseRestResponse result = this.beirutService.applyNewPosition(generateRequestId(),
-        getUsername(), applyNewPositionModelDTORequest);
-    return result;
-  }
+//  @RequestMapping(value = BeirutController.APPLY_NEW_POSITION)
+//  @ResponseBody
+//  public GdnBaseRestResponse applyNewPosition(
+//      @RequestBody ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest)
+//          throws Exception {
+//    GdnBaseRestResponse result = this.beirutService.applyNewPosition(generateRequestId(),
+//        getUsername(), applyNewPositionModelDTORequest);
+//    return result;
+//  }
 
   private String generateRequestId() {
     return GdnUUIDHelper.generateUUID();
@@ -59,39 +59,39 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.GET_ALL_CANDIDATE_POSITION)
-  @ResponseBody
-  public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
-      @RequestParam String query, @RequestParam Integer page, @RequestParam Integer size)
-          throws Exception {
-    GdnRestListResponse<CandidatePositionSolrDTOResponse> result = this.beirutService
-        .getCandidatePositionBySolrQuery(generateRequestId(), getUsername(), query, page, size);
-    return result;
-  }
-
+//  @RequestMapping(value = BeirutController.GET_ALL_CANDIDATE_POSITION)
+//  @ResponseBody
+//  public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
+//      @RequestParam String query, @RequestParam Integer page, @RequestParam Integer size)
+//          throws Exception {
+//    GdnRestListResponse<CandidatePositionSolrDTOResponse> result = this.beirutService
+//        .getCandidatePositionBySolrQuery(generateRequestId(), getUsername(), query, page, size);
+//    return result;
+//  }
+//
   private String getUsername() {
     final org.springframework.security.core.Authentication auth =
         SecurityContextHolder.getContext().getAuthentication();
     return auth.getName();
   }
-
-  @RequestMapping(value = BeirutController.UPDATE_CANDIDATE_STATUS)
-  @ResponseBody
-  public GdnBaseRestResponse updateCandidatesStatus(
-      @RequestBody UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest)
-          throws Exception {
-    GdnBaseRestResponse result = this.beirutService.updateCandidatesStatus(generateRequestId(),
-        getUsername(), updateCandidateStatusModelDTORequest);
-    return result;
-  }
-
-  @RequestMapping(value = BeirutController.UPDATE_POSITION)
-  @ResponseBody
-  public GdnBaseRestResponse updatePosition(
-      @RequestBody UpdatePositionModelDTORequest updatePositionModelDTORequest) throws Exception {
-    GdnBaseRestResponse result = this.beirutService.updatePosition(generateRequestId(),
-        getUsername(), updatePositionModelDTORequest);
-    return result;
-  }
+//
+//  @RequestMapping(value = BeirutController.UPDATE_CANDIDATE_STATUS)
+//  @ResponseBody
+//  public GdnBaseRestResponse updateCandidatesStatus(
+//      @RequestBody UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest)
+//          throws Exception {
+//    GdnBaseRestResponse result = this.beirutService.updateCandidatesStatus(generateRequestId(),
+//        getUsername(), updateCandidateStatusModelDTORequest);
+//    return result;
+//  }
+//
+//  @RequestMapping(value = BeirutController.UPDATE_POSITION)
+//  @ResponseBody
+//  public GdnBaseRestResponse updatePosition(
+//      @RequestBody UpdatePositionModelDTORequest updatePositionModelDTORequest) throws Exception {
+//    GdnBaseRestResponse result = this.beirutService.updatePosition(generateRequestId(),
+//        getUsername(), updatePositionModelDTORequest);
+//    return result;
+//  }
 
 }

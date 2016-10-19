@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    asd
+    <h1>MASUK</h1>
 
     <script src="${applicationBasePathLocation}/resources/js/script/apps/shipping/position-summary-app.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/services/shipping/beirut-service.js"></script>

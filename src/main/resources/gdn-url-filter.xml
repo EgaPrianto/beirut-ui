@@ -207,7 +207,7 @@
       <!--<property name="permission" ref="categorySettingsView" />-->
       <!--<property name="method" value="get" />-->
     <!--</bean>-->
-  <!--</util:list>-->
+  </util:list>
 
 
   <!--&lt;!&ndash; ==================== &ndash;&gt;-->
