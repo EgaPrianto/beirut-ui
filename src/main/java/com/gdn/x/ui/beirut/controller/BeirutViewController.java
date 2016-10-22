@@ -14,19 +14,18 @@ import com.gdn.x.ui.beirut.service.BeirutService;
 @RequestMapping(value = BeirutViewController.BASE_PATH)
 public class BeirutViewController {
   public static final String BASE_PATH = "/view";
-  public static final String POSITION_SUMMARY_PATH = "/position-summary";
-  public static final String RECUITMENT_CENTER = "/recruitment-center";
+  public static final String RECRUITMENT_CENTER = "/recruitment-center";
   public static final String JOBS_MANAGEMENT = "/jobs-management";
   @Autowired
   private BeirutService beirutService;
 
-  @RequestMapping(value = BeirutViewController.RECUITMENT_CENTER)
+  @RequestMapping(value = BeirutViewController.JOBS_MANAGEMENT, method = RequestMethod.GET)
   public String getJobsManagement() {
     return "jobs-management";
   }
 
-  @RequestMapping(value = BeirutViewController.POSITION_SUMMARY_PATH, method = RequestMethod.GET)
-  public String getPositionSummary() {
-    return "position-summary";
+  @RequestMapping(value = BeirutViewController.RECRUITMENT_CENTER, method = RequestMethod.GET)
+  public String getRecuitmentCenter() {
+    return "recruitment-center";
   }
 }
