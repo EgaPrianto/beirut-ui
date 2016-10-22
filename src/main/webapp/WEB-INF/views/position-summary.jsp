@@ -12,7 +12,7 @@
   	<script src="${applicationBasePathLocation}/resources/bower_components/angular-route/angular-route.js"></script>
     <script src="${applicationBasePathLocation}/resources/bower_components/angular-resource/angular-resource.js"></script>-->
     <script src="${staticBlistrapPathLocation}js/vendor/ui-grid-angular/ui-grid.js"></script>
-	<script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
+	  <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/position-summary-app.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/services/beirut/beirut-service.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/position-controller.js"></script>
