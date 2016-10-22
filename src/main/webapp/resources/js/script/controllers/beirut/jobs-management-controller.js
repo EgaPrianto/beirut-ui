@@ -10,7 +10,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
 
-    $scope.getAllLogisticProducts = function(){
+    $scope.getAllPositionsSummary = function(){
         $scope.loading = true;
         positionService.getAllPositions({
             page : $scope.currentPage - 1,
