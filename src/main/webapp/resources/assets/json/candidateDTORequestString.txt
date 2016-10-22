@@ -1,0 +1,10 @@
+{
+	"emailAddress": "aswqedda@egamail.com",
+	"firstName": "asducup",
+	"lastName": "sanusias",
+	"phoneNumber": "1",
+	"positionIds": 
+		[
+			"0ba7e594-8602-45bc-be1c-7c6ab396651e"
+		]
+}
