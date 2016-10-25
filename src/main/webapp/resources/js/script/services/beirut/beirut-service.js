@@ -1,7 +1,6 @@
 var beirutModuleService = angular.module('x.beirut-module.services', ['ngResource']);
 
 beirutModuleService.factory('positionService', ['$resource', positionServiceFunc]);
-
 function positionServiceFunc($resource) {
     var url = applicationBasePathLocation + '/api/:command';
     return $resource(url, {}, {

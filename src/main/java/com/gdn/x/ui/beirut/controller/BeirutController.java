@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -73,7 +74,7 @@ public class BeirutController {
     return GdnUUIDHelper.generateUUID();
   }
 
-  @RequestMapping(value = BeirutController.GET_ALL_POSITION)
+  @RequestMapping(value = BeirutController.GET_ALL_POSITION, method = RequestMethod.GET)
   @ResponseBody
   public GdnRestListResponse<PositionDTOResponse> getAllPositionWithPageable(
       @RequestParam Integer page, @RequestParam Integer size) throws Exception {
@@ -95,7 +96,7 @@ public class BeirutController {
   private String getUsername() {
     final org.springframework.security.core.Authentication auth =
         SecurityContextHolder.getContext().getAuthentication();
-    return auth.getName();
+    return "TempUsername";
   }
 
   @RequestMapping(value = BeirutController.INSERT_NEW_CANDIDATE)
