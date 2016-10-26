@@ -8,5 +8,5 @@
 		
 		<http security="none" auto-config="false" pattern="/version" />
 		<http security="none" auto-config="false" pattern="/sys-info/**" />
-		
+
 </beans:beans>
