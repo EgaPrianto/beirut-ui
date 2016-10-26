@@ -20,8 +20,8 @@
            </div>
           </div>
           <ul>
-           <li><a href="/beirut-ui/view/recruitment-center">Recruitment Center</a></li>
-           <li><a href="/beirut-ui/view/jobs-management">Jobs Management</a></li>
+           <li><a href="${applicationBasePathLocation}/view/recruitment-center">Recruitment Center</a></li>
+           <li><a href="${applicationBasePathLocation}/view/jobs-management">Jobs Management</a></li>
           </ul>
          </div>
         </div>

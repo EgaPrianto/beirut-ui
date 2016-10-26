@@ -1,10 +1,10 @@
-<div ng-app="x.beirut.position-angularApp" ng-controller="positionSummary.ctrl">
+<div ng-app="x.beirut.candidate-angularApp" ng-controller="candidateSummary.ctrl">
     <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-    {{candidatePositions}}
+    {{positions}}
     <h1>MASUK</h1><!--
     <script src="${applicationBasePathLocation}/resources/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="${applicationBasePathLocation}/resources/bower_components/bootstrap/dist/js/bootstrap.js"></script>
