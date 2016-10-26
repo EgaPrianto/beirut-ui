@@ -4,7 +4,7 @@
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-    {{positions[1]}}
+    {{positions}}
     <h1>MASUK</h1><!--
     <script src="${applicationBasePathLocation}/resources/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="${applicationBasePathLocation}/resources/bower_components/bootstrap/dist/js/bootstrap.js"></script>

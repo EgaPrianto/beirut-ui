@@ -16,7 +16,6 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
             page : $scope.currentPage - 1,
             size : $scope.size
         }, function(response){
-            console.log(response);
             //debug
             if(response.success){
                 $scope.positions = response.content;
