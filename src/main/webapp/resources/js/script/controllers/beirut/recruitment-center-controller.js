@@ -1,6 +1,6 @@
-var positionModuleController = angular.module('x.beirut.candidate-module.controllers', []);
+var candidatePositionModuleController = angular.module('x.beirut.candidate-module.controllers', []);
 
-positionModuleController.controller('candidateSummary.ctrl', ['$scope', '$window', '$modal', 'positionService', candidateSummaryModuleCtrlFunc]);
+candidatePositionModuleController.controller('candidateSummary.ctrl', ['$scope', '$window', '$modal', 'candidateService', candidateSummaryModuleCtrlFunc]);
 
 function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateService){
     $scope.currentPage = 1;
@@ -10,14 +10,12 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
     $scope.totalRecords = 0;
 
     $scope.getAllCandidatePositionsSummary = function(){
-
         $scope.loading = true;
         candidateService.getAllCandidatePosition({
             query : '*:*',
             page  : $scope.currentPage - 1,
             size  : $scope.size
         }, function(response){
-            //debug
             if(response.success){
                 $scope.candidatePositions = response.content;
                 $scope.totalRecords = response.pageMetaData.totalRecords;
@@ -26,7 +24,6 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
             } else {
                 swal("Failed!", response.errorMessage, "error");
             }
-            console.log(response);
             $scope.loading = false;
         }, function(error){
             swal('Error!', error.statusText, 'error');
