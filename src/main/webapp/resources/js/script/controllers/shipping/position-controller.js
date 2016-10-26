@@ -1,9 +1,10 @@
 var positionModuleController = angular.module('x.beirut.position-module.controllers', []);
 
-positionModuleController.controller('positionSummary.ctrl', ['$scope', 'positionService', positionSummaryModuleCtrlFunc]);
+positionModuleController.controller('positionSummary.ctrl', ['$scope', '$window', '$modal','positionService', positionSummaryModuleCtrlFunc]);
 
 
 function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService){
+    console.log("!!!!MASUK CONTROLLER!!!!");
     $scope.currentPage = 1;
     $scope.size = 10;
     $scope.numPages = $scope.totalRecords / $scope.size;
