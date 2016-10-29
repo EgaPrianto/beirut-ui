@@ -16,6 +16,10 @@ public class BeirutViewController {
   public static final String BASE_PATH = "/view";
   public static final String RECRUITMENT_CENTER = "/recruitment-center";
   public static final String JOBS_MANAGEMENT = "/jobs-management";
+  public static final String INSERT_NEW_POSITION = "/insert-new-position";
+  public static final String POSITION_VIEW = "/position-view";
+  public static final String POSITION_EDIT = "/position-edit";
+
   @Autowired
   private BeirutService beirutService;
 
@@ -28,4 +32,13 @@ public class BeirutViewController {
   public String getRecuitmentCenter() {
     return "recruitment-center";
   }
+
+  @RequestMapping(value = BeirutViewController.INSERT_NEW_POSITION, method = RequestMethod.GET)
+  public String getInsertNewPosition() { return "insert-new-position"; }
+
+  @RequestMapping(value = BeirutViewController.POSITION_VIEW, method = RequestMethod.GET)
+  public String getPositionView() { return "position-view"; }
+
+  @RequestMapping(value = BeirutViewController.POSITION_EDIT, method = RequestMethod.GET)
+  public String getPositionEdit() { return "position-edit"; }
 }
