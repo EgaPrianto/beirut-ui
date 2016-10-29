@@ -1,28 +1,25 @@
-var positionModuleController = angular.module('x.beirut.position-module.controllers', []);
+var positionModuleController = angular.module('x.beirut.candidate-module.controllers', []);
 
-positionModuleController.controller('positionSummary.ctrl', ['$scope', '$window', '$modal', 'positionService', positionSummaryModuleCtrlFunc]);
+positionModuleController.controller('candidateSummary.ctrl', ['$scope', '$window', '$modal', 'positionService', candidateSummaryModuleCtrlFunc]);
 
-function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService){
+function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateService){
     $scope.currentPage = 1;
     $scope.size = 10;
     $scope.numPages = $scope.totalRecords / $scope.size;
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
 
-    $scope.getAllPositionsSummary = function(){
+    $scope.getAllCandidatePositionsSummary = function(){
 
         $scope.loading = true;
-        positionService.getAllPositions({
-            page : $scope.currentPage - 1,
-            size : $scope.size
+        candidateService.getAllCandidatePosition({
+            query : '*:*',
+            page  : $scope.currentPage - 1,
+            size  : $scope.size
         }, function(response){
-<<<<<<< HEAD
-            console.log(response);
-=======
->>>>>>> 39920a7475aac46c49ec392f72660cd9e6922047
             //debug
             if(response.success){
-                $scope.positions = response.content;
+                $scope.candidatePositions = response.content;
                 $scope.totalRecords = response.pageMetaData.totalRecords;
                 $scope.size = response.pageMetaData.pageSize;
                 $scope.currentPage = response.pageMetaData.pageNumber + 1;
@@ -37,6 +34,6 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
         });
     };
 
-	$scope.getAllPositionsSummary();
+	$scope.getAllCandidatePositionsSummary();
 
 }
