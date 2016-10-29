@@ -8,7 +8,7 @@
 
 <form>
 <h3>Jobs Management</h3>
-<h4 style="color:#086CA3"> Insert New Position </h4>
+<h4 style="color:#086CA3"> Edit Position </h4>
 <br>
 <br>
 <h4 class="title-head">Detil Information</h4>
@@ -23,6 +23,13 @@
 <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" style="width:300px" ng-model="city" name="city" placeholder="Job Division" id="Job Division" required="">
 <br>
 
+<h4 class="title-head">Status Information</h4>
+<br>
+<label> Status </label>
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+         Status <i class="bli bli-caret-down"></i>
+</button>
+<br>
 <br>
 
 <h4 class="title-head">Description</h4>

@@ -1,14 +1,10 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 39920a7475aac46c49ec392f72660cd9e6922047
 <div ng-app="x.beirut.position-angularApp" ng-controller="positionSummary.ctrl">
     <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-<<<<<<< HEAD
     {{positions[1]}}
 
     <h3>Jobs Management</h3>
@@ -63,8 +59,8 @@
                                           <i class="fa fa-cog"></i> <span class="caret"></span>
                                        </button>
                                        <ul class="dropdown-menu pull-right" role="menu">
-                                          <li><a href="#">View</a></li>
-                                          <li><a href="#">Ubah</a></li>
+                                          <li><a href="/beirut-ui/view/position-view">View</a></li>
+                                          <li><a href="/beirut-ui/view/position-edit">Ubah</a></li>
                                        </ul>
                                     </div>
                                 </td>
@@ -112,10 +108,6 @@
 			  </div>
 
     <!--
-=======
-    {{candidatePositions}}
-    <h1>MASUK</h1><!--
->>>>>>> 39920a7475aac46c49ec392f72660cd9e6922047
     <script src="${applicationBasePathLocation}/resources/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="${applicationBasePathLocation}/resources/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="${applicationBasePathLocation}/resources/bower_components/angular/angular.js"></script>
