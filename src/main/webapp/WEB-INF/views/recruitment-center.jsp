@@ -1,10 +1,11 @@
 <div ng-app="x.beirut.position-angularApp" ng-controller="positionSummary.ctrl">
-    <!--div class="loading-wrapper" ng-show="loading">
+    <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
-    </div-->
-    <h3>Recruitment Center</h3>
+    </div>
+    
+	<h3 class="title-head">Recruitment Center</h3>
 
     <div class="col-sm-6">
         <div class="btn-group pull-left">
@@ -30,9 +31,11 @@
             <tr class="table-head">
                 <th></th>
                 <th>Nama</th>
-                <th>Email</th>
-                <th>No HP</th>
-                <th>Action</th>
+                <th>Applied Date</th>
+                <th>Job Type</th>
+                <th>Job Division</th>
+				<th>Job Title</th>
+				<th>Status</th>
             </tr>
             </thead>
             <tbody>
@@ -41,6 +44,9 @@
                 <td><a href="#"></a></td>
                 <td></td>
                 <td></td>
+				<td></td>
+				<td></td>
+				<td></td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -57,7 +63,9 @@
         </table>
         <div class="col-sm-6">
             <button type="button" class="btn btn-primary pull-right" href="recruitment-center-delete.jsp">
-                <span class="glyphicon glyphicon-remove"></span> Hapus</button>
+                <span class="glyphicon glyphicon-remove"></span> Hapus
+			</button>
+			<button type="submit" class="btn btn-primary">Next</button>
         </div>
     </div>
     <!--
@@ -70,5 +78,5 @@
     <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/recruitment-center-app.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/services/beirut/beirut-service.js"></script>
-    <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/jobs-management-controller.js"></script>
+    <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/recuirement-center-controller.js"></script>
 </div>
