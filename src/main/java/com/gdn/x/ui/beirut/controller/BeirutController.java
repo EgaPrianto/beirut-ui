@@ -96,6 +96,7 @@ public class BeirutController {
   private String getUsername() {
     final org.springframework.security.core.Authentication auth =
         SecurityContextHolder.getContext().getAuthentication();
+    //
     return "TempUsername";
   }
 

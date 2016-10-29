@@ -1,6 +1,6 @@
-var positionModuleController = angular.module('x.beirut.candidate-module.controllers', []);
+var candidatePositionModuleController = angular.module('x.beirut.candidate-module.controllers', []);
 
-positionModuleController.controller('candidateSummary.ctrl', ['$scope', '$window', '$modal', 'positionService', candidateSummaryModuleCtrlFunc]);
+candidatePositionModuleController.controller('candidateSummary.ctrl', ['$scope', '$window', '$modal', 'candidateService', candidateSummaryModuleCtrlFunc]);
 
 function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateService){
     $scope.currentPage = 1;
