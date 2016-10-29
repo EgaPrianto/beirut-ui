@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var candidatePositionModuleController = angular.module('x.beirut.candidate-module.controllers', []);
 
 candidatePositionModuleController.controller('candidateSummary.ctrl', ['$scope', '$window', '$modal', 'candidateService', candidateSummaryModuleCtrlFunc]);
@@ -38,5 +37,3 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
 	$scope.getAllCandidatePositionsSummary();
 
 }
-=======
->>>>>>> af33bbf524d07fb546504ef9666f8c5a4389e8f1

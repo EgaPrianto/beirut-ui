@@ -16,15 +16,11 @@ public class BeirutViewController {
   public static final String BASE_PATH = "/view";
   public static final String RECRUITMENT_CENTER = "/recruitment-center";
   public static final String JOBS_MANAGEMENT = "/jobs-management";
-<<<<<<< HEAD
   public static final String INSERT_NEW_POSITION = "/insert-new-position";
   public static final String POSITION_VIEW = "/position-view";
   public static final String POSITION_EDIT = "/position-edit";
-
-=======
   public static final String RECRUITMENT_CENTER_EDIT="/recruitment-center-edit";
   public static final String RECRUITMENT_CENTER_DETAIL="/recruitment-center-detail";
->>>>>>> af33bbf524d07fb546504ef9666f8c5a4389e8f1
   @Autowired
   private BeirutService beirutService;
 
@@ -38,24 +34,20 @@ public class BeirutViewController {
     return "recruitment-center";
   }
 
-<<<<<<< HEAD
   @RequestMapping(value = BeirutViewController.INSERT_NEW_POSITION, method = RequestMethod.GET)
   public String getInsertNewPosition() { return "insert-new-position"; }
+  @RequestMapping(value = BeirutViewController.RECRUITMENT_CENTER_EDIT, method = RequestMethod.GET)
+  public String getRecuitmentCenterEdit() {
+    return "recruitment-center-edit";
+  }
 
   @RequestMapping(value = BeirutViewController.POSITION_VIEW, method = RequestMethod.GET)
   public String getPositionView() { return "position-view"; }
 
   @RequestMapping(value = BeirutViewController.POSITION_EDIT, method = RequestMethod.GET)
   public String getPositionEdit() { return "position-edit"; }
-=======
-  @RequestMapping(value = BeirutViewController.RECRUITMENT_CENTER_EDIT, method = RequestMethod.GET)
-  public String getRecuitmentCenterEdit() {
-    return "recruitment-center-edit";
-  }
-
   @RequestMapping(value = BeirutViewController.RECRUITMENT_CENTER_DETAIL, method = RequestMethod.GET)
   public String getRecuitmentCenterDetail() {
     return "recruitment-center-detail";
   }
->>>>>>> af33bbf524d07fb546504ef9666f8c5a4389e8f1
 }

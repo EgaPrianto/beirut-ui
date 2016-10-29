@@ -42,7 +42,7 @@ public class BeirutController {
   @Autowired
   private BeirutService beirutService;
 
-  @RequestMapping(value = BeirutController.APPLY_NEW_POSITION)
+  @RequestMapping(value = BeirutController.APPLY_NEW_POSITION, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse applyNewPosition(
       @RequestBody ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest)
@@ -52,7 +52,7 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.DELETE_CANDIDATE)
+  @RequestMapping(value = BeirutController.DELETE_CANDIDATE, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse deleteCandidate(@RequestBody ListStringRequest listStringRequest)
       throws Exception {
@@ -61,7 +61,7 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.DELETE_POSITION)
+  @RequestMapping(value = BeirutController.DELETE_POSITION, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse deletePosition(@RequestBody ListStringRequest listStringRequest)
       throws Exception {
@@ -83,7 +83,7 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.GET_ALL_CANDIDATE_POSITION)
+  @RequestMapping(value = BeirutController.GET_ALL_CANDIDATE_POSITION, method = RequestMethod.GET)
   @ResponseBody
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       @RequestParam String query, @RequestParam Integer page, @RequestParam Integer size)
@@ -100,7 +100,7 @@ public class BeirutController {
     return "TempUsername";
   }
 
-  @RequestMapping(value = BeirutController.INSERT_NEW_CANDIDATE)
+  @RequestMapping(value = BeirutController.INSERT_NEW_CANDIDATE, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse insertNewCandidate(@RequestBody String candidateDTORequestString,
       @RequestParam byte[] data, @RequestParam String filename) throws Exception {
@@ -109,7 +109,7 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.INSERT_NEW_POSITION)
+  @RequestMapping(value = BeirutController.INSERT_NEW_POSITION, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse insertNewPosition(@RequestBody String positionDTORequestString,
       @RequestParam byte[] data, @RequestParam String filename) throws Exception {
@@ -118,7 +118,7 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.UPDATE_CANDIDATE_STATUS)
+  @RequestMapping(value = BeirutController.UPDATE_CANDIDATE_STATUS, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse updateCandidatesStatus(
       @RequestBody UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest)
@@ -128,7 +128,7 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.UPDATE_POSITION)
+  @RequestMapping(value = BeirutController.UPDATE_POSITION, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse updatePositionInformation(
       @RequestBody PositionDTORequest positionDTORequest) throws Exception {
