@@ -37,7 +37,6 @@ import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
-import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.ui.beirut.service.BeirutService;
@@ -249,18 +248,17 @@ public class BeirutControllerTest {
     idCandidates.add(ID_1);
     idCandidates.add(ID_2);
 
-    UpdatePositionModelDTORequest updatePositionModelDTORequest =
-        new UpdatePositionModelDTORequest();
-    updatePositionModelDTORequest.setIdPositionTarget(ID_1);
-    updatePositionModelDTORequest.setTitle(TITLE_1);
+    PositionDTORequest positionDTORequest = new PositionDTORequest();
+    positionDTORequest.setId(ID_1);
+    positionDTORequest.setTitle(TITLE_1);
 
-    when(this.beirutService.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest))
+    when(this.beirutService.updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest))
         .thenReturn(expectedResult);
     assertTrue(
-        this.beirutController.updatePosition(updatePositionModelDTORequest) == expectedResult);
-    this.beirutController.updatePosition(updatePositionModelDTORequest);
-    verify(this.beirutService, times(2)).updatePosition(REQUEST_ID, USERNAME,
-        updatePositionModelDTORequest);
+        this.beirutController.updatePositionInformation(positionDTORequest) == expectedResult);
+    this.beirutController.updatePositionInformation(positionDTORequest);
+    verify(this.beirutService, times(2)).updatePositionInformation(REQUEST_ID, USERNAME,
+        positionDTORequest);
   }
 
 

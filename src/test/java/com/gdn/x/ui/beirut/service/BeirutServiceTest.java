@@ -21,9 +21,9 @@ import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.PageMetaData;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
 import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
-import com.gdn.x.beirut.dto.request.UpdatePositionModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.ui.beirut.service.impl.BeirutServiceImpl;
 
@@ -147,18 +147,17 @@ public class BeirutServiceTest {
   public void testUpdatePosition() throws Exception {
     GdnBaseRestResponse gdnBaseRestResponseTestUpdatePosition = new GdnBaseRestResponse(REQUEST_ID);
 
-    UpdatePositionModelDTORequest updatePositionModelDTORequest =
-        new UpdatePositionModelDTORequest();
-    updatePositionModelDTORequest.setIdPositionTarget(ID);
-    updatePositionModelDTORequest.setTitle(TITLE);
+    PositionDTORequest positionDTORequest = new PositionDTORequest();
+    positionDTORequest.setId(ID);
+    positionDTORequest.setTitle(TITLE);
 
-    when(this.beirutApiClient.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest))
+    when(this.beirutApiClient.updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest))
         .thenReturn(gdnBaseRestResponseTestUpdatePosition);
-    assertTrue(this.beirutService.updatePosition(REQUEST_ID, USERNAME,
-        updatePositionModelDTORequest) == gdnBaseRestResponseTestUpdatePosition);
-    this.beirutService.updatePosition(REQUEST_ID, USERNAME, updatePositionModelDTORequest);
-    verify(this.beirutApiClient, times(2)).updatePosition(REQUEST_ID, USERNAME,
-        updatePositionModelDTORequest);
+    assertTrue(this.beirutService.updatePositionInformation(REQUEST_ID, USERNAME,
+        positionDTORequest) == gdnBaseRestResponseTestUpdatePosition);
+    this.beirutService.updatePositionInformation(REQUEST_ID, USERNAME, positionDTORequest);
+    verify(this.beirutApiClient, times(2)).updatePositionInformation(REQUEST_ID, USERNAME,
+        positionDTORequest);
   }
 
 

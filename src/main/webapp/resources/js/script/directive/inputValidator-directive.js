@@ -183,7 +183,7 @@ saveDirectives.directive('droppable', function($compile) {
 		  	if(dragNode.type === "categoryNode") {
 			  	scope.addCategoryNode(dragNode);
 		  	}
-		  
+
             var type= angular.element(this).data('field');
             console.log(type);
 
