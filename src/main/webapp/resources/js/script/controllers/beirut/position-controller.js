@@ -1,6 +1,7 @@
 var positionModuleController = angular.module('x.beirut.position-module.controllers', []);
 
-positionModuleController.controller('positionSummary.ctrl', ['$scope', '$window', '$modal', 'positionService', positionSummaryModuleCtrlFunc]);
+positionModuleController.controller('positionSummary.ctrl', ['$scope', 'positionService', positionSummaryModuleCtrlFunc]);
+
 
 function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService){
     $scope.currentPage = 1;
@@ -9,8 +10,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
 
-    $scope.getAllPositionsSummary = function(){
-
+    $scope.getAllLogisticProducts = function(){
         $scope.loading = true;
         positionService.getAllPositions({
             page : $scope.currentPage - 1,
@@ -33,7 +33,5 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
             $scope.loading = false;
         });
     };
-
-	$scope.getAllPositionsSummary();
 
 }
