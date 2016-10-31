@@ -237,4 +237,5 @@ public class BeirutServiceImpl implements BeirutService {
         return gdnBaseRestResponseUpdatePosition;
     }
 
+
 }
