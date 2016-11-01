@@ -1,11 +1,11 @@
-<div ng-app="x.beirut.position-angularApp" ng-controller="positionSummary.ctrl">
+<div ng-app="x.beirut.candidate-angularApp" ng-controller="candidateSummary.ctrl">
     <!--div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div-->
     <h3>Recruitment Center</h3>
-
+    {{candidatePositions[1]}}
     <div class="col-sm-6">
         <div class="btn-group pull-left">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -30,15 +30,18 @@
             <tr class="table-head">
                 <th></th>
                 <th>Nama</th>
-                <th>Email</th>
-                <th>No HP</th>
+                <th>Tanggal Pendaftaran</th>
+                <th>Tipe Pekerjaan</th>
+                <th>Divisi Pekerjaan</th>
+                <th>Judul Pekerjaan</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr ng-repeat = "candidatePosition in candidatePositions">
                 <td><input type="checkbox" name="options" id="option" autocomplete="off"></td>
-                <td><a href="#"></a></td>
+                <td>{{candidatePosition.firstName}} {{candidatePosition.lastName}}</td>
                 <td></td>
                 <td></td>
                 <td>
@@ -70,5 +73,5 @@
     <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/recruitment-center-app.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/services/beirut/beirut-service.js"></script>
-    <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/jobs-management-controller.js"></script>
+    <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/recruitment-center-controller.js"></script>
 </div>

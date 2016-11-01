@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gdn.common.util.GdnUUIDHelper;
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
+import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
 import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.response.CandidatePositionDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
+import com.gdn.x.beirut.dto.response.PositionDetailDTOResponse;
+import com.gdn.x.ui.beirut.model.PositionNew;
 import com.gdn.x.ui.beirut.service.BeirutService;
 
 @Controller
@@ -31,9 +35,13 @@ public class BeirutController {
   public static final String BASE_PATH = "/api";
   public static final String UPDATE_POSITION = "/update-position";
   public static final String GET_ALL_POSITION = "/get-all-position";
+  public static final String GET_POSITION_DETAIL = "/get-position-detail";
+
   public static final String APPLY_NEW_POSITION = "/apply-new-position";
   public static final String GET_ALL_CANDIDATE_POSITION = "/get-all-candidate-position";
+  public static final String GET_CANDIDATE_POSITION_DETAIL = "/get-candidate-position-detail";
   public static final String UPDATE_CANDIDATE_STATUS = "/update-candidate-status";
+
   public static final String INSERT_NEW_POSITION = "/insert-new-position";
   public static final String INSERT_NEW_CANDIDATE = "/insert-new-candidate";
   public static final String DELETE_CANDIDATE = "/delete-candidate";
@@ -93,10 +101,25 @@ public class BeirutController {
     return result;
   }
 
+  @RequestMapping(value = BeirutController.GET_CANDIDATE_POSITION_DETAIL,
+      method = RequestMethod.GET)
+  @ResponseBody
+  public GdnRestSingleResponse<CandidatePositionDTOResponse> getCandidatePositionDetail(
+      @RequestParam String idCandidate, @RequestParam String idPosition) throws Exception {
+    return this.beirutService.getCandidatePositionDetailByStoreIdWithLogs(generateRequestId(),
+        getUsername(), idCandidate, idPosition);
+  }
+
+  @RequestMapping(value = BeirutController.GET_POSITION_DETAIL, method = RequestMethod.GET)
+  @ResponseBody
+  public GdnRestListResponse<PositionDetailDTOResponse> getPositionDetailById(
+      @RequestParam String id) throws Exception {
+    return this.beirutService.getPositionDetailById(generateRequestId(), getUsername(), id);
+  }
+
   private String getUsername() {
     final org.springframework.security.core.Authentication auth =
         SecurityContextHolder.getContext().getAuthentication();
-    //
     return "TempUsername";
   }
 
@@ -111,10 +134,15 @@ public class BeirutController {
 
   @RequestMapping(value = BeirutController.INSERT_NEW_POSITION, method = RequestMethod.POST)
   @ResponseBody
-  public GdnBaseRestResponse insertNewPosition(@RequestBody String positionDTORequestString,
-      @RequestParam byte[] data, @RequestParam String filename) throws Exception {
+  public GdnBaseRestResponse insertNewPosition(@RequestBody PositionNew positionNew)
+      throws Exception {
+    LOG.trace("\n\n MASUK \n\n");
+    System.out.println("\n\nMASUK nih\n\n");
+    // byte[] bytes = positionNew.getFiles().getBytes("UTF-8");
+    // String text = new String(bytes, "UTF-8");
     GdnBaseRestResponse result = this.beirutService.insertNewPosition(generateRequestId(),
-        getUsername(), positionDTORequestString, data, filename);
+        getUsername(), positionNew.getPositionDTORequestString(), positionNew.getFiles(),
+        positionNew.getFilename());
     return result;
   }
 

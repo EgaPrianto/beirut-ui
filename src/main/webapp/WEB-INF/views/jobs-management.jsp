@@ -4,7 +4,6 @@
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-    {{positions[1]}}
 
     <h3>Jobs Management</h3>
 	<br>
@@ -14,8 +13,8 @@
       <button style="background-color:#068AC9; color:white; margin-left:-35px; height:34px; width:40px;"id="gdn-search-button" class="bli-search search-lup"></button>
 
 	  <div class="col-sm-6">
-          <button type="button" class="btn btn-primary pull-right" ng-click="popModal()">
-          <i class="bli bli-plus"></i><a style="color:white; text-decoration:none;" href="/beirut-ui/view/insert-new-position"> Tambah</a></button>
+          <a style="color:white; text-decoration:none;" href="/beirut-ui/view/insert-new-position"><button type="button" class="btn btn-primary pull-right" ng-click="popModal()">
+          <i class="bli bli-plus"></i> Tambah</button></a>
       </div>
 
     </div>
@@ -47,11 +46,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="position in positions">
 								<td><input type="checkbox" name="options" id="option1" autocomplete="off"></td>
-                                <td> Professional </td>
-                                 <td> Sr. System Development Engineer</td>
-                                <td><span class="label label-outline-success">OPEN</span></td>
+                                <td> {{position.jobType}} </td>
+                                 <td> {{position.title}}</td>
+                                <td><span class="label label-outline-success">{{position.jobStatus}}</span></td>
                                 <td>
                                        <div class="btn-group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -60,40 +59,6 @@
                                        <ul class="dropdown-menu pull-right" role="menu">
                                           <li><a href="/beirut-ui/view/position-view">View</a></li>
                                           <li><a href="/beirut-ui/view/position-edit">Ubah</a></li>
-                                       </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-								<td><input type="checkbox" name="options" id="option1" autocomplete="off"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                       <div class="btn-group">
-                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                          <i class="fa fa-cog"></i> <span class="caret"></span>
-                                       </button>
-                                       <ul class="dropdown-menu pull-right" role="menu">
-                                          <li><a href="#">View</a></li>
-                                          <li><a href="#">Ubah</a></li>
-                                       </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-								<td><input type="checkbox" name="options" id="option1" autocomplete="off"></td>
-                                <td></td>
-                                <td></a></td>
-                                <td></td>
-                                <td>
-                                       <div class="btn-group">
-                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                          <i class="fa fa-cog"></i> <span class="caret"></span>
-                                       </button>
-                                       <ul class="dropdown-menu pull-right" role="menu">
-                                          <li><a href="#">View</a></li>
-                                          <li><a href="#">Ubah</a></li>
                                        </ul>
                                     </div>
                                 </td>
