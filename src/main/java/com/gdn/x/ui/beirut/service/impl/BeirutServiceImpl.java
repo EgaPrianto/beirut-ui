@@ -139,6 +139,13 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
+  public GdnRestSingleResponse<PositionDetailDTOResponse> getPositionDescription(
+      String generateRequestId, String username, Integer id) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public GdnRestListResponse<PositionDetailDTOResponse> getPositionDetailById(String requestId,
       String username, String id) throws Exception {
     GdnRestListResponse<PositionDetailDTOResponse> result =

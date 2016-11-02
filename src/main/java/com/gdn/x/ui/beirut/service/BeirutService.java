@@ -41,6 +41,9 @@ public interface BeirutService {
   public GdnRestSingleResponse<CandidatePositionDTOResponse> getCandidatePositionDetailByStoreIdWithLogs(
       String requestId, String username, String idCandidate, String idPosition) throws Exception;
 
+  public GdnRestSingleResponse<PositionDetailDTOResponse> getPositionDescription(
+      String generateRequestId, String username, Integer id);
+
   public GdnRestListResponse<PositionDetailDTOResponse> getPositionDetailById(String requestId,
       String username, String id) throws Exception;
 

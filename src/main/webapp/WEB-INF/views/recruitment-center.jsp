@@ -5,7 +5,6 @@
         </div>
     </div-->
     <h3>Recruitment Center</h3>
-    {{candidatePositions[1]}}
     <div class="col-sm-6">
         <div class="btn-group pull-left">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -42,8 +41,11 @@
             <tr ng-repeat = "candidatePosition in candidatePositions">
                 <td><input type="checkbox" name="options" id="option" autocomplete="off"></td>
                 <td>{{candidatePosition.firstName}} {{candidatePosition.lastName}}</td>
-                <td></td>
-                <td></td>
+                <td>{{candidatePosition.createdDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>{{candidatePosition.jobType}}</td>
+                <td>{{candidatePosition.jobDivision}}</td>
+                <td>{{candidatePosition.title}}</td>
+                <td><span class="label label-outline-success">{{candidatePosition.status}}</span></td>
                 <td>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">

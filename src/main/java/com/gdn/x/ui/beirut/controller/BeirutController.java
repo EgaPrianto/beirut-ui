@@ -38,6 +38,7 @@ public class BeirutController {
   public static final String GET_POSITION_DETAIL = "/get-position-detail";
 
   public static final String APPLY_NEW_POSITION = "/apply-new-position";
+  public static final String GET_POSITION_DESCRIPTION = "/get-position-description";
   public static final String GET_ALL_CANDIDATE_POSITION = "/get-all-candidate-position";
   public static final String GET_CANDIDATE_POSITION_DETAIL = "/get-candidate-position-detail";
   public static final String UPDATE_CANDIDATE_STATUS = "/update-candidate-status";
@@ -108,6 +109,15 @@ public class BeirutController {
       @RequestParam String idCandidate, @RequestParam String idPosition) throws Exception {
     return this.beirutService.getCandidatePositionDetailByStoreIdWithLogs(generateRequestId(),
         getUsername(), idCandidate, idPosition);
+  }
+
+  @RequestMapping(value = BeirutController.GET_POSITION_DESCRIPTION, method = RequestMethod.GET)
+  @ResponseBody
+  public GdnRestSingleResponse<PositionDetailDTOResponse> getPositionDescription(
+      @RequestParam Integer id) throws Exception {
+    GdnRestSingleResponse<PositionDetailDTOResponse> result =
+        this.beirutService.getPositionDescription(generateRequestId(), getUsername(), id);
+    return result;
   }
 
   @RequestMapping(value = BeirutController.GET_POSITION_DETAIL, method = RequestMethod.GET)

@@ -71,5 +71,5 @@ function positionCreateNewModuleCtrlFunc($scope, $window, $modal, positionServic
 
     $scope.loading=false;
 
-    
+
 }

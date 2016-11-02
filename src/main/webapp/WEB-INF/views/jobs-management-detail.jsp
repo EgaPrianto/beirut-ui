@@ -1,11 +1,15 @@
 
-<div ng-app="x.beirut.position-angularApp" ng-controller="positionSummary.ctrl">
+<div ng-app="x.beirut.position-angularApp">
+  <div ng-init="id='${id}'">
+    <div ng-controller="positionDetail.ctrl">
+
     <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-
+    ID = ${id}
+{{response}}
     <h3>Jobs Management</h3>
     <h4 style="color:#086CA3"> Job Title </h4>
     <br>
@@ -31,4 +35,6 @@
     <script src="${applicationBasePathLocation}/resources/js/script/services/beirut/beirut-service.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/jobs-management-controller.js"></script>
 
+    </div>
+  </div>
 </div>

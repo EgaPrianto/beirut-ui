@@ -4,7 +4,6 @@
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-
     <h3>Jobs Management</h3>
 	<br>
 	<br>
@@ -49,23 +48,26 @@
                             <tr ng-repeat="position in positions">
 								<td><input type="checkbox" name="options" id="option1" autocomplete="off"></td>
                                 <td> {{position.jobType}} </td>
-                                 <td> {{position.title}}</td>
-                                <td><span class="label label-outline-success">{{position.jobStatus}}</span></td>
+                                <td> {{position.title}}</td>
+              							    <td>
+                									<span class="label label-outline-success" ng-if = "position.jobStatus == 'OPEN'">{{position.jobStatus}}</span>
+                                  <span class="label label-outline-default" ng-if = "position.jobStatus == 'PENDING'">{{position.jobStatus}}</span>
+                									<span class="label label-outline-danger" ng-if = "position.jobStatus == 'CLOSE'">{{position.jobStatus}}</span>
+              								  </td>
                                 <td>
-                                       <div class="btn-group">
+                                    <div class="btn-group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                           <i class="fa fa-cog"></i> <span class="caret"></span>
                                        </button>
                                        <ul class="dropdown-menu pull-right" role="menu">
-                                          <li><a href="/beirut-ui/view/position-view">View</a></li>
-                                          <li><a href="/beirut-ui/view/position-edit">Ubah</a></li>
+                                          <li><a href="/beirut-ui/view/jobs-management-detail/{{position.id}}">View</a></li>
+                                          <li><a href="/beirut-ui/view/position-edit/{{position.id}}">Ubah</a></li>
                                        </ul>
                                     </div>
                                 </td>
                             </tr>
                  </tbody>
               </table>
-
 			  <div class="col-sm-6">
 				<button type="button" class="btn btn-primary pull-right" ng-click="popModal()">
 				<span class="glyphicon glyphicon-remove"></span>Hapus</button>

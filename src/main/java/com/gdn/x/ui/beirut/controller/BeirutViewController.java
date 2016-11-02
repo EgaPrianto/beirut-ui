@@ -22,7 +22,6 @@ public class BeirutViewController {
   public static final String JOBS_MANAGEMENT = "/jobs-management";
   public static final String JOBS_MANAGEMENT_DETAIL = "/jobs-management-detail/{id}";
   public static final String INSERT_NEW_POSITION = "/insert-new-position";
-  public static final String POSITION_VIEW = "/position-view";
   public static final String POSITION_EDIT = "/position-edit";
   public static final String RECRUITMENT_CENTER_EDIT = "/recruitment-center-edit";
   public static final String RECRUITMENT_CENTER_DETAIL =
@@ -65,11 +64,6 @@ public class BeirutViewController {
   @RequestMapping(value = BeirutViewController.POSITION_EDIT, method = RequestMethod.GET)
   public String getPositionEdit() {
     return "position-edit";
-  }
-
-  @RequestMapping(value = BeirutViewController.POSITION_VIEW, method = RequestMethod.GET)
-  public String getPositionView() {
-    return "position-view";
   }
 
   @RequestMapping(value = BeirutViewController.RECRUITMENT_CENTER, method = RequestMethod.GET)
