@@ -15,13 +15,19 @@ function positionServiceFunc($resource) {
                 size:'@size'
             }
         },
+        // positionDTORequestString: $scope.positionDTORequestString,
+        // filename: $scope.files[0].name,
+        // file: fd
+    //     private String positionDTORequestString;
+    // private String filename;
+    // private String base64File;
         insertNewPosition: {
             method: 'POST',
             params: {command: 'insert-new-position'},
             data: {
                 positionDTORequestString: '@positionDTORequestString',
                 filename: '@filename',
-                files: '@files'
+                base64File: '@base64File'
             }
         },
         getPositionDetail: {

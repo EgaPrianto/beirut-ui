@@ -13,33 +13,31 @@ function positionCreateNewModuleCtrlFunc($scope, $window, $modal, positionServic
             $scope.encoded_file = btoa(e.target.result.toString());
         };
         reader.readAsBinaryString($scope.files[0]);
+        $scope.fileBase64 = new FileReader();
+        $scope.fileBase64.readAsDataURL($scope.files[0]);
+        console.log("$scope.fileBase64: ",$scope.fileBase64);
     };
 
     $scope.submitPosition = function(){
-        $scope.positionDTORequestString = "{'id': 'id'," +
-            "'title': "+$scope.title+"," +
-            "'jobType': "+$scope.jobType+"," +
-            "'jobDivision': "+$scope.jobDivision+"}";
+        $scope.positionDTORequestString = "{\"id\": \"id\"," +
+            "\"title\": \""+$scope.title+"\"," +
+            "\"jobType\": \""+$scope.jobType+"\"," +
+            "\"jobDivision\": \""+$scope.jobDivision+"\"}";
 
         $scope.positionNew = {
             positionDTORequestString: $scope.positionDTORequestString,
             filename: $scope.files[0].name,
-            files: $scope.encoded_file
+            base64File: $scope.fileBase64.result
         }
 
-        // for (var i = 0 ; i < $scope.files.length ; i ++){
-        //     $scope.formData.append('files', $scope.files[i]);
-        // }
-        // console.log("$scope.formData: ",$scope.formData);
         console.log("$scope.positionNew: ",$scope.positionNew);
-        // console.log("$scope.encoded_file: ",$scope.encoded_file);
-        // console.log("$scope.positionDTORequestString: ",$scope.positionDTORequestString);
-        // console.log("$scope.files: ",$scope.files);
+        //Convert file to img base 64
+
 
         positionService.insertNewPosition({
             positionDTORequestString: $scope.positionDTORequestString,
             filename: $scope.files[0].name,
-            files: $scope.encoded_file
+            base64File: $scope.fileBase64.result
         }, function(response){
             console.log("Response available");
             if(response.success){
@@ -55,19 +53,32 @@ function positionCreateNewModuleCtrlFunc($scope, $window, $modal, positionServic
             $scope.loading = false;
         });
 
+        //     $http({
+        //         method: 'POST',
+        //         url: 'EmployeeService/employee/data/fileupload',
+        //         headers: {'Content-Type': undefined},
+        //         data: fd,
+        //         transformRequest: angular.identity
+        //     })
+        //         .success(function(data, status) {
+        //             alert("success");
+        //         });
+        // }
+        //     --
+
     }
 
-    $scope.fileNameChanged = function (ele) {
-        var files = ele.files;
-        var l = files.length;
-        var namesArr = [];
-
-        for (var i = 0; i < l; i++) {
-            namesArr.push(files[i].name);
-        }
-        // console.log("Files: ",files);
-        $scope.files = files;
-    }
+    // $scope.fileNameChanged = function (ele) {
+    //     var files = ele.files;
+    //     var l = files.length;
+    //     var namesArr = [];
+    //
+    //     for (var i = 0; i < l; i++) {
+    //         namesArr.push(files[i].name);
+    //     }
+    //     // console.log("Files: ",files);
+    //     $scope.files = files;
+    // }
 
     $scope.loading=false;
 

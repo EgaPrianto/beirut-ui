@@ -57,6 +57,7 @@
                 <label for="Data" class="col-sm-2 control-label">Data<span class="red">*</span></label>
                 <div class="col-sm-6">
                     <input id="Data" type="file" multiple onchange="angular.element(this).scope().onFileSelect(this)">
+                    <%--<input id="Data" type="file" ng-model="fileBase64" base-sixty-four-input>--%>
                     <span id="helpBlock" class="help-block">Validation for required field should not empty</span>
                 </div>
             </div>
@@ -72,6 +73,7 @@
 
     <script src="${staticBlistrapPathLocation}js/vendor/ui-grid-angular/ui-grid.js"></script>
     <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
+    <script src="${applicationBasePathLocation}/resources/assets/js/angular-base64-upload/dist/angular-base64-upload.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/jobs-management-option-app.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/services/beirut/beirut-service.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/jobs-management-option-controller.js"></script>
