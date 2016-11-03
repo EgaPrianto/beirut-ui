@@ -1,6 +1,5 @@
 package com.gdn.x.ui.beirut.service;
 
-
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.GdnRestSingleResponse;
@@ -10,10 +9,13 @@ import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidateDTOResponse;
+import com.gdn.x.beirut.dto.response.CandidatePositionDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
+import com.gdn.x.beirut.dto.response.PositionDetailDTOResponse;
 
 public interface BeirutService {
+
 
   public GdnBaseRestResponse applyNewPosition(String requestId, String username,
       ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception;
@@ -36,6 +38,15 @@ public interface BeirutService {
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception;
 
+  public GdnRestSingleResponse<CandidatePositionDTOResponse> getCandidatePositionDetailByStoreIdWithLogs(
+      String requestId, String username, String idCandidate, String idPosition) throws Exception;
+
+  public GdnRestSingleResponse<PositionDetailDTOResponse> getPositionDescription(
+      String generateRequestId, String username, Integer id);
+
+  public GdnRestListResponse<PositionDetailDTOResponse> getPositionDetailById(String requestId,
+      String username, String id) throws Exception;
+
   public GdnBaseRestResponse insertNewCandidate(String requestId, String username,
       String candidateDTORequestString, byte[] data, String filename) throws Exception;
 
@@ -51,10 +62,10 @@ public interface BeirutService {
   public GdnBaseRestResponse updateCandidatesStatus(String requestId, String username,
       UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest) throws Exception;
 
-  public GdnBaseRestResponse updatePositionInformation(String requestId, String username,
-      PositionDTORequest positionDTORequest) throws Exception;
-
   public GdnBaseRestResponse updatePositionDescription(String requestId, String username, String id,
       byte[] data, String filename) throws Exception;
+
+  public GdnBaseRestResponse updatePositionInformation(String requestId, String username,
+      PositionDTORequest positionDTORequest) throws Exception;
 
 }

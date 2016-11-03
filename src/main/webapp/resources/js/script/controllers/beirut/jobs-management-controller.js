@@ -1,6 +1,27 @@
 var positionModuleController = angular.module('x.beirut.position-module.controllers', []);
 
 positionModuleController.controller('positionSummary.ctrl', ['$scope', '$window', '$modal', 'positionService', positionSummaryModuleCtrlFunc]);
+positionModuleController.controller('positionDetail.ctrl', ['$scope', '$window', '$modal', 'positionService', positionDetailModuleCtrlFunc]);
+
+function positionDetailModuleCtrlFunc($scope, $window, $modal, positionService){
+    $scope.loading = true;
+
+    console.log("$scope.id: ",$scope.id);
+    positionService.getPositionDetail({
+        id: $scope.id
+    },function(response){
+        // console.log("Ini Response: ",response);
+        if(response.success){
+            $scope.response = response;
+        } else{
+            swal("Failed!", response.errorMessage, "error");
+        }
+        $scope.loading = false;
+    }, function(error){
+        swal('Error!', error.statusText, 'error');
+        $scope.loading = false;
+    });
+}
 
 function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService){
     $scope.currentPage = 1;
@@ -16,7 +37,6 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
             page : $scope.currentPage - 1,
             size : $scope.size
         }, function(response){
-            console.log(response);
             //debug
             if(response.success){
                 $scope.positions = response.content;
