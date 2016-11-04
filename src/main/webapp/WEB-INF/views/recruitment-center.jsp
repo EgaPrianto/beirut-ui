@@ -53,16 +53,13 @@
             </tr>
             </tbody>
         </table>
-        {{currentPage}}
-        {{pageSize}}
-        {{totalAllRecords}}
-        {{size}}
-        <pagination  class="pull-right"
-          ng-model="currentPage"
-          total-items="totalAllRecords"
-          max-size="size"
-          boundary-links="true">
-        </pagination>
+      <pagination class="pull-right"
+        ng-model="currentPage"
+        items-per-page="size"
+        total-items="pageSize * size"
+        max-size="maxSize"
+        boundary-links="true">
+      </pagination>
       <div class="panel-body col-md-12">
       <h5>Action to checked box</h5>
         <div class="col-md-6  col-sm-8">

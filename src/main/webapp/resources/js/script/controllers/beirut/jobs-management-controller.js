@@ -30,9 +30,9 @@ function positionDetailModuleCtrlFunc($scope, $window, $modal, positionService){
 function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService){
     $scope.currentPage = 1;
     $scope.size = 10;
-    $scope.numPages = $scope.totalRecords / $scope.size;
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
+    $scope.maxSize = 5;
 
     $scope.getDetail = function(position){
       window.location.assign(applicationBasePathLocation + "/view/jobs-management-detail/"+position.id);

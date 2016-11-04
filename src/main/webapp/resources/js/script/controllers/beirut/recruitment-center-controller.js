@@ -34,10 +34,10 @@ function candidateDetailModuleCtrlFunc($scope, $window, $modal, candidateService
 
 function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateService){
     $scope.currentPage = 1;
-    $scope.size = 5;
-    $scope.numPages = $scope.totalRecords / $scope.size;
+    $scope.size = 10;
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
+    $scope.maxSize = 5;
 
     $scope.getDetail = function(candidatePositions){
       window.location.assign(applicationBasePathLocation + "/view/recruitment-center-detail/"+candidatePositions.idCandidate+"/"+candidatePositions.idPosition);
@@ -76,6 +76,29 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
       }
     }
 
+
+    $scope.$watch('currentPage + size', function(){
+        console.log("TES");
+        candidateService.getAllCandidatePosition({
+            query : '*:*',
+            page  : $scope.currentPage - 1,
+            size  : $scope.size
+        }, function(response){
+            if(response.success){
+                $scope.candidatePositions = response.content;
+                $scope.totalRecords = response.pageMetaData.totalRecords;
+                $scope.pageSize = response.pageMetaData.pageSize;
+                $scope.currentPage = response.pageMetaData.pageNumber + 1;
+            } else {
+                swal("Failed!", response.errorMessage, "error");
+            }
+            $scope.loading = false;
+        }, function(error){
+            swal('Error!', error.statusText, 'error');
+            $scope.loading = false;
+        });
+    });
+
     $scope.loading = true;
     $scope.getAllCandidatePositionsSummary = function(){
         $scope.loading = true;
@@ -98,7 +121,6 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
             $scope.loading = false;
         });
     };
-    $scope.totalAllRecords = Number($scope.pageSize) * Number($scope.size);
     console.log($scope.totalAllRecords);
 	$scope.getAllCandidatePositionsSummary();
 
