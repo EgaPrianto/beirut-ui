@@ -36,7 +36,6 @@ import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
-import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.ui.beirut.service.BeirutService;
@@ -220,23 +219,29 @@ public class BeirutControllerTest {
   @Test
   @Ignore
   public void testUpdateCandidateStatus() throws Exception {
-    ids.add(ID_1);
-    ids.add(ID_2);
-
-    UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest =
-        new UpdateCandidateStatusModelDTORequest();
-    updateCandidateStatusModelDTORequest.setIdCandidates(ids);
-    updateCandidateStatusModelDTORequest.setIdPosition(ID_1);
-    updateCandidateStatusModelDTORequest.setStatusDTORequest(statusDTORequest.name());
-
-    GdnBaseRestResponse expectedResult = new GdnBaseRestResponse(REQUEST_ID);
-    when(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME,
-        updateCandidateStatusModelDTORequest)).thenReturn(expectedResult);
-    assertTrue(this.beirutController
-        .updateCandidatesStatus(updateCandidateStatusModelDTORequest) == expectedResult);
-    this.beirutController.updateCandidatesStatus(updateCandidateStatusModelDTORequest);
-    verify(this.beirutService, times(2)).updateCandidatesStatus(REQUEST_ID, USERNAME,
-        updateCandidateStatusModelDTORequest);
+    // ids.add(ID_1);
+    // ids.add(ID_2);
+    //
+    // UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest =
+    // new UpdateCandidateStatusModelDTORequest();
+    // List<CandidatePositionBindRequest> listBind = new ArrayList<CandidatePositionBindRequest>();
+    // for (String string : ids) {
+    // CandidatePositionBindRequest candidatePositionBindRequest =
+    // new CandidatePositionBindRequest();
+    // candidatePositionBindRequest.setIdCandidate(string);
+    // candidatePositionBindRequest.setIdPosition(ID_1);
+    // }
+    // updateCandidateStatusModelDTORequest.setListBind(listBind);
+    // updateCandidateStatusModelDTORequest.setStatusDTORequest(statusDTORequest.name());
+    //
+    // GdnBaseRestResponse expectedResult = new GdnBaseRestResponse(REQUEST_ID);
+    // when(this.beirutService.updateCandidatesStatus(REQUEST_ID, USERNAME,
+    // updateCandidateStatusModelDTORequest)).thenReturn(expectedResult);
+    // assertTrue(this.beirutController
+    // .updateCandidatesStatus(updateCandidateStatusModelDTORequest) == expectedResult);
+    // this.beirutController.updateCandidatesStatus(updateCandidateStatusModelDTORequest);
+    // verify(this.beirutService, times(2)).updateCandidatesStatus(REQUEST_ID, USERNAME,
+    // updateCandidateStatusModelDTORequest);
   }
 
   @PrepareForTest({SecurityContextHolder.class, GdnUUIDHelper.class})

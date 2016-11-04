@@ -13,7 +13,7 @@ function candidateDetailModuleCtrlFunc($scope, $window, $modal, candidateService
         },function(response){
             // console.log("Ini Response: ",response);
             if(response.success){
-                $scope.candidateDetail = response.value.candidate;
+                $scope.candidate = response.value.candidate;
                 $scope.position = response.value.position;
                 $scope.statusLogs = response.value.statusLogs;
             } else{
@@ -34,11 +34,49 @@ function candidateDetailModuleCtrlFunc($scope, $window, $modal, candidateService
 
 function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateService){
     $scope.currentPage = 1;
-    $scope.size = 10;
+    $scope.size = 5;
     $scope.numPages = $scope.totalRecords / $scope.size;
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
 
+    $scope.getDetail = function(candidatePositions){
+      window.location.assign(applicationBasePathLocation + "/view/recruitment-center-detail/"+candidatePositions.idCandidate+"/"+candidatePositions.idPosition);
+    }
+
+    $scope.changeStatus = function(){
+      $scope.selectedStatus;
+      if ($scope.selectedStatus==null) {
+        alert("Please Select Status");
+      }else{
+        $scope.idArrayBind = [];
+        angular.forEach($scope.candidatePositions, function(candidatePosition){
+          if (!!candidatePosition.selected){
+            data = new Object();
+            data.idCandidate = candidatePosition.idCandidate;
+            data.idPosition = candidatePosition.idPosition;
+            $scope.idArrayBind.push(data);
+          }
+        })
+        console.log($scope.idArrayBind);
+        candidateService.updateCandidatesStatus({
+          arrayBind : $scope.idArrayBind,
+          status : $scope.selectedStatus
+        },function(response){
+          if(response.success){
+            window.location.replace(applicationBasePathLocation + "/view/recruitment-center");
+            console.log(response);
+          } else {
+              swal("Failed!", response.errorMessage, "error");
+          }
+          $scope.loading = false;
+        },function(error){
+          swal('Error!', error.statusText, 'error');
+          $scope.loading = false;
+        });
+      }
+    }
+
+    $scope.loading = true;
     $scope.getAllCandidatePositionsSummary = function(){
         $scope.loading = true;
         candidateService.getAllCandidatePosition({
@@ -49,7 +87,7 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
             if(response.success){
                 $scope.candidatePositions = response.content;
                 $scope.totalRecords = response.pageMetaData.totalRecords;
-                $scope.size = response.pageMetaData.pageSize;
+                $scope.pageSize = response.pageMetaData.pageSize;
                 $scope.currentPage = response.pageMetaData.pageNumber + 1;
             } else {
                 swal("Failed!", response.errorMessage, "error");
@@ -60,7 +98,8 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
             $scope.loading = false;
         });
     };
-
+    $scope.totalAllRecords = Number($scope.pageSize) * Number($scope.size);
+    console.log($scope.totalAllRecords);
 	$scope.getAllCandidatePositionsSummary();
 
 }

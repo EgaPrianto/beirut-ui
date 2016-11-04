@@ -1,32 +1,30 @@
-
 <div ng-app="x.beirut.position-angularApp">
-  <div ng-init="id='${id}'">
-    <div ng-controller="positionDetail.ctrl">
 
     <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-    ID = ${id}
-{{response}}
+  <div ng-init="id='${id}'">
+    <div ng-controller="positionDescription.ctrl">
     <h3>Jobs Management</h3>
-    <h4 style="color:#086CA3"> Job Title </h4>
+    <h4 style="color:#086CA3">{{detail.value.title}}</h4>
     <br>
     <br>
-    <h4 class="title-head">Detil Information</h4>
+    <h4 class="title-head">Detil Information </h4>
     <br>
-    <label> Job ID : </label>
-    <label> Job Type : </label>
-    <label> Job Division : </label>
+    <label> Job ID : {{detail.value.id}}</label><br>
+    <label> Job Type : {{detail.value.jobType}} </label><br>
+    <label> Job Division : {{detail.value.jobDivision}} </label>
     <br>
     <h4 class="title-head">Status Information</h4>
     <br>
-    <label> Status : </label>
-    <label> Create Date : </label>
-    <label> Update Date : </label>
+    <label> Status : {{detail.value.jobStatus}}</label><br>
+    <label> Create Date : {{detail.value.createdDate  | date:'yyyy-MM-dd HH:mm:ss'}}</label><br>
+    <label> Update Date : {{detail.value.updatedDate  | date:'yyyy-MM-dd HH:mm:ss'}}</label>
     <br>
     <h4 class="title-head">Description</h4>
+    <pre>{{response.value.positionDetail}}</pre>
     <br>
 
     <script src="${staticBlistrapPathLocation}js/vendor/ui-grid-angular/ui-grid.js"></script>

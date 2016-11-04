@@ -33,7 +33,6 @@
                 </div>
 
     </div>
-
     <table class="table table-striped" style="margin-top: 0;">
                         <thead>
                             <tr class="table-head">
@@ -45,33 +44,52 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="position in positions">
-								<td><input type="checkbox" name="options" id="option1" autocomplete="off"></td>
-                                <td> {{position.jobType}} </td>
-                                <td> {{position.title}}</td>
-              							    <td>
+                            <tr ng-repeat="position in positions"  class="beirutRows">
+								<td><input type="checkbox" ng-model="position.selected" value="{{position.id}}" id="option1" autocomplete="off"></td>
+                                <td ng-click="getDetail(position)"> {{position.jobType}} </td>
+                                <td ng-click="getDetail(position)"> {{position.title}}</td>
+              							    <td ng-click="getDetail(position)">
                 									<span class="label label-outline-success" ng-if = "position.jobStatus == 'OPEN'">{{position.jobStatus}}</span>
                                   <span class="label label-outline-default" ng-if = "position.jobStatus == 'PENDING'">{{position.jobStatus}}</span>
                 									<span class="label label-outline-danger" ng-if = "position.jobStatus == 'CLOSE'">{{position.jobStatus}}</span>
               								  </td>
                                 <td>
-                                    <div class="btn-group">
+                                  <div class="btn-group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                           <i class="fa fa-cog"></i> <span class="caret"></span>
                                        </button>
                                        <ul class="dropdown-menu pull-right" role="menu">
-                                          <li><a href="/beirut-ui/view/jobs-management-detail/{{position.id}}">View</a></li>
-                                          <li><a href="/beirut-ui/view/position-edit/{{position.id}}">Ubah</a></li>
+                                          <li><a href="${applicationBasePathLocation}/view/jobs-management-detail/{{position.id}}">View</a></li>
+                                          <li><a href="${applicationBasePathLocation}/view/position-edit/{{position.id}}">Ubah</a></li>
                                        </ul>
                                     </div>
                                 </td>
                             </tr>
                  </tbody>
               </table>
-			  <div class="col-sm-6">
-				<button type="button" class="btn btn-primary pull-right" ng-click="popModal()">
-				<span class="glyphicon glyphicon-remove"></span>Hapus</button>
-			  </div>
+              <pagination class="pull-right"
+                ng-model="currentPage"
+                total-items="pageSize * size"
+                max-size="size"
+                boundary-links="true">
+              </pagination>
+			<div class="panel-body col-md-12">
+			  <h5>Action to checked box</h5>
+				<div class="col-md-6  col-sm-8">
+					<div class="col-md-4 col-sm-4">
+					<select class="form-control" ng-model="selectedStatus" name="new-url" id="new-url" tooltip="mandatory">
+						<option>OPEN</option>
+						<option>CLOSE</option>
+						<option>PENDING</option>
+					</select>
+					</div>
+					<div class="col-md-2 col-sm-2">
+					<button type="button" class="btn" ng-click="changeStatus()">
+						<span class="glyphicon glyphicon-save"></span>Submit Status
+					</button>
+					</div>
+				</div>
+			</div>
     <script src="${staticBlistrapPathLocation}js/vendor/ui-grid-angular/ui-grid.js"></script>
 	  <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/jobs-management-app.js"></script>
