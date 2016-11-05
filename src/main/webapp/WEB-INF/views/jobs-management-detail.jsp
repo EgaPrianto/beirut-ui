@@ -1,34 +1,73 @@
-
 <div ng-app="x.beirut.position-angularApp">
-  <div ng-init="id='${id}'">
-    <div ng-controller="positionDetail.ctrl">
 
     <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
     </div>
-    ID = ${id}
-{{response}}
-    <h3>Jobs Management</h3>
-    <h4 style="color:#086CA3"> Job Title </h4>
-    <br>
-    <br>
-    <h4 class="title-head">Detil Information</h4>
-    <br>
-    <label> Job ID : </label>
-    <label> Job Type : </label>
-    <label> Job Division : </label>
-    <br>
-    <h4 class="title-head">Status Information</h4>
-    <br>
-    <label> Status : </label>
-    <label> Create Date : </label>
-    <label> Update Date : </label>
-    <br>
-    <h4 class="title-head">Description</h4>
-    <br>
+  <div ng-init="id='${id}'">
+    <div ng-controller="positionDescription.ctrl">
 
+    <h2 class="title-head">Detail Posisi</h2>
+    <div class="panel panel-default">
+         <div class="panel-body">
+	             <div class="form-horizontal">
+		                  <fieldset>
+                          <legend>Data Posisi</legend>
+		                            <div class="form-group">
+			                                   <label for="job-id" class="col-md-2 control-label">Job ID:</label>
+			                                          <div class="col-md-6">
+			                                                   {{detail.value.id}}
+			                                          </div>
+		                           </div>
+                               <div class="form-group">
+                                         <label for="job-type" class="col-md-2 control-label">Job Type:</label>
+                                                <div class="col-md-6">
+                                                        {{detail.value.jobType}}
+                                                </div>
+                              </div>
+                              <div class="form-group">
+                                        <label for="job-division" class="col-md-2 control-label">Job Division:</label>
+                                                <div class="col-md-6">
+                                                        {{detail.value.jobDivision}}
+                                                </div>
+                              </div>
+                    </fieldset>
+                    <fieldset>
+                          <legend>Informasi Status</legend>
+                                <div class="form-group">
+                                        <label for="status" class="col-md-2 control-label">Status:</label>
+                                                <div class="col-md-6">
+                                                        <span class="label label-outline-success" ng-if = "detail.value.jobStatus == 'OPEN'">{{detail.value.jobStatus}}</span>
+                        <span class="label label-outline-default" ng-if = "detail.value.jobStatus == 'PENDING'">{{detail.value.jobStatus}}</span>
+      									<span class="label label-outline-danger" ng-if = "detail.value.jobStatus == 'CLOSE'">{{detail.value.jobStatus}}</span>
+                                                </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="created-date" class="col-md-2 control-label">Created Date:</label>
+                                                <div class="col-md-6">
+                                                        {{detail.value.createdDate  | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                </div>
+                                </div>
+                                <div class="form-group">
+                                        <label for="updated-date" class="col-md-2 control-label">Updated Date:</label>
+                                                <div class="col-md-6">
+                                                        {{detail.value.updatedDate  | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                </div>
+                                </div>
+                    </fieldset>
+                    <fieldset>
+                            <legend>Description</legend>
+                                  <div class="form-group">
+                                          <label for="description" class="col-md-2 control-label">Description:</label>
+                                                  <div class="col-md-8">
+                                                          <pre>{{response.value.positionDetail}}</pre>
+                                                  </div>
+                                  </div>
+                   </fieldset>
+              </div>
+          </div>
+      </div>
     <script src="${staticBlistrapPathLocation}js/vendor/ui-grid-angular/ui-grid.js"></script>
     <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/jobs-management-app.js"></script>

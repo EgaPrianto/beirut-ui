@@ -8,11 +8,13 @@ import com.gdn.x.beirut.dto.request.CandidateDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionStatusModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidateDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDetailDTOResponse;
+import com.gdn.x.ui.beirut.model.PositionDetail;
 
 public interface BeirutService {
 
@@ -35,14 +37,25 @@ public interface BeirutService {
   public GdnRestListResponse<PositionDTOResponse> getAllPositionWithPageable(String requestId,
       String username, int page, int size) throws Exception;
 
+  public GdnRestListResponse<PositionDTOResponse> getAllPositionWithPageableNotDeleted(
+      String requestId, String username, Integer page, Integer size) throws Exception;
+
+  public byte[] getCandidateDetail(String requestId, String username, String id) throws Exception;
+
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception;
 
   public GdnRestSingleResponse<CandidatePositionDTOResponse> getCandidatePositionDetailByStoreIdWithLogs(
       String requestId, String username, String idCandidate, String idPosition) throws Exception;
 
-  public GdnRestSingleResponse<PositionDetailDTOResponse> getPositionDescription(
-      String generateRequestId, String username, Integer id);
+  public GdnRestSingleResponse<PositionDTOResponse> getPositionById(String requestId,
+      String username, String id) throws Exception;
+
+  public GdnRestListResponse<PositionDTOResponse> getPositionByTitle(String requestId,
+      String username, String title) throws Exception;
+
+  public GdnRestSingleResponse<PositionDetail> getPositionDescription(String requestId,
+      String username, String id) throws Exception;
 
   public GdnRestListResponse<PositionDetailDTOResponse> getPositionDetailById(String requestId,
       String username, String id) throws Exception;
@@ -67,5 +80,8 @@ public interface BeirutService {
 
   public GdnBaseRestResponse updatePositionInformation(String requestId, String username,
       PositionDTORequest positionDTORequest) throws Exception;
+
+  public GdnBaseRestResponse updatePositionStatus(String requestId, String username,
+      UpdatePositionStatusModelDTORequest updatePositionStatusModelDTORequest) throws Exception;
 
 }

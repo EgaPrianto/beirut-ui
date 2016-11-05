@@ -14,11 +14,13 @@ import com.gdn.x.beirut.dto.request.CandidateDTORequest;
 import com.gdn.x.beirut.dto.request.ListStringRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
+import com.gdn.x.beirut.dto.request.UpdatePositionStatusModelDTORequest;
 import com.gdn.x.beirut.dto.response.CandidateDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionDTOResponse;
 import com.gdn.x.beirut.dto.response.CandidatePositionSolrDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDTOResponse;
 import com.gdn.x.beirut.dto.response.PositionDetailDTOResponse;
+import com.gdn.x.ui.beirut.model.PositionDetail;
 import com.gdn.x.ui.beirut.service.BeirutService;
 
 @Service
@@ -112,8 +114,28 @@ public class BeirutServiceImpl implements BeirutService {
   }
 
   @Override
+  public GdnRestListResponse<PositionDTOResponse> getAllPositionWithPageableNotDeleted(
+      String requestId, String username, Integer page, Integer size) throws Exception {
+    GdnRestListResponse<PositionDTOResponse> gdnPositionDTOResponses = this.beirutApiClient
+        .getAllPositionWithPageableAndMarkForDelete(requestId, username, page, size, false);
+    if (!gdnPositionDTOResponses.isSuccess()) {
+      LOG.warn(
+          "failed to getAllPositionWithPageable with requestId:{} errorCode:{} errorMessage:{}",
+          requestId, gdnPositionDTOResponses.getErrorCode(),
+          gdnPositionDTOResponses.getErrorMessage());
+    }
+    return gdnPositionDTOResponses;
+  }
+
+  @Override
+  public byte[] getCandidateDetail(String requestId, String username, String id) throws Exception {
+    return this.beirutApiClient.getCandidateDetail(requestId, username, id);
+  }
+
+  @Override
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception {
+    LOG.info("Beirut ServiceImpl QUERY DEBUG = " + query);
     GdnRestListResponse<CandidatePositionSolrDTOResponse> gdnCandidatePositionSolrDTOResponses =
         this.beirutApiClient.getCandidatePositionBySolrQuery(requestId, username, query, page,
             size);
@@ -138,11 +160,33 @@ public class BeirutServiceImpl implements BeirutService {
     return result;
   }
 
+  // @Override
+  // public String getPositionDescription(String requestId, String username, String id)
+  // throws Exception {
+  // byte[] result = this.beirutApiClient.getPositionDescription(requestId, username, id);
+  // return new String(result);
+  // }
+
   @Override
-  public GdnRestSingleResponse<PositionDetailDTOResponse> getPositionDescription(
-      String generateRequestId, String username, Integer id) {
+  public GdnRestSingleResponse<PositionDTOResponse> getPositionById(String requestId,
+      String username, String id) throws Exception {
+    return this.beirutApiClient.getPositionId(requestId, username, id);
+  }
+
+  @Override
+  public GdnRestListResponse<PositionDTOResponse> getPositionByTitle(String requestId,
+      String username, String title) throws Exception {
     // TODO Auto-generated method stub
-    return null;
+    return this.beirutApiClient.getPositionByTitle(requestId, username, title);
+  }
+
+  @Override
+  public GdnRestSingleResponse<PositionDetail> getPositionDescription(String requestId,
+      String username, String id) throws Exception {
+    byte[] result = this.beirutApiClient.getPositionDescription(requestId, username, id);
+    PositionDetail content = new PositionDetail();
+    content.setPositionDetail(new String(result));
+    return new GdnRestSingleResponse<PositionDetail>(content, requestId);
   }
 
   @Override
@@ -247,6 +291,19 @@ public class BeirutServiceImpl implements BeirutService {
           gdnBaseRestResponseUpdatePosition.getErrorMessage());
     }
     return gdnBaseRestResponseUpdatePosition;
+  }
+
+  @Override
+  public GdnBaseRestResponse updatePositionStatus(String requestId, String username,
+      UpdatePositionStatusModelDTORequest updatePositionStatusModelDTORequest) throws Exception {
+    GdnBaseRestResponse gdnBaseRestResponseUpdatePositionStatus = this.beirutApiClient
+        .updatePositionStatus(requestId, username, updatePositionStatusModelDTORequest);
+    if (!gdnBaseRestResponseUpdatePositionStatus.isSuccess()) {
+      LOG.warn("failed to updatePosition with requestId:{} errorCode:{} errorMessage:{}", requestId,
+          gdnBaseRestResponseUpdatePositionStatus.getErrorCode(),
+          gdnBaseRestResponseUpdatePositionStatus.getErrorMessage());
+    }
+    return gdnBaseRestResponseUpdatePositionStatus;
   }
 
 

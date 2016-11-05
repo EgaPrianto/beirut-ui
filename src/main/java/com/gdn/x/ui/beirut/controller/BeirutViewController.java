@@ -44,6 +44,7 @@ public class BeirutViewController {
     return mav;
   }
 
+
   @RequestMapping(value = BeirutViewController.INSERT_NEW_POSITION, method = RequestMethod.GET)
   public String getInsertNewPosition() {
     return "insert-new-position";

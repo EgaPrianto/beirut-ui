@@ -1,0 +1,6 @@
+.beirutRows:hover td {
+  background:#e5e5ff;
+}
+[ng-click]{
+    cursor: pointer;
+}

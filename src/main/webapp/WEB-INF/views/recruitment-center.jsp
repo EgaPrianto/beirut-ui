@@ -1,27 +1,30 @@
 <div ng-app="x.beirut.candidate-angularApp" ng-controller="candidateSummary.ctrl">
-    <!--div class="loading-wrapper" ng-show="loading">
+    <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
-    </div-->
+    </div>
     <h3>Recruitment Center</h3>
-    <div class="col-sm-6">
-        <div class="btn-group pull-left">
+    <div class="col-md-12">
+        <div class="btn-group col-md-6 pull-left">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Display Row <i class="bli bli-caret-down"></i>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#">25</a></li>
-                <li><a href="#">50</a></li>
-                <li><a href="#">100</a></li>
+               <li><a ng-click="changeNumPerPage(5)">5</a></li>
+               <li><a ng-click="changeNumPerPage(10)">10</a></li>
+               <li><a ng-click="changeNumPerPage(25)">25</a></li>
+               <li><a ng-click="changeNumPerPage(50)">50</a></li>
+               <li><a ng-click="changeNumPerPage(100)">100</a></li>
             </ul>
         </div>
-        <div align="right">
+        <div align="col-md-6 pull-right">
             <div class="autocomplete" id="" style="height: 100%" data="test">
                 <input autocomplete="off" name="s" type="text" ng-model="searchParam" placeholder="Search Candidate" class="" style="height:33px; width:300px;">
-                <button style="background-color:#068AC9; color:white; margin-left:-36px; height:34px; width:40px;"id="gdn-search-button" class="bli-search search-lup"></button>
+                <button ng-click="searchCandidate()" style="background-color:#068AC9; color:white; margin-left:-36px; height:34px; width:40px;" id="gdn-search-button" class="bli-search search-lup"></button>
             </div>
-        </div></div>
+        </div>
+    </div>
     <p>&nbsp;</p>
     <div class="row">
         <table class="table table-striped" style="margin-top: 0;">
@@ -38,32 +41,55 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat = "candidatePosition in candidatePositions">
-                <td><input type="checkbox" name="options" id="option" autocomplete="off"></td>
-                <td>{{candidatePosition.firstName}} {{candidatePosition.lastName}}</td>
-                <td>{{candidatePosition.createdDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                <td>{{candidatePosition.jobType}}</td>
-                <td>{{candidatePosition.jobDivision}}</td>
-                <td>{{candidatePosition.title}}</td>
-                <td><span class="label label-outline-success">{{candidatePosition.status}}</span></td>
-                <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-cog"></i> <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="/beirut-ui/view/recruitment-center-detail">View</a></li>
-                            <li><a href="/beirut-ui/view/recruitment-center-edit">Ubah</a></li>
-                        </ul>
-                    </div>
+            <tr ng-repeat = "candidatePosition in candidatePositions" class="beirutRows">
+                <td><input type="checkbox" ng-model="candidatePosition.selected" name="options" id="option" autocomplete="off"></td>
+                <td ng-click="getDetail(candidatePosition)">{{candidatePosition.firstName}} {{candidatePosition.lastName}}</td>
+                <td ng-click="getDetail(candidatePosition)">{{candidatePosition.createdDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td ng-click="getDetail(candidatePosition)">{{candidatePosition.jobType}}</td>
+                <td ng-click="getDetail(candidatePosition)">{{candidatePosition.jobDivision}}</td>
+                <td ng-click="getDetail(candidatePosition)">{{candidatePosition.title}}</td>
+                <td ng-click="getDetail(candidatePosition)"><span class="label label-outline-success">{{candidatePosition.status}}</span></td>
+                <td ng-click="getDetail(candidatePosition)">
+                    Klik untuk melihat detil.
                 </td>
             </tr>
             </tbody>
         </table>
-        <div class="col-sm-6">
-            <button type="button" class="btn btn-primary pull-right" href="recruitment-center-delete.jsp">
-                <span class="glyphicon glyphicon-remove"></span> Hapus</button>
+      <pagination class="pull-right"
+        ng-model="currentPage"
+        items-per-page="size"
+        total-items="pageSize * size"
+        max-size="maxSize"
+        boundary-links="true">
+      </pagination>
+      <div class="panel-body col-md-12">
+      <h5>Action to checked box</h5>
+        <div class="col-md-6  col-sm-8">
+          <div class="col-md-4 col-sm-4">
+          <select class="form-control" ng-model="selectedStatus" name="new-url" id="new-url" tooltip="mandatory">
+						<option>APPLY</option>
+						<option>CALL_CANDIDATE</option>
+						<option>PSIKOTES</option>
+						<option>TECHNICAL_TEST</option>
+						<option>USER</option>
+						<option>HRD</option>
+						<option>ON_HOLD</option>
+						<option>HEAD</option>
+						<option>CEO</option>
+						<option>MEDICAL</option>
+						<option>OFFERING</option>
+						<option>DECLINED</option>
+						<option>JOIN</option>
+						<option>WITHDRAWL</option>
+          </select>
+          </div>
+          <div class="col-md-2 col-sm-2">
+          <button type="button" class="btn" ng-click="changeStatus()">
+            <span class="glyphicon glyphicon-save"></span>Submit Status
+          </button>
+          </div>
         </div>
+      </div>
     </div>
     <!--
     <script src="${applicationBasePathLocation}/resources/bower_components/jquery/dist/jquery.min.js"></script>
