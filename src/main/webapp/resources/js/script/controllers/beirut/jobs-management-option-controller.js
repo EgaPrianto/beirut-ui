@@ -18,7 +18,7 @@ function positionCreateNewModuleCtrlFunc($scope, $window, $modal, positionServic
         console.log("$scope.fileBase64: ",$scope.fileBase64);
     };
 
-    $scope.submitPosition = function(){
+    $scope.submitPosition = function(successUrl){
         $scope.positionDTORequestString = "{\"id\": \"id\"," +
             "\"title\": \""+$scope.title+"\"," +
             "\"jobType\": \""+$scope.jobType+"\"," +
@@ -42,6 +42,8 @@ function positionCreateNewModuleCtrlFunc($scope, $window, $modal, positionServic
             console.log("Response available");
             if(response.success){
                 console.log("Success response: ",response);
+                console.log("successUrl: ",successUrl);
+                $window.location.href = successUrl;
             } else {
                 swal("Failed!", response.errorMessage, "error");
             }

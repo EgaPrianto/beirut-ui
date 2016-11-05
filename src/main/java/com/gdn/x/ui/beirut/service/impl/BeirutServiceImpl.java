@@ -158,6 +158,7 @@ public class BeirutServiceImpl implements BeirutService {
     @Override
     public GdnBaseRestResponse insertNewPosition(String requestId, String username,
         String positionDTORequestString, byte[] data, String filename) throws Exception {
+        LOG.info("Masuk service UIx: "+new String(data));
         GdnBaseRestResponse gdnPositionDTOResponse = this.beirutApiClient
             .insertNewPosition(requestId, username, positionDTORequestString, filename, data);
         if (!gdnPositionDTOResponse.isSuccess()) {

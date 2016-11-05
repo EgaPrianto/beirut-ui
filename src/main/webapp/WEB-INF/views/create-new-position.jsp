@@ -64,7 +64,7 @@
 
             <div class="col-sm-6" style="text-align: center;">
                 <div class="form-group">
-                    <button type="submit" ng-click="submitPosition()">Submit !</button>
+                    <button type="submit" ng-click="submitPosition('${applicationBasePathLocation}/view/jobs-management')">Submit !</button>
                 </div>
             </div>
 
@@ -73,7 +73,6 @@
 
     <script src="${staticBlistrapPathLocation}js/vendor/ui-grid-angular/ui-grid.js"></script>
     <script src="${staticBlistrapPathLocation}js/vendor/angular-chips/angular-chips.js"></script>
-    <script src="${applicationBasePathLocation}/resources/assets/js/angular-base64-upload/dist/angular-base64-upload.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/apps/beirut/jobs-management-option-app.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/services/beirut/beirut-service.js"></script>
     <script src="${applicationBasePathLocation}/resources/js/script/controllers/beirut/jobs-management-option-controller.js"></script>
