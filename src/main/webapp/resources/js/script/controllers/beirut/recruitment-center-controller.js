@@ -43,6 +43,49 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
       window.location.assign(applicationBasePathLocation + "/view/recruitment-center-detail/"+candidatePositions.idCandidate+"/"+candidatePositions.idPosition);
     }
 
+    $scope.searchCandidate = function(){
+      candidateService.getAllCandidatePosition({
+        query : 'firstName:'+$scope.searchParam +' OR lastName:'+ $scope.searchParam ,
+        page  : $scope.currentPage - 1,
+        size  : $scope.size
+      }, function(response){
+          if(response.success){
+              $scope.candidatePositions = response.content;
+              $scope.totalRecords = response.pageMetaData.totalRecords;
+              $scope.pageSize = response.pageMetaData.pageSize;
+              $scope.currentPage = response.pageMetaData.pageNumber + 1;
+          } else {
+              swal("Failed!", response.errorMessage, "error");
+          }
+          $scope.loading = false;
+      }, function(error){
+          swal('Error!', error.statusText, 'error');
+          $scope.loading = false;
+      });
+    }
+
+    $scope.changeNumPerPage = function(numPerPages){
+      $scope.size = numPerPages;
+      candidateService.getAllCandidatePosition({
+          query : '*:*',
+          page  : $scope.currentPage - 1,
+          size  : $scope.size
+      }, function(response){
+          if(response.success){
+              $scope.candidatePositions = response.content;
+              $scope.totalRecords = response.pageMetaData.totalRecords;
+              $scope.pageSize = response.pageMetaData.pageSize;
+              $scope.currentPage = response.pageMetaData.pageNumber + 1;
+          } else {
+              swal("Failed!", response.errorMessage, "error");
+          }
+          $scope.loading = false;
+      }, function(error){
+          swal('Error!', error.statusText, 'error');
+          $scope.loading = false;
+      });
+    }
+
     $scope.changeStatus = function(){
       $scope.selectedStatus;
       if ($scope.selectedStatus==null) {

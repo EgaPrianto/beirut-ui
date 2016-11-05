@@ -33,9 +33,41 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     $scope.currentRecords = (($scope.currentPage - 1) * $scope.size) + 1;
     $scope.totalRecords = 0;
     $scope.maxSize = 5;
+    $scope.currentState = "Summary";
 
     $scope.getDetail = function(position){
       window.location.assign(applicationBasePathLocation + "/view/jobs-management-detail/"+position.id);
+    }
+
+    $scope.searchPositionTitle = function(){
+      console.log($scope.searchParam);
+      $scope.currentState = "Search";
+      if($scope.searchParam == null){
+        $scope.currentState = "Summary";
+        $scope.currentPage = 1;
+        $scope.size = 10;
+      }else{
+        positionService.getPositionByTitle({
+          title : $scope.searchParam
+        }, function(response){
+            if(response.success){
+                $scope.positions = response.content;
+                $scope.currentPage= 1;
+                $scope.pageSize = 1;
+            } else {
+                swal("Failed!", response.errorMessage, "error");
+            }
+            $scope.loading = false;
+        }, function(error){
+            swal('Error!', error.statusText, 'error');
+            $scope.loading = false;
+        });
+        $scope.currentPage= 1;
+      }
+    }
+
+    $scope.changeNumPerPage = function(numPerPages){
+      $scope.size = numPerPages;
     }
 
     $scope.changeStatus = function(){
@@ -68,27 +100,30 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
         });
       }
     }
+
     $scope.$watch('currentPage + size', function(){
         console.log("TES");
-        positionService.getAllPositionsNotDeleted({
-            page : $scope.currentPage - 1,
-            size : $scope.size
-        }, function(response){
-            //debug
-            if(response.success){
-                $scope.positions = response.content;
-                $scope.totalRecords = response.pageMetaData.totalRecords;
-                $scope.pageSize = response.pageMetaData.pageSize;
-                $scope.currentPage = response.pageMetaData.pageNumber + 1;
-            } else {
-                swal("Failed!", response.errorMessage, "error");
-            }
-            console.log(response);
-            $scope.loading = false;
-        }, function(error){
-            swal('Error!', error.statusText, 'error');
-            $scope.loading = false;
-        });
+        if ($scope.currentState === "Summary") {
+          positionService.getAllPositionsNotDeleted({
+              page : $scope.currentPage - 1,
+              size : $scope.size
+          }, function(response){
+              //debug
+              if(response.success){
+                  $scope.positions = response.content;
+                  $scope.totalRecords = response.pageMetaData.totalRecords;
+                  $scope.pageSize = response.pageMetaData.pageSize;
+                  $scope.currentPage = response.pageMetaData.pageNumber + 1;
+              } else {
+                  swal("Failed!", response.errorMessage, "error");
+              }
+              console.log(response);
+              $scope.loading = false;
+          }, function(error){
+              swal('Error!', error.statusText, 'error');
+              $scope.loading = false;
+          });
+        }
     });
 
     $scope.deletePosition = function(){
@@ -120,6 +155,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     $scope.getAllPositionsSummary = function(){
 
         $scope.loading = true;
+        $scope.currentState = "Summary";
         positionService.getAllPositionsNotDeleted({
             page : $scope.currentPage - 1,
             size : $scope.size
@@ -140,7 +176,6 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
             $scope.loading = false;
         });
     };
-
     $scope.getAllPositionsSummary();
     console.log($scope);
 }

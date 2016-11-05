@@ -5,21 +5,23 @@
         </div>
     </div>
     <h3>Recruitment Center</h3>
-    <div class="col-sm-6">
-        <div class="btn-group pull-left">
+    <div class="col-md-12">
+        <div class="btn-group col-md-6 pull-left">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Display Row <i class="bli bli-caret-down"></i>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#">25</a></li>
-                <li><a href="#">50</a></li>
-                <li><a href="#">100</a></li>
+               <li><a ng-click="changeNumPerPage(5)">5</a></li>
+               <li><a ng-click="changeNumPerPage(10)">10</a></li>
+               <li><a ng-click="changeNumPerPage(25)">25</a></li>
+               <li><a ng-click="changeNumPerPage(50)">50</a></li>
+               <li><a ng-click="changeNumPerPage(100)">100</a></li>
             </ul>
         </div>
-        <div align="right">
+        <div align="col-md-6 pull-right">
             <div class="autocomplete" id="" style="height: 100%" data="test">
                 <input autocomplete="off" name="s" type="text" ng-model="searchParam" placeholder="Search Candidate" class="" style="height:33px; width:300px;">
-                <button style="background-color:#068AC9; color:white; margin-left:-36px; height:34px; width:40px;"id="gdn-search-button" class="bli-search search-lup"></button>
+                <button ng-click="searchCandidate()" style="background-color:#068AC9; color:white; margin-left:-36px; height:34px; width:40px;" id="gdn-search-button" class="bli-search search-lup"></button>
             </div>
         </div>
     </div>

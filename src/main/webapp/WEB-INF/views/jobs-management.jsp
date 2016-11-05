@@ -8,9 +8,8 @@
 	<br>
 	<br>
 	<div class="autocomplete " id="" style="height: 100%" data="test">
-      <input style="height:33px; width:300px;" autocomplete="off" name="s" type="text" ng-model="searchParam" placeholder="Search Job Title" class="">
-      <button style="background-color:#068AC9; color:white; margin-left:-35px; height:34px; width:40px;"id="gdn-search-button" class="bli-search search-lup"></button>
-
+      <input autocomplete="off" name="s" type="text" ng-model="searchParam" placeholder="Search Position Title" class="" style="height:33px; width:300px;">
+      <button ng-click="searchPositionTitle()" style="background-color:#068AC9; color:white; margin-left:-36px; height:34px; width:40px;" id="gdn-search-button" class="bli-search search-lup"></button>
 	  <div class="col-sm-6">
           <a style="color:white; text-decoration:none;" href="/beirut-ui/view/insert-new-position"><button type="button" class="btn btn-primary pull-right" ng-click="popModal()">
           <i class="bli bli-plus"></i> Tambah</button></a>
@@ -25,9 +24,11 @@
                         Display Row <i class="bli bli-caret-down"></i>
                      </button>
                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">25</a></li>
-                        <li><a href="#">50</a></li>
-                        <li><a href="#">100</a></li>
+                        <li><a ng-click="changeNumPerPage(5)">5</a></li>
+                        <li><a ng-click="changeNumPerPage(10)">10</a></li>
+                        <li><a ng-click="changeNumPerPage(25)">25</a></li>
+                        <li><a ng-click="changeNumPerPage(50)">50</a></li>
+                        <li><a ng-click="changeNumPerPage(100)">100</a></li>
                      </ul>
                   </div>
                 </div>
@@ -67,6 +68,8 @@
                             </tr>
                  </tbody>
               </table>
+              {{currentPage}}
+              {{size}}
             <pagination class="pull-right"
               ng-model="currentPage"
               items-per-page="size"

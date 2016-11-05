@@ -23,6 +23,13 @@ function positionServiceFunc($resource) {
                 size:'@size'
             }
         },
+        getPositionByTitle: {
+            method: 'GET',
+            params : {command : 'get-position-by-title'},
+            data: {
+                title:'@title'
+            }
+        },
         insertNewPosition: {
             method: 'POST',
             params: {command: 'insert-new-position'},

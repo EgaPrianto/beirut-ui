@@ -48,10 +48,13 @@ public interface BeirutService {
   public GdnRestSingleResponse<CandidatePositionDTOResponse> getCandidatePositionDetailByStoreIdWithLogs(
       String requestId, String username, String idCandidate, String idPosition) throws Exception;
 
-  public GdnRestSingleResponse<PositionDTOResponse> getPositionById(String generateRequestId,
+  public GdnRestSingleResponse<PositionDTOResponse> getPositionById(String requestId,
       String username, String id) throws Exception;
 
-  public GdnRestSingleResponse<PositionDetail> getPositionDescription(String generateRequestId,
+  public GdnRestListResponse<PositionDTOResponse> getPositionByTitle(String requestId,
+      String username, String title) throws Exception;
+
+  public GdnRestSingleResponse<PositionDetail> getPositionDescription(String requestId,
       String username, String id) throws Exception;
 
   public GdnRestListResponse<PositionDetailDTOResponse> getPositionDetailById(String requestId,

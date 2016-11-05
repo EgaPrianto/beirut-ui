@@ -45,19 +45,19 @@ public class BeirutController {
   public static final String GET_ALL_POSITION = "/get-all-position";
   public static final String GET_ALL_POSITION_NOT_DELETED = "/get-all-position-not-deleted";
   public static final String GET_POSITION = "/get-position";
+  public static final String GET_POSITION_BY_TITLE = "/get-position-by-title";
   public static final String GET_POSITION_DETAIL = "/get-position-detail";
-
-  public static final String APPLY_NEW_POSITION = "/apply-new-position";
   public static final String GET_POSITION_DESCRIPTION = "/get-position-description";
+  public static final String APPLY_NEW_POSITION = "/apply-new-position";
+  public static final String UPDATE_POSITIONS_STATUS = "/update-positions-status";
+  public static final String INSERT_NEW_POSITION = "/insert-new-position";
+  public static final String DELETE_POSITION = "/delete-position";
+
   public static final String GET_ALL_CANDIDATE_POSITION = "/get-all-candidate-position";
   public static final String GET_CANDIDATE_POSITION_DETAIL = "/get-candidate-position-detail";
   public static final String UPDATE_CANDIDATES_STATUS = "/update-candidates-status";
-  public static final String UPDATE_POSITIONS_STATUS = "/update-positions-status";
-
-  public static final String INSERT_NEW_POSITION = "/insert-new-position";
   public static final String INSERT_NEW_CANDIDATE = "/insert-new-candidate";
   public static final String DELETE_CANDIDATE = "/delete-candidate";
-  public static final String DELETE_POSITION = "/delete-position";
 
   @Autowired
   private BeirutService beirutService;
@@ -125,6 +125,8 @@ public class BeirutController {
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       @RequestParam String query, @RequestParam Integer page, @RequestParam Integer size)
           throws Exception {
+
+    LOG.info("BeirutController QUERY DEBUG = " + query);
     GdnRestListResponse<CandidatePositionSolrDTOResponse> result = this.beirutService
         .getCandidatePositionBySolrQuery(generateRequestId(), getUsername(), query, page, size);
     return result;
@@ -147,6 +149,16 @@ public class BeirutController {
         this.beirutService.getPositionById(this.generateRequestId(), this.getUsername(), id);
     return result;
   }
+
+  @RequestMapping(value = BeirutController.GET_POSITION_BY_TITLE, method = RequestMethod.GET)
+  @ResponseBody
+  public GdnRestListResponse<PositionDTOResponse> getPositionByTitle(@RequestParam String title)
+      throws Exception {
+    GdnRestListResponse<PositionDTOResponse> result =
+        this.beirutService.getPositionByTitle(this.generateRequestId(), this.getUsername(), title);
+    return result;
+  }
+
 
   @RequestMapping(value = BeirutController.GET_POSITION_DESCRIPTION, method = RequestMethod.GET)
   @ResponseBody

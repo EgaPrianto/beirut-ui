@@ -135,6 +135,7 @@ public class BeirutServiceImpl implements BeirutService {
   @Override
   public GdnRestListResponse<CandidatePositionSolrDTOResponse> getCandidatePositionBySolrQuery(
       String requestId, String username, String query, int page, int size) throws Exception {
+    LOG.info("Beirut ServiceImpl QUERY DEBUG = " + query);
     GdnRestListResponse<CandidatePositionSolrDTOResponse> gdnCandidatePositionSolrDTOResponses =
         this.beirutApiClient.getCandidatePositionBySolrQuery(requestId, username, query, page,
             size);
@@ -170,6 +171,13 @@ public class BeirutServiceImpl implements BeirutService {
   public GdnRestSingleResponse<PositionDTOResponse> getPositionById(String requestId,
       String username, String id) throws Exception {
     return this.beirutApiClient.getPositionId(requestId, username, id);
+  }
+
+  @Override
+  public GdnRestListResponse<PositionDTOResponse> getPositionByTitle(String requestId,
+      String username, String title) throws Exception {
+    // TODO Auto-generated method stub
+    return this.beirutApiClient.getPositionByTitle(requestId, username, title);
   }
 
   @Override
