@@ -21,6 +21,7 @@ import com.gdn.common.web.wrapper.response.GdnRestListResponse;
 import com.gdn.common.web.wrapper.response.PageMetaData;
 import com.gdn.x.beirut.clientsdk.BeirutApiClient;
 import com.gdn.x.beirut.dto.request.ApplyNewPositionModelDTORequest;
+import com.gdn.x.beirut.dto.request.CandidatePositionBindRequest;
 import com.gdn.x.beirut.dto.request.PositionDTORequest;
 import com.gdn.x.beirut.dto.request.StatusDTORequest;
 import com.gdn.x.beirut.dto.request.UpdateCandidateStatusModelDTORequest;
@@ -141,10 +142,15 @@ public class BeirutServiceTest {
 
     UpdateCandidateStatusModelDTORequest updateCandidateStatusModelDTORequest =
         new UpdateCandidateStatusModelDTORequest();
-    updateCandidateStatusModelDTORequest.setIdPosition(ID);
+    List<CandidatePositionBindRequest> listBind = new ArrayList<CandidatePositionBindRequest>();
+    for (String string : idCandidates) {
+      CandidatePositionBindRequest candidatePositionBindRequest =
+          new CandidatePositionBindRequest();
+      candidatePositionBindRequest.setIdCandidate(string);
+      candidatePositionBindRequest.setIdPosition(ID);
+    }
+    updateCandidateStatusModelDTORequest.setListBind(listBind);
     updateCandidateStatusModelDTORequest.setStatusDTORequest(STATUS_DTO_REQUEST.name());
-    updateCandidateStatusModelDTORequest.setIdCandidates(idCandidates);
-
     when(this.beirutApiClient.updateCandidatesStatus(REQUEST_ID, USERNAME,
         updateCandidateStatusModelDTORequest))
             .thenReturn(gdnBaseRestResponseTestUpdateCandidateStatus);
