@@ -35,26 +35,6 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     $scope.maxSize = 5;
     $scope.currentState = "Summary";
 
-	$scope.advanceSearch=false;
-
-	
-	$scope.date1 = new Date();
-	$scope.date2 = new Date();
-
-    $scope.opened1 = false;
-	$scope.opened2 = false;
-	
-    $scope.openCalendar = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $scope.opened1 = true;
-    };
-	$scope.openCalendar2 = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $scope.opened2 = true;
-    };
-	
     $scope.getDetail = function(position){
       window.location.assign(applicationBasePathLocation + "/view/jobs-management-detail/"+position.id);
     }

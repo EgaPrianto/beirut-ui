@@ -26,74 +26,9 @@
 							<a style="color:white; text-decoration:none;" href="/beirut-ui/view/insert-new-position"><button type="button" class="btn btn-primary pull-right" ng-click="popModal()">
 									<i class="bli bli-plus"></i> Tambah</button></a>
 						</div>
-						<button type="button" class="btn btn-down" ng-click="advanceSearch = !advanceSearch" style="background-color:#068AC9; color:white;">Advanced Search <span id="box" class="glyphicon glyphicon-chevron-down"></span></button>
 					</div>
 				</div>
-				<div align="col-md-12 text-center" ng-show="advanceSearch" style="margin-left:120px; margin-top:20px;">
-					<div class="btn-group pull-left" style="margin-right:20px;">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							Job Type <i class="bli bli-caret-down"></i>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"></a></li>
-						</ul>
-					</div>
-					<div class="btn-group pull-left" style="margin-right:20px;">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							Job Title <i class="bli bli-caret-down"></i>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"></a></li>
-						</ul>
-					</div>
-					<div class="btn-group pull-left">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							Status <i class="bli bli-caret-down"></i>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"></a></li>
-						</ul>
-					</div>
-					<div class="input-group-2">
-					<label for="new-url" class="col-sm-1 control-label">Start Date</label>
-						<div class="col-sm-2">
-							<p class="input-group">
-								<input type="text" class="form-control"
-										datetime-picker="dd-MM-yyyy" enable-time="false"
-										ng-model="date1"
-										is-open="opened1"
-										popover="Klik ikon kalender untuk pilih tanggal."
-										popover-trigger="mouseenter"
-										style="height: 40px;"/>
-								<span class="input-group-btn" style="padding-bottom: 10px;">
-									<button type="button" class="btn btn-default"
-											ng-click="openCalendar($event)">	
-										<i class="fa fa-calendar"></i>
-									</button>
-								</span>
-							</p>
-						</div>
-					</div>
-					<div class="input-group-2">
-					<label for="new-url" class="col-sm-1 control-label">End Date</label>
-						<div class="col-sm-2">
-							<p class="input-group">
-								<input type="text" class="form-control"
-										datetime-picker="dd-MM-yyyy" enable-time="false"
-										ng-model="date2"
-										is-open="opened2"
-										popover="Klik ikon kalender untuk pilih tanggal."
-										popover-trigger="mouseenter"
-										style="height: 40px;"/>
-								<span class="input-group-btn" style="padding-bottom: 10px;">
-									<button type="button" class="btn btn-default"
-											ng-click="openCalendar2($event)">	
-										<i class="fa fa-calendar"></i>
-									</button>
-								</span>
-							</p>
-						</div>
-					</div>
+	
 </div>
 					<div class="row">
 						<table class="table table-striped" style="margin-top: 0;">
