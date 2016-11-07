@@ -3,12 +3,12 @@ package com.gdn.x.ui.beirut.model;
 import com.gdn.common.web.base.BaseRequest;
 
 /**
- * Created by Gl552 on 10/30/2016.
+ * Created by Gl552 on 11/6/2016.
  */
-public class PositionNew extends BaseRequest {
-  private String positionDTORequestString;
-  private String filename;
+public class PositionEdit extends BaseRequest {
+  private String id;
   private String base64File;
+  private String filename;
 
   public String getBase64File() {
     return base64File;
@@ -26,11 +26,11 @@ public class PositionNew extends BaseRequest {
     this.filename = filename;
   }
 
-  public String getPositionDTORequestString() {
-    return positionDTORequestString;
+  public String getId() {
+    return id;
   }
 
-  public void setPositionDTORequestString(String positionDTORequestString) {
-    this.positionDTORequestString = positionDTORequestString;
+  public void setId(String id) {
+    this.id = id;
   }
 }

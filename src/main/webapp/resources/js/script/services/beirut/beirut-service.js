@@ -39,6 +39,15 @@ function positionServiceFunc($resource) {
                 base64File: '@base64File'
             }
         },
+        updatePositionDescription: {
+            method: 'POST',
+            params: {command: '/update-position-description'},
+            data: {
+                id: '@id',
+                base64File: '@base64File',
+                filename: '@filename'
+            }
+        },
         deletePosition: {
             method: 'POST',
             params: {command: 'delete-position'},
@@ -73,7 +82,16 @@ function positionServiceFunc($resource) {
           data: {
             id:'@id'
           }
+        },
+        updatePositionInformation: {
+            method: 'POST',
+            params: {command: '/update-position'},
+            data: {
+                positionDTORequest: '@positionDTORequest'
+            }
         }
+
+
         // getAllLogisticProducts: {method: 'GET', params : {command : 'get-all-logistic-products'}, data: {page:'@page', size:'@size', property:'@property', direction:'@direction'}},
         // saveLogisticProducts: {method: 'POST', params : {command : 'save-logistic-product'}, data: {logisticProduct:'@logisticProduct'}},
         // getLogisticProductByCode: {method: 'GET', params: {command: 'get-logistic-product'}, data: {logisticProductCode:'@logisticProductCode'}},

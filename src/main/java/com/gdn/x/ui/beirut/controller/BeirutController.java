@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gdn.x.ui.beirut.model.PositionEdit;
+import org.omg.PortableServer.RequestProcessingPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,7 @@ public class BeirutController {
   public static final String UPDATE_POSITIONS_STATUS = "/update-positions-status";
   public static final String INSERT_NEW_POSITION = "/insert-new-position";
   public static final String DELETE_POSITION = "/delete-position";
+  public static final String UPDATE_POSITION_DESCRIPTION = "/update-position-description";
 
   public static final String GET_ALL_CANDIDATE_POSITION = "/get-all-candidate-position";
   public static final String GET_CANDIDATE_POSITION_DETAIL = "/get-candidate-position-detail";
@@ -211,7 +214,7 @@ public class BeirutController {
   @ResponseBody
   public GdnBaseRestResponse insertNewPosition(@RequestBody PositionNew positionNew) throws Exception {
     byte[] file = javax.xml.bind.DatatypeConverter.parseBase64Binary(positionNew.getBase64File().split(",")[1]);
-    String checker = new String(file);
+//    String checker = new String(file);
      GdnBaseRestResponse result = this.beirutService
       .insertNewPosition(generateRequestId(), getUsername(),
         positionNew.getPositionDTORequestString(), file,
@@ -271,6 +274,16 @@ public class BeirutController {
         .setStatusDTORequest((String) requestBodyMapping.get("status"));
     GdnBaseRestResponse result = this.beirutService.updatePositionStatus(generateRequestId(),
         getUsername(), updatePositionStatusModelDTORequest);
+    return result;
+  }
+
+  @RequestMapping(value = BeirutController.UPDATE_POSITION_DESCRIPTION, method = RequestMethod.POST)
+  @ResponseBody
+  public GdnBaseRestResponse updatePositionDescription(@RequestBody PositionEdit positionEdit) throws Exception{
+    byte[] file = javax.xml.bind.DatatypeConverter.parseBase64Binary(positionEdit.getBase64File().split(",")[1]);
+    GdnBaseRestResponse result = this.beirutService
+        .updatePositionDescription(generateRequestId(),getUsername(),positionEdit.getId(),file,
+            positionEdit.getFilename());
     return result;
   }
 
