@@ -115,7 +115,21 @@ public class BeirutServiceTest {
         QUERY, PAGE, SIZE);
   }
 
-
+  // @Test
+  // public void testUpdateCandidateDetail() throws Exception {
+  // FileInputStream inputFile =
+  // new FileInputStream(new File("src/test/resources/JSON/updatedFile.txt"));
+  // MockMultipartFile file =
+  // new MockMultipartFile("file", "file.txt", "multipart/form-data", inputFile);
+  // GdnBaseRestResponse gdnBaseRestResponseTestUpdateCandidateDetail =
+  // new GdnBaseRestResponse(REQUEST_ID);
+  // when(this.beirutApiClient.updateCandidateDetail(REQUEST_ID, USERNAME, ID, file))
+  // .thenReturn(gdnBaseRestResponseTestUpdateCandidateDetail);
+  // assertTrue(this.beirutService.updateCandidateDetail(REQUEST_ID, USERNAME, ID,
+  // file) == gdnBaseRestResponseTestUpdateCandidateDetail);
+  // this.beirutService.updateCandidateDetail(REQUEST_ID, USERNAME, ID, file);
+  // verify(this.beirutApiClient, times(2)).updateCandidateDetail(REQUEST_ID, USERNAME, ID, file);
+  // }
 
   @Test
   @Ignore

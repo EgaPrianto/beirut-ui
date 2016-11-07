@@ -73,7 +73,7 @@ public class BeirutServiceImpl implements BeirutService {
   @Override
   public GdnRestListResponse<CandidateDTOResponse> findCandidateByCreatedDateBetweenAndStoreId(
       String requestId, String username, Long start, Long end, int page, int size)
-          throws Exception {
+      throws Exception {
     GdnRestListResponse<CandidateDTOResponse> gdnCandidateDTOResponses = this.beirutApiClient
         .findCandidateByCreatedDateBetweenAndStoreId(requestId, username, start, end, page, size);
     if (!gdnCandidateDTOResponses.isSuccess()) {

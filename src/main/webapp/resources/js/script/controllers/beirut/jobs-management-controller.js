@@ -24,9 +24,6 @@ function positionDetailModuleCtrlFunc($scope, $window, $modal, positionService){
     });
 }
 
-
-
-
 function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService){
     $scope.currentPage = 1;
     $scope.size = 10;
@@ -102,7 +99,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     }
 
     $scope.$watch('currentPage + size', function(){
-        console.log("TES");
+        // console.log("TES");
         if ($scope.currentState === "Summary") {
           positionService.getAllPositionsNotDeleted({
               page : $scope.currentPage - 1,
@@ -117,7 +114,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
               } else {
                   swal("Failed!", response.errorMessage, "error");
               }
-              console.log(response);
+              // console.log(response);
               $scope.loading = false;
           }, function(error){
               swal('Error!', error.statusText, 'error');
@@ -169,7 +166,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
             } else {
                 swal("Failed!", response.errorMessage, "error");
             }
-            console.log(response);
+            // console.log(response);
             $scope.loading = false;
         }, function(error){
             swal('Error!', error.statusText, 'error');
@@ -177,7 +174,7 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
         });
     };
     $scope.getAllPositionsSummary();
-    console.log($scope);
+    // console.log($scope);
 }
 
 function positionDescriptionModuleCtrlFunc($scope, $window, $modal, positionService){

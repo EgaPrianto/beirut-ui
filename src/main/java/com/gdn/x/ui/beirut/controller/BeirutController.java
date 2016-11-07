@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gdn.x.ui.beirut.model.PositionEdit;
+import org.omg.PortableServer.RequestProcessingPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.gdn.common.util.GdnUUIDHelper;
 import com.gdn.common.web.wrapper.response.GdnBaseRestResponse;
 import com.gdn.common.web.wrapper.response.GdnRestListResponse;
@@ -33,6 +34,14 @@ import com.gdn.x.beirut.dto.response.PositionDetailDTOResponse;
 import com.gdn.x.ui.beirut.model.PositionDetail;
 import com.gdn.x.ui.beirut.model.PositionNew;
 import com.gdn.x.ui.beirut.service.BeirutService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Controller
 @RequestMapping(value = BeirutController.BASE_PATH)
@@ -52,6 +61,7 @@ public class BeirutController {
   public static final String UPDATE_POSITIONS_STATUS = "/update-positions-status";
   public static final String INSERT_NEW_POSITION = "/insert-new-position";
   public static final String DELETE_POSITION = "/delete-position";
+  public static final String UPDATE_POSITION_DESCRIPTION = "/update-position-description";
 
   public static final String GET_ALL_CANDIDATE_POSITION = "/get-all-candidate-position";
   public static final String GET_CANDIDATE_POSITION_DETAIL = "/get-candidate-position-detail";
@@ -65,25 +75,26 @@ public class BeirutController {
   @RequestMapping(value = BeirutController.APPLY_NEW_POSITION, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse applyNewPosition(
-      @RequestBody ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest)
-          throws Exception {
-    GdnBaseRestResponse result = this.beirutService.applyNewPosition(generateRequestId(),
-        getUsername(), applyNewPositionModelDTORequest);
+    @RequestBody ApplyNewPositionModelDTORequest applyNewPositionModelDTORequest) throws Exception {
+    GdnBaseRestResponse result = this.beirutService
+      .applyNewPosition(generateRequestId(), getUsername(), applyNewPositionModelDTORequest);
     return result;
   }
 
-  @RequestMapping(value = BeirutController.DELETE_CANDIDATE, method = RequestMethod.POST)
+  @RequestMapping(value = BeirutController.DELETE_CANDIDATE,
+    method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse deleteCandidate(@RequestBody Map requestBodyMapping) throws Exception {
     List<String> listId = (List<String>) requestBodyMapping.get("listId");
     ListStringRequest listStringRequest = new ListStringRequest();
     listStringRequest.setValues(listId);
     GdnBaseRestResponse result =
-        this.beirutService.deleteCandidate(generateRequestId(), getUsername(), listStringRequest);
+      this.beirutService.deleteCandidate(generateRequestId(), getUsername(), listStringRequest);
     return result;
   }
 
-  @RequestMapping(value = BeirutController.DELETE_POSITION, method = RequestMethod.POST)
+  @RequestMapping(value = BeirutController.DELETE_POSITION,
+    method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse deletePosition(@RequestBody Map requestBodyMapping) throws Exception {
     LOG.info("Enter deletePosition() = >>>" + requestBodyMapping.toString() + "<<<");
@@ -91,7 +102,7 @@ public class BeirutController {
     ListStringRequest listStringRequest = new ListStringRequest();
     listStringRequest.setValues(listId);
     GdnBaseRestResponse result =
-        this.beirutService.deletePosition(generateRequestId(), getUsername(), listStringRequest);
+      this.beirutService.deletePosition(generateRequestId(), getUsername(), listStringRequest);
     return result;
   }
 
@@ -102,12 +113,11 @@ public class BeirutController {
   @RequestMapping(value = BeirutController.GET_ALL_POSITION, method = RequestMethod.GET)
   @ResponseBody
   public GdnRestListResponse<PositionDTOResponse> getAllPositionWithPageable(
-      @RequestParam Integer page, @RequestParam Integer size) throws Exception {
+    @RequestParam Integer page, @RequestParam Integer size) throws Exception {
     GdnRestListResponse<PositionDTOResponse> result = this.beirutService
-        .getAllPositionWithPageable(this.generateRequestId(), this.getUsername(), page, size);
+      .getAllPositionWithPageable(this.generateRequestId(), this.getUsername(), page, size);
     return result;
   }
-
 
   @RequestMapping(value = BeirutController.GET_ALL_POSITION_NOT_DELETED, method = RequestMethod.GET)
   @ResponseBody
@@ -128,7 +138,7 @@ public class BeirutController {
 
     LOG.info("BeirutController QUERY DEBUG = " + query);
     GdnRestListResponse<CandidatePositionSolrDTOResponse> result = this.beirutService
-        .getCandidatePositionBySolrQuery(generateRequestId(), getUsername(), query, page, size);
+      .getCandidatePositionBySolrQuery(generateRequestId(), getUsername(), query, page, size);
     return result;
   }
 
@@ -184,29 +194,30 @@ public class BeirutController {
 
   private String getUsername() {
     final org.springframework.security.core.Authentication auth =
-        SecurityContextHolder.getContext().getAuthentication();
+      SecurityContextHolder.getContext().getAuthentication();
     return "TempUsername";
   }
 
-  @RequestMapping(value = BeirutController.INSERT_NEW_CANDIDATE, method = RequestMethod.POST)
+  @RequestMapping(value = BeirutController.INSERT_NEW_CANDIDATE,
+    method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse insertNewCandidate(@RequestBody String candidateDTORequestString,
-      @RequestParam byte[] data, @RequestParam String filename) throws Exception {
-    GdnBaseRestResponse result = this.beirutService.insertNewCandidate(generateRequestId(),
-        getUsername(), candidateDTORequestString, data, filename);
+    @RequestParam byte[] data, @RequestParam String filename) throws Exception {
+    GdnBaseRestResponse result = this.beirutService
+      .insertNewCandidate(generateRequestId(), getUsername(), candidateDTORequestString, data,
+        filename);
     return result;
   }
 
-  @RequestMapping(value = BeirutController.INSERT_NEW_POSITION, method = RequestMethod.POST)
+  @RequestMapping(value = BeirutController.INSERT_NEW_POSITION,
+    method = RequestMethod.POST)
   @ResponseBody
-  public GdnBaseRestResponse insertNewPosition(@RequestBody PositionNew positionNew)
-      throws Exception {
-    LOG.trace("\n\n MASUK \n\n");
-    System.out.println("\n\nMASUK nih\n\n");
-    // byte[] bytes = positionNew.getFiles().getBytes("UTF-8");
-    // String text = new String(bytes, "UTF-8");
-    GdnBaseRestResponse result = this.beirutService.insertNewPosition(generateRequestId(),
-        getUsername(), positionNew.getPositionDTORequestString(), positionNew.getFiles(),
+  public GdnBaseRestResponse insertNewPosition(@RequestBody PositionNew positionNew) throws Exception {
+    byte[] file = javax.xml.bind.DatatypeConverter.parseBase64Binary(positionNew.getBase64File().split(",")[1]);
+//    String checker = new String(file);
+     GdnBaseRestResponse result = this.beirutService
+      .insertNewPosition(generateRequestId(), getUsername(),
+        positionNew.getPositionDTORequestString(), file,
         positionNew.getFilename());
     return result;
   }
@@ -240,15 +251,15 @@ public class BeirutController {
     return result;
   }
 
-  @RequestMapping(value = BeirutController.UPDATE_POSITION, method = RequestMethod.POST)
+  @RequestMapping(value = BeirutController.UPDATE_POSITION,
+    method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse updatePositionInformation(
-      @RequestBody PositionDTORequest positionDTORequest) throws Exception {
-    GdnBaseRestResponse result = this.beirutService.updatePositionInformation(generateRequestId(),
-        getUsername(), positionDTORequest);
+    @RequestBody PositionDTORequest positionDTORequest) throws Exception {
+    GdnBaseRestResponse result = this.beirutService
+      .updatePositionInformation(generateRequestId(), getUsername(), positionDTORequest);
     return result;
   }
-
 
   @RequestMapping(value = BeirutController.UPDATE_POSITIONS_STATUS, method = RequestMethod.POST)
   @ResponseBody
@@ -263,6 +274,16 @@ public class BeirutController {
         .setStatusDTORequest((String) requestBodyMapping.get("status"));
     GdnBaseRestResponse result = this.beirutService.updatePositionStatus(generateRequestId(),
         getUsername(), updatePositionStatusModelDTORequest);
+    return result;
+  }
+
+  @RequestMapping(value = BeirutController.UPDATE_POSITION_DESCRIPTION, method = RequestMethod.POST)
+  @ResponseBody
+  public GdnBaseRestResponse updatePositionDescription(@RequestBody PositionEdit positionEdit) throws Exception{
+    byte[] file = javax.xml.bind.DatatypeConverter.parseBase64Binary(positionEdit.getBase64File().split(",")[1]);
+    GdnBaseRestResponse result = this.beirutService
+        .updatePositionDescription(generateRequestId(),getUsername(),positionEdit.getId(),file,
+            positionEdit.getFilename());
     return result;
   }
 
