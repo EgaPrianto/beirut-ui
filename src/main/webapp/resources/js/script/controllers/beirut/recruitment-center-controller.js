@@ -39,6 +39,27 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
     $scope.totalRecords = 0;
     $scope.maxSize = 5;
 
+	$scope.advanceSearch=false;
+
+	
+	$scope.date1 = new Date();
+	$scope.date2 = new Date();
+
+    $scope.opened1 = false;
+	$scope.opened2 = false;
+	
+    $scope.openCalendar = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.opened1 = true;
+    };
+	
+	$scope.openCalendar2 = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $scope.opened2 = true;
+    };
+	
     $scope.getDetail = function(candidatePositions){
       window.location.assign(applicationBasePathLocation + "/view/recruitment-center-detail/"+candidatePositions.idCandidate+"/"+candidatePositions.idPosition);
     }
@@ -118,7 +139,6 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
         });
       }
     }
-
 
     $scope.$watch('currentPage + size', function(){
         console.log("TES");
