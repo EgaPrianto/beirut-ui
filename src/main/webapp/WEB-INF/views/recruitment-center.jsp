@@ -1,9 +1,9 @@
 <div ng-app="x.beirut.candidate-angularApp" ng-controller="candidateSummary.ctrl">
-    <!--div class="loading-wrapper" ng-show="loading">
+    <div class="loading-wrapper" ng-show="loading">
         <div class="loading-spinner">
             <img src="${staticBlistrapPathLocation}images/Preloader84.gif">
         </div>
-    </div-->
+    </div>
     <h3>Recruitment Center</h3>
     <div class="col-md-12">
         <div class="btn-group col-md-6 pull-left">
@@ -20,7 +20,7 @@
         </div>
         <div align="col-md-6 pull-right">
             <div class="autocomplete" id="" style="height: 100%" data="test">
-                <input autocomplete="off" name="s" type="text" ng-model="searchParam" placeholder="Search Candidate" class="" style="height:33px; width:300px;">
+                <input autocomplete="off" name="s" type="text" ng-model="advSearchCandidate" placeholder="Search Candidate" class="" style="height:33px; width:300px;">
                 <button ng-click="searchCandidate()" style="background-color:#068AC9; color:white; margin-left:-36px; height:34px; width:40px;" id="gdn-search-button" class="bli-search search-lup"></button>
 						<button type="button" class="btn btn-down" ng-click="advanceSearch = !advanceSearch" style="background-color:#068AC9; color:white;">Advanced Search <span id="box" class="glyphicon glyphicon-chevron-down"></span></button>
 					</div>
@@ -42,7 +42,7 @@
             </select>
 					</div>
 					<div class="btn-group pull-left" style="margin-right:20px;">
-            <select class="form-control" ng-model="advSearchStatus" name="new-url" id="new-url" tooltip="Status">
+            <select class="form-control" ng-model="searchStatus" name="new-url" id="new-url" tooltip="Status">
               <option>APPLY</option>
               <option>CALL_CANDIDATE</option>
               <option>PSIKOTES</option>

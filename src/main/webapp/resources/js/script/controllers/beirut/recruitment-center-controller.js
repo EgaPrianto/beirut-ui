@@ -41,14 +41,17 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
     $scope.jobTypes = [];
     $scope.jobTitles = [];
     $scope.jobTitlesToShow = [];
-	  $scope.advanceSearch=false;
+    $scope.advanceSearch=false;
     $scope.searchJobType=null;
-
-  	$scope.date1 = new Date();
-  	$scope.date2 = new Date();
+    $scope.searchJobTitle=null;
+    $scope.searchStatus=null;
+    $scope.advSearchCandidate=null;
+    $scope.date1 = new Date();
+    $scope.date2 = new Date();
+    $scope.currentState = "Summary";
 
     $scope.opened1 = false;
-	  $scope.opened2 = false;
+    $scope.opened2 = false;
 
     $scope.openCalendar = function (e) {
         e.preventDefault();
@@ -56,7 +59,7 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
         $scope.opened1 = true;
     };
 
-	$scope.openCalendar2 = function (e) {
+  $scope.openCalendar2 = function (e) {
         e.preventDefault();
         e.stopPropagation();
         $scope.opened2 = true;
@@ -67,7 +70,71 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
     }
 
     $scope.searchCandidate = function(){
-      console.log($scope.jobTypes);
+      firstName = null;
+      lastName = null;
+      if($scope.advSearchCandidate != null) {
+        splitted = $scope.advSearchCandidate.split(" ")
+        firstName = splitted[0];
+        lastName = splitted[1];
+      }
+      if(firstName == null) firstName = "*";
+      else   firstName = '*'+firstName+'*';
+      if(lastName == null) lastName = "*";
+      else lastName = '*'+lastName+'*';
+      if($scope.searchJobType == null) $scope.searchJobType = "*";
+      else $scope.searchJobType = '"'+$scope.searchJobType+'"';
+      if($scope.searchJobTitle == null) $scope.searchJobTitle = "*";
+      else $scope.searchJobTitle = '"'+$scope.searchJobTitle+'"';
+      if($scope.searchStatus == null) $scope.searchStatus = "*";
+      else $scope.searchStatus = '"'+$scope.searchStatus+'"';
+      if($scope.date1 == null) $scope.date1 = "*";
+      if($scope.date2 == null) $scope.date2 = "*";
+      $scope.currentState = "Search";
+      console.log($scope.searchJobType);
+      console.log($scope.searchJobTitle);
+      console.log($scope.searchStatus);
+      console.log($scope.date1);
+      console.log($scope.date2);
+      console.log($scope.advSearchCandidate);
+      console.log(firstName);
+      console.log(lastName);
+      executedQuery = null
+      if ($scope.advanceSearch == false) {
+        executedQuery = 'firstName:'+firstName+' AND lastName:'+lastName;
+      }else{
+        executedQuery = 'firstName:'+firstName+' AND lastName:'+lastName+' AND jobType:'+$scope.searchJobType+' AND title:'+$scope.searchJobTitle+' AND createdDate:["'+$scope.date1.getFullYear()+'-'+$scope.date1.getMonth()+'-'+$scope.date1.getDate()+'T00:00:00Z" TO "'+$scope.date2.getFullYear()+'-'+$scope.date2.getMonth()+'-'+$scope.date2.getDate()+'T00:00:00Z"]';
+      }
+      console.log(executedQuery);
+
+
+
+      candidateService.getAllCandidatePosition({
+          query : executedQuery,
+          page  : $scope.currentPage - 1,
+          size  : $scope.size
+      }, function(response){
+          if(response.success){
+              $scope.candidatePositions = response.content;
+              $scope.totalRecords = response.pageMetaData.totalRecords;
+              $scope.pageSize = response.pageMetaData.pageSize;
+              $scope.currentPage = response.pageMetaData.pageNumber + 1;
+
+          } else {
+              swal("Failed!", response.errorMessage, "error");
+          }
+          $scope.loading = false;
+      }, function(error){
+          swal('Error!', error.statusText, 'error');
+          $scope.loading = false;
+      });
+
+      $scope.searchJobType = null ;
+      $scope.searchJobTitle = null ;
+      $scope.searchStatus = null ;
+      $scope.advSearchCandidate = null ;
+      firstName = null ;
+      lastName = null ;
+
       /*
       candidateService.getAllCandidatePosition({
         query : 'firstName:'+$scope.searchParam +' OR lastName:'+ $scope.searchParam ,
@@ -127,6 +194,7 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
     }
     $scope.loading = true;
     $scope.getAllCandidatePositionsSummary = function(){
+      $scope.currentState = "Summary";
         $scope.loading = true;
         candidateService.getAllCandidatePosition({
             query : '*:*',
@@ -185,8 +253,10 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
 
 
     $scope.$watch('currentPage + size', function(){
+      if ($scope.currentState === "Summary") {
         console.log("TES");
         $scope.getAllCandidatePositionsSummary();
+      }
     });
     $scope.$watch('searchJobType', function(){
     console.log($scope.searchJobType);
