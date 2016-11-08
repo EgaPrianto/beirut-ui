@@ -39,9 +39,32 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
     $scope.searchPositionTitle = function(){
       console.log($scope.searchParam);
       $scope.currentState = "Search";
-      if($scope.searchParam == null){
+      if($scope.searchParam == null||$scope.searchParam == ""){
         $scope.currentState = "Summary";
         $scope.currentPage = 1;
+        if ($scope.size == 10) {
+          if ($scope.currentState === "Summary") {
+            positionService.getAllPositionsNotDeleted({
+                page : $scope.currentPage - 1,
+                size : $scope.size
+            }, function(response){
+                //debug
+                if(response.success){
+                    $scope.positions = response.content;
+                    $scope.totalRecords = response.pageMetaData.totalRecords;
+                    $scope.pageSize = response.pageMetaData.pageSize;
+                    $scope.currentPage = response.pageMetaData.pageNumber + 1;
+                } else {
+                    swal("Failed!", response.errorMessage, "error");
+                }
+                // console.log(response);
+                $scope.loading = false;
+            }, function(error){
+                swal('Error!', error.statusText, 'error');
+                $scope.loading = false;
+            });
+          }
+        }
         $scope.size = 10;
       }else{
         positionService.getPositionByTitle({
@@ -173,7 +196,6 @@ function positionSummaryModuleCtrlFunc($scope, $window, $modal, positionService)
             $scope.loading = false;
         });
     };
-    $scope.getAllPositionsSummary();
     // console.log($scope);
 }
 

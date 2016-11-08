@@ -25,30 +25,39 @@
 						<button type="button" class="btn btn-down" ng-click="advanceSearch = !advanceSearch" style="background-color:#068AC9; color:white;">Advanced Search <span id="box" class="glyphicon glyphicon-chevron-down"></span></button>
 					</div>
 				</div>
-				<div align="col-md-12 text-center" ng-show="advanceSearch" style="margin-left:120px; margin-top:20px;">
+				<div align="col-md-12 text-center" ng-show="advanceSearch" style="margin-left:60px; margin-top:20px;">
 					<div class="btn-group pull-left" style="margin-right:20px;">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							Job Type <i class="bli bli-caret-down"></i>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"></a></li>
-						</ul>
+            <select class="form-control" ng-model="searchJobType" name="new-url" id="new-url" tooltip="Job Type">
+							<option ng-repeat = "jobType in jobTypes" >{{jobType.jobType}}</option>
+            </select>
 					</div>
 					<div class="btn-group pull-left" style="margin-right:20px;">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							Job Title <i class="bli bli-caret-down"></i>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"></a></li>
-						</ul>
+            <select class="form-control" ng-model="searchJobTitle" name="new-url" id="new-url" tooltip="Job Title">
+							<option ng-repeat = "jobTitle in jobTitlesToShow" >{{jobTitle}}</option>
+
+                  <!--span class="label label-outline-success" ng-if="position.jobStatus == 'OPEN'">{{position.jobStatus}}</span>
+                  <span class="label label-outline-default"
+                        ng-if="position.jobStatus == 'PENDING'">{{position.jobStatus}}</span>
+                  <span class="label label-outline-danger" ng-if="position.jobStatus == 'CLOSE'">{{position.jobStatus}}</span-->
+            </select>
 					</div>
 					<div class="btn-group pull-left" style="margin-right:20px;">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							Status <i class="bli bli-caret-down"></i>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"></a></li>
-						</ul>
+            <select class="form-control" ng-model="advSearchStatus" name="new-url" id="new-url" tooltip="Status">
+              <option>APPLY</option>
+              <option>CALL_CANDIDATE</option>
+              <option>PSIKOTES</option>
+              <option>TECHNICAL_TEST</option>
+              <option>USER</option>
+              <option>HRD</option>
+              <option>ON_HOLD</option>
+              <option>HEAD</option>
+              <option>CEO</option>
+              <option>MEDICAL</option>
+              <option>OFFERING</option>
+              <option>DECLINED</option>
+              <option>JOIN</option>
+              <option>WITHDRAWL</option>
+            </select>
 					</div>
 					<div class="input-group-2">
 					<label for="new-url" class="col-sm-1 control-label">Start Date</label>
@@ -63,7 +72,7 @@
 										style="height: 40px;"/>
 								<span class="input-group-btn" style="padding-bottom: 10px;">
 									<button type="button" class="btn btn-default"
-											ng-click="openCalendar($event)">	
+											ng-click="openCalendar($event)">
 										<i class="fa fa-calendar"></i>
 									</button>
 								</span>
@@ -83,7 +92,7 @@
 										style="height: 40px;"/>
 								<span class="input-group-btn" style="padding-bottom: 10px;">
 									<button type="button" class="btn btn-default"
-											ng-click="openCalendar2($event)">	
+											ng-click="openCalendar2($event)">
 										<i class="fa fa-calendar"></i>
 									</button>
 								</span>

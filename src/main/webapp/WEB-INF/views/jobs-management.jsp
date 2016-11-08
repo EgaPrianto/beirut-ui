@@ -23,7 +23,7 @@
             <div class="autocomplete " id="" style="height: 100%" data="test">
                 <input style="height:33px; width:300px;" autocomplete="off" name="s" type="text"
                        ng-model="searchParam" placeholder="Search Job Title" class="">
-                <button style="background-color:#068AC9; color:white; margin-left:-35px; height:34px; width:40px;"
+                <button ng-click = "searchPositionTitle()" style="background-color:#068AC9; color:white; margin-left:-35px; height:34px; width:40px;"
                         id="gdn-search-button" class="bli-search search-lup"></button>
                 <div class="col-sm-6">
                     <a style="color:white; text-decoration:none;"

@@ -108,6 +108,15 @@ function candidateServiceFunc($resource) {
     return $resource(url, {}, {
         getAllCandidatePosition: {method: 'GET', params : {command : 'get-all-candidate-position'}, data: {query: '@query',page:'@page', size:'@size'}},
         getCandidatePositionDetail: {method: 'GET', params: {command: 'get-candidate-position-detail', data: {idCandidate: '@idCandidate', idPosition: '@idPosition'}}},
+
+        getAllPositionsNotDeleted: {
+            method: 'GET',
+            params : {command : 'get-all-position-not-deleted'},
+            data: {
+                page:'@page',
+                size:'@size'
+            }
+        },
         updateCandidatesStatus: {
             method: 'POST',
             params: {command: 'update-candidates-status'},
