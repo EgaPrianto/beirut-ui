@@ -41,7 +41,7 @@ function positionServiceFunc($resource) {
         },
         updatePositionDescription: {
             method: 'POST',
-            params: {command: '/update-position-description'},
+            params: {command: 'update-position-description'},
             data: {
                 id: '@id',
                 base64File: '@base64File',
@@ -85,9 +85,12 @@ function positionServiceFunc($resource) {
         },
         updatePositionInformation: {
             method: 'POST',
-            params: {command: '/update-position'},
+            params: {command: 'update-position'},
             data: {
-                positionDTORequest: '@positionDTORequest'
+                id: '@id',
+                title: '@title',
+                jobType: '@jobType',
+                jobDivision: '@jobDivision'
             }
         }
 

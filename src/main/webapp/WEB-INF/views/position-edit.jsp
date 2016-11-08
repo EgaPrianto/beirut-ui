@@ -57,7 +57,7 @@
                    onchange="angular.element(this).scope().onFileSelect(this)">
             <br>
             <button type="submit" style="background-color:#086CA3" class="btn btn-success"
-                    ng-click="submitEditPosition('${applicationBasePathLocation}/view/jobs-management/${id}')">Submit
+                    ng-click="submitEditPosition('${applicationBasePathLocation}/view/jobs-management-detail/${id}')">Submit
             </button>
         </form>
 
