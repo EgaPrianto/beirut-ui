@@ -256,8 +256,12 @@ public class BeirutController {
   @ResponseBody
   public GdnBaseRestResponse updatePositionInformation(
     @RequestBody PositionDTORequest positionDTORequest) throws Exception {
+    System.out.println("!!!MASUK UpdatePositionInformation di BeirutController!!!");
+    LOG.trace("!!!MASUK UpdatePositionInformation di BeirutController!!!");
     GdnBaseRestResponse result = this.beirutService
       .updatePositionInformation(generateRequestId(), getUsername(), positionDTORequest);
+    System.out.println("result.toString(): "+result.toString());
+    LOG.trace("result.toString(): "+result.toString());
     return result;
   }
 
@@ -280,7 +284,7 @@ public class BeirutController {
   @RequestMapping(value = BeirutController.UPDATE_POSITION_DESCRIPTION, method = RequestMethod.POST)
   @ResponseBody
   public GdnBaseRestResponse updatePositionDescription(@RequestBody PositionEdit positionEdit) throws Exception{
-    byte[] file = javax.xml.bind.DatatypeConverter.parseBase64Binary(positionEdit.getBase64File().split(",")[1]);
+    byte[] file = javax.xml.bind.DatatypeConverter.parseBase64Binary(positionEdit.getBase64File());
     GdnBaseRestResponse result = this.beirutService
         .updatePositionDescription(generateRequestId(),getUsername(),positionEdit.getId(),file,
             positionEdit.getFilename());
