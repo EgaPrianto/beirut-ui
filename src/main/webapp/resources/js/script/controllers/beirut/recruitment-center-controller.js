@@ -102,7 +102,7 @@ function candidateSummaryModuleCtrlFunc($scope, $window, $modal, candidateServic
       if ($scope.advanceSearch == false) {
         executedQuery = 'firstName:'+firstName+' AND lastName:'+lastName;
       }else{
-        executedQuery = 'firstName:'+firstName+' AND lastName:'+lastName+' AND jobType:'+$scope.searchJobType+' AND title:'+$scope.searchJobTitle+' AND createdDate:["'+$scope.date1.getFullYear()+'-'+$scope.date1.getMonth()+'-'+$scope.date1.getDate()+'T00:00:00Z" TO "'+$scope.date2.getFullYear()+'-'+$scope.date2.getMonth()+'-'+$scope.date2.getDate()+'T00:00:00Z"]';
+        executedQuery = 'firstName:'+firstName+' AND lastName:'+lastName+' AND jobType:'+$scope.searchJobType+' AND title:'+$scope.searchJobTitle+' AND status:'+$scope.searchStatus+' AND createdDate:["'+$scope.date1.toISOString()+'" TO "'+$scope.date2.toISOString()+'"]';
       }
       console.log(executedQuery);
 
